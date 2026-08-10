@@ -4,59 +4,59 @@ services:
     #  =================================================================
     pgadmin:
         image: dpage/pgadmin4:latest
-        container_name: graduation-thesis-pgadmin
+        container_name: hs-pgadmin
         restart: unless-stopped
         environment:
-            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@iuh.com}
-            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-homespace@homespace.com}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-homespace123}
             PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
         ports:
             - '5050:80'
         volumes:
-            - graduation-thesis-pgadmin:/var/lib/pgadmin
+            - hs-pgadmin-data:/var/lib/pgadmin
             - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
         networks:
-            - graduation-thesis
+            - hs-network
 
     #  =================================================================
     #  RedisInsight
     #  =================================================================
     redis-insight:
         image: redis/redisinsight:latest
-        container_name: graduation-thesis-redis-insight
+        container_name: hs-redis-insight
         restart: unless-stopped
         ports:
             - '5540:5540'
         volumes:
-            - graduation-thesis-redis-insight:/data
+            - hs-redis-insight-data:/data
         networks:
-            - graduation-thesis
+            - hs-network
 
     #  =================================================================
     #  Kafka UI
     #  =================================================================
     kafka-ui:
         image: provectuslabs/kafka-ui:latest
-        container_name: graduation-thesis-kafka-ui
+        container_name: hs-kafka-ui
         restart: unless-stopped
         ports:
             - '9022:9022'
         environment:
             SERVER_PORT: 9022
-            KAFKA_CLUSTERS_0_NAME: graduation-thesis
+            KAFKA_CLUSTERS_0_NAME: HomeSpace
             KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:19092
         networks:
-            - graduation-thesis
+            - hs-network
 
 volumes:
-    graduation-thesis-pgadmin:
-        name: graduation-thesis-pgadmin
-    graduation-thesis-redis-insight:
-        name: graduation-thesis-redis-insight
+    hs-pgadmin-data:
+        name: hs-pgadmin-data
+    hs-redis-insight-data:
+        name: hs-redis-insight-data
 
 networks:
-    graduation-thesis:
-        name: graduation-thesis
+    hs-network:
+        name: hs-network
         external: true
 
 #  =================================================================
@@ -73,13 +73,13 @@ networks:
 #
 #  pgAdmin:
 #    URL: http://localhost:5050
-#    Login email: admin@iuh.com
-#    Login password: admin
+#    Login email: homespace@homespace.com
+#    Login password: homespace123
 #    PostgreSQL host: postgres
 #    PostgreSQL port: 5432
 #    PostgreSQL database: keycloak
-#    PostgreSQL username: admin
-#    PostgreSQL password: admin
+#    PostgreSQL username: homespace
+#    PostgreSQL password: homespace123
 #
 #  RedisInsight:
 #    URL: http://localhost:5540
@@ -92,10 +92,10 @@ networks:
 #    Host: redis
 #    Port: 6379
 #    Username: leave empty
-#    Password: admin
+#    Password: homespace123
 #
 #  Connect to Redis from an app running on local machine:
 #    Host: localhost
 #    Port: 6379
 #    Username: leave empty
-#    Password: admin
+#    Password: homespace123

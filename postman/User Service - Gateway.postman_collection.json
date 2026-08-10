@@ -721,11 +721,11 @@
     },
     {
       "key": "realm",
-      "value": "graduation-thesis"
+      "value": "homespace-platform"
     },
     {
       "key": "clientId",
-      "value": "graduation-thesis-id"
+      "value": "homespace-id"
     },
     {
       "key": "clientSecret",

@@ -1,12 +1,12 @@
 {
     "Servers": {
         "1": {
-            "Name": "graduation-thesis-postgres",
+            "Name": "hs-postgres",
             "Group": "Servers",
             "Host": "postgres",
             "Port": 5432,
             "MaintenanceDB": "keycloak",
-            "Username": "admin",
+            "Username": "homespace",
             "SSLMode": "prefer"
         }
     }

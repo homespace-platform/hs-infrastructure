@@ -1,4 +1,4 @@
-package com.fit.iuh.keycloak_event_publisher;
+package com.hs.keycloak;
 
 import java.util.HashMap;
 import java.util.Map;

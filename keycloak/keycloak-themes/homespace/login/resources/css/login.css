@@ -1,15 +1,31 @@
+/* Toàn bộ màu sắc của theme nằm ở đây, đổi ở đây là đổi cả trang login. */
+:root {
+    --hs-primary: #0f766e;
+    --hs-primary-hover: #115e59;
+    --hs-primary-deep: #062f2c;
+    --hs-primary-light: #14b8a6;
+    --hs-accent: #f59e0b;
+    --hs-ink: #0f2b2a;
+    --hs-surface: #ffffff;
+    --hs-header-height: 86px;
+    --hs-content-width: 1180px;
+    --hs-radius: 8px;
+    --hs-shadow-header: 0 10px 32px rgba(6, 46, 43, 0.16);
+    --hs-shadow-card: 0 24px 64px rgba(4, 33, 31, 0.28);
+    --hs-shadow-logo: 0 8px 18px rgba(6, 46, 43, 0.14);
+    --hs-page-background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.22), transparent 30rem),
+        linear-gradient(135deg, var(--hs-primary-light) 0%, var(--hs-primary) 45%, var(--hs-primary-deep) 100%);
+}
+
 body {
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top left, rgba(255, 196, 37, 0.2), transparent 30rem),
-        linear-gradient(135deg, #0b4ea2 0%, #123f8c 45%, #082a63 100%);
-    color: #102033;
+    background: var(--hs-page-background);
+    color: var(--hs-ink);
 }
 
 .login-pf body {
-    background:
-        radial-gradient(circle at top left, rgba(255, 196, 37, 0.2), transparent 30rem),
-        linear-gradient(135deg, #0b4ea2 0%, #123f8c 45%, #082a63 100%);
+    background: var(--hs-page-background);
 }
 
 .login-pf-page {
@@ -28,11 +44,11 @@ body {
     left: 0;
     z-index: 10;
     width: 100%;
-    height: 86px;
+    height: var(--hs-header-height);
     margin: 0;
     padding: 0.75rem 2rem;
     background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 10px 32px rgba(4, 26, 65, 0.16);
+    box-shadow: var(--hs-shadow-header);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -41,8 +57,8 @@ body {
 .login-pf-page .card-pf {
     width: min(100%, 420px);
     border: 0;
-    border-radius: 8px;
-    box-shadow: 0 24px 64px rgba(3, 20, 51, 0.28);
+    border-radius: var(--hs-radius);
+    box-shadow: var(--hs-shadow-card);
 }
 
 .login-pf-page .login-pf-header {
@@ -54,23 +70,15 @@ body {
     display: none;
 }
 
-.login-pf-page .subtitle {
-    display: none;
-}
-
-.login-pf-page .required {
-    display: none;
-}
-
 #kc-header-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 0.875rem;
-    width: min(100%, 1180px);
+    width: min(100%, var(--hs-content-width));
     margin: 0 auto;
-    color: #0b3f8a;
+    color: var(--hs-primary);
     font-size: 1.45rem;
     font-weight: 700;
     letter-spacing: 0;
@@ -85,13 +93,13 @@ body {
     flex: 0 0 auto;
     width: 58px;
     height: 58px;
-    border-radius: 8px;
-    background: #ffffff url("../img/iuh.jpg") center / 50px 50px no-repeat;
-    box-shadow: 0 8px 18px rgba(4, 26, 65, 0.14);
+    border-radius: var(--hs-radius);
+    background: url("../img/homespace.svg") center / 52px 52px no-repeat;
+    box-shadow: var(--hs-shadow-logo);
 }
 
 #kc-page-title {
-    color: #123f8c;
+    color: var(--hs-primary-hover);
     font-weight: 700;
 }
 
@@ -110,22 +118,21 @@ form[action*="registration"] #kc-form-buttons {
     width: 88px;
     height: 88px;
     margin: 0 auto 1rem;
-    border-radius: 8px;
-    background: #ffffff url("../img/iuh.jpg") center / 76px 76px no-repeat;
-    box-shadow: 0 12px 28px rgba(4, 26, 65, 0.22);
+    border-radius: var(--hs-radius);
+    background: url("../img/homespace.svg") center / 88px 88px no-repeat;
 }
 
 .pf-c-button.pf-m-primary,
 input[type="submit"] {
     border: 0;
     border-radius: 6px;
-    background: #0b4ea2;
+    background: var(--hs-primary);
     font-weight: 700;
 }
 
 .pf-c-button.pf-m-primary:hover,
 input[type="submit"]:hover {
-    background: #083c80;
+    background: var(--hs-primary-hover);
 }
 
 .pf-c-form-control,
@@ -134,8 +141,15 @@ input[type="password"] {
     border-radius: 6px;
 }
 
+.pf-c-form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-bottom-color: var(--hs-primary);
+    box-shadow: 0 1px 0 0 var(--hs-primary);
+}
+
 a {
-    color: #0b4ea2;
+    color: var(--hs-primary);
 }
 
 #kc-form-options,
@@ -151,7 +165,7 @@ form a[href*="login-actions/authenticate"] {
     gap: 0.35rem;
     width: fit-content;
     margin-bottom: 0.25rem;
-    color: #0b4ea2;
+    color: var(--hs-primary);
     font-weight: 700;
     text-decoration: none;
     transition: color 160ms ease, transform 160ms ease;
@@ -168,7 +182,7 @@ form a[href*="login-actions/authenticate"]::before {
 #kc-form-options a:hover,
 #kc-registration a[href*="login-actions/authenticate"]:hover,
 form a[href*="login-actions/authenticate"]:hover {
-    color: #083c80;
+    color: var(--hs-primary-hover);
     text-decoration: underline;
     text-underline-offset: 0.2rem;
     transform: translateX(-2px);
@@ -177,10 +191,10 @@ form a[href*="login-actions/authenticate"]:hover {
 #kc-locale {
     position: fixed;
     top: 0;
-    right: max(2rem, calc((100vw - 1180px) / 2 + 2rem));
+    right: max(2rem, calc((100vw - var(--hs-content-width)) / 2 + 2rem));
     z-index: 11;
     width: auto;
-    height: 86px;
+    height: var(--hs-header-height);
     margin: 0;
     display: flex;
     align-items: center;
@@ -201,7 +215,7 @@ form a[href*="login-actions/authenticate"]:hover {
     align-items: center;
     padding: 0.35rem 0.25rem;
     font-size: 1.25rem;
-    color: #0b3f8a;
+    color: var(--hs-primary);
     font-weight: 700;
     line-height: 1.25;
     text-decoration: none;
@@ -241,17 +255,17 @@ form a[href*="login-actions/authenticate"]:hover {
     width: 1px;
     height: 1.6rem;
     margin-left: 0.25rem;
-    background: rgba(11, 63, 138, 0.24);
+    background: rgba(15, 118, 110, 0.24);
 }
 
 #kc-locale-dropdown li a:hover {
-    background: rgba(11, 78, 162, 0.08);
+    background: rgba(15, 118, 110, 0.08);
     text-decoration: none;
 }
 
 #kc-locale-dropdown li a[aria-current="true"],
 #kc-locale-dropdown li a:hover {
-    color: #082f70;
+    color: var(--hs-primary-hover);
 }
 
 #kc-locale-dropdown a[href*="kc_locale=en"],
@@ -260,7 +274,7 @@ form a[href*="login-actions/authenticate"]:hover {
     width: 48px;
     height: 44px;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: var(--hs-radius);
     color: transparent !important;
     font-size: 0 !important;
     transition: background 160ms ease, color 160ms ease, transform 160ms ease;
@@ -268,7 +282,7 @@ form a[href*="login-actions/authenticate"]:hover {
 
 #kc-locale-dropdown a[href*="kc_locale=en"]::after,
 #kc-locale-dropdown a[href*="kc_locale=vi"]::after {
-    color: #0b3f8a !important;
+    color: var(--hs-primary) !important;
     font-size: 1.25rem !important;
     font-weight: 800;
     line-height: 1.25;
@@ -301,7 +315,7 @@ html[lang="vi"] #kc-locale-dropdown a[href*="kc_locale=vi"]::before {
     left: 10px;
     height: 3px;
     border-radius: 999px;
-    background: #0b4ea2;
+    background: var(--hs-accent);
 }
 
 @media (max-width: 640px) {

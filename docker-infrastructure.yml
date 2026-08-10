@@ -4,18 +4,19 @@ services:
     #  =================================================================
     postgres:
         image: postgres:16-alpine
-        container_name: graduation-thesis-postgres
+        container_name: hs-postgres
         restart: unless-stopped
         environment:
             POSTGRES_DB: ${POSTGRES_DB:-keycloak}
-            POSTGRES_USER: ${POSTGRES_USER:-admin}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+            POSTGRES_USER: ${POSTGRES_USER:-homespace}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-homespace123}
         ports:
             - '5432:5432'
         volumes:
-            - graduation-thesis-postgres:/var/lib/postgresql/data
+            - hs-postgres-data:/var/lib/postgresql/data
+            - ./postgres/init:/docker-entrypoint-initdb.d:ro
         networks:
-            - graduation-thesis
+            - hs-network
         healthcheck:
             test: ['CMD-SHELL', 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
             interval: 10s
@@ -27,18 +28,18 @@ services:
     #  =================================================================
     mongodb:
         image: mongo:7
-        container_name: graduation-thesis-mongodb
+        container_name: hs-mongodb
         restart: unless-stopped
         environment:
-            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
-            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-admin}
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-homespace}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-homespace123}
             MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-admin}
         ports:
             - '27017:27017'
         volumes:
-            - graduation-thesis-mongodb:/data/db
+            - hs-mongodb-data:/data/db
         networks:
-            - graduation-thesis
+            - hs-network
         healthcheck:
             test: ['CMD-SHELL', 'mongosh --quiet -u "$$MONGO_INITDB_ROOT_USERNAME" -p "$$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --eval "db.adminCommand(''ping'').ok"']
             interval: 10s
@@ -50,17 +51,17 @@ services:
     #  =================================================================
     redis:
         image: redis:7-alpine
-        container_name: graduation-thesis-redis
+        container_name: hs-redis
         restart: unless-stopped
-        command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-admin}
+        command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-homespace123}
         environment:
-            REDIS_PASSWORD: ${REDIS_PASSWORD:-admin}
+            REDIS_PASSWORD: ${REDIS_PASSWORD:-homespace123}
         ports:
             - '6379:6379'
         volumes:
-            - graduation-thesis-redis:/data
+            - hs-redis-data:/data
         networks:
-            - graduation-thesis
+            - hs-network
         healthcheck:
             test: ['CMD-SHELL', 'redis-cli -a "$$REDIS_PASSWORD" ping']
             interval: 10s
@@ -72,7 +73,7 @@ services:
     #  =================================================================
     kafka:
         image: apache/kafka:latest
-        container_name: graduation-thesis-kafka
+        container_name: hs-kafka
         restart: unless-stopped
         healthcheck:
             test: ['CMD-SHELL', '/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092']
@@ -106,16 +107,16 @@ services:
             KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
             KAFKA_NUM_PARTITIONS: 3
         volumes:
-            - graduation-thesis-kafka:/var/lib/kafka/data
+            - hs-kafka-data:/var/lib/kafka/data
         networks:
-            - graduation-thesis
+            - hs-network
 
     #  =================================================================
     #  Keycloak
     #  =================================================================
     keycloak:
         image: quay.io/keycloak/keycloak:26.5.2
-        container_name: graduation-thesis-keycloak
+        container_name: hs-keycloak
         restart: unless-stopped
         deploy:
             resources:
@@ -144,11 +145,12 @@ services:
             # Database
             KC_DB: postgres
             KC_DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-keycloak}
-            KC_DB_USERNAME: ${POSTGRES_USER:-admin}
-            KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+            KC_DB_USERNAME: ${POSTGRES_USER:-homespace}
+            KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-homespace123}
             # Keycloak
-            KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
-            KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+            # Chỉ tạo admin ở lần khởi động đầu tiên (khi master realm chưa tồn tại).
+            KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USERNAME:-homespace}
+            KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-homespace123}
             # SPI Config
             KAFKA_BOOTSTRAP_SERVER: ${KAFKA_BOOTSTRAP_SERVER:-kafka:19092}
             KEYCLOAK_KAFKA_TOPIC: ${KEYCLOAK_KAFKA_TOPIC:-keycloak-user-events}
@@ -159,27 +161,27 @@ services:
             KC_SPI_THEME_CACHE_TEMPLATES: 'false'
             KC_SPI_THEME_STATIC_MAX_AGE: '-1'
             # Network
+            # Keycloak 26 dùng Hostname v2 — bỏ hostname-strict-https (đã deprecate).
             KC_HTTP_ENABLED: 'true'
             KC_HOSTNAME: ${KEYCLOAK_HOSTNAME:-localhost}
             KC_HOSTNAME_STRICT: ${KEYCLOAK_HOSTNAME_STRICT:-false}
-            KC_HOSTNAME_STRICT_HTTPS: ${KEYCLOAK_HOSTNAME_STRICT_HTTPS:-false}
             JAVA_OPTS_APPEND: -Xms256m -Xmx512m
         networks:
-            - graduation-thesis
+            - hs-network
 
 volumes:
-    graduation-thesis-postgres:
-        name: graduation-thesis-postgres
-    graduation-thesis-mongodb:
-        name: graduation-thesis-mongodb
-    graduation-thesis-redis:
-        name: graduation-thesis-redis
-    graduation-thesis-kafka:
-        name: graduation-thesis-kafka
+    hs-postgres-data:
+        name: hs-postgres-data
+    hs-mongodb-data:
+        name: hs-mongodb-data
+    hs-redis-data:
+        name: hs-redis-data
+    hs-kafka-data:
+        name: hs-kafka-data
 
 networks:
-    graduation-thesis:
-        name: graduation-thesis
+    hs-network:
+        name: hs-network
         driver: bridge
 
 #  =================================================================
@@ -195,16 +197,16 @@ networks:
 #    Host in Docker: postgres
 #    Host on local machine: localhost
 #    Port: 5432
-#    Database: keycloak
-#    Username: admin
-#    Password: admin
+#    Databases: keycloak (Keycloak), hs-user-service (hs-user-service)
+#    Username: homespace
+#    Password: homespace123
 #
 #  MongoDB:
 #    Host in Docker: mongodb
 #    Host on local machine: localhost
 #    Port: 27017
-#    Username: admin
-#    Password: admin
+#    Username: homespace
+#    Password: homespace123
 #    Auth database: admin
 #
 #  Redis:
@@ -212,7 +214,7 @@ networks:
 #    Host on local machine: localhost
 #    Port: 6379
 #    Username: leave empty
-#    Password: admin
+#    Password: homespace123
 #
 #  Kafka:
 #    Bootstrap server in Docker: kafka:19092
@@ -221,5 +223,5 @@ networks:
 #  Keycloak:
 #    URL: http://localhost:9000
 #    Health: http://localhost:9001/health/ready
-#    Admin username: admin
-#    Admin password: admin
+#    Admin username: homespace
+#    Admin password: homespace123
