@@ -1,1 +1,1 @@
-com.fit.iuh.keycloak_event_publisher.KafkaEventPublisherProviderFactory
+com.hs.keycloak.KafkaEventPublisherProviderFactory
