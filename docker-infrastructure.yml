@@ -197,7 +197,7 @@ networks:
 #    Host in Docker: postgres
 #    Host on local machine: localhost
 #    Port: 5432
-#    Databases: keycloak (Keycloak), hs-user-service (hs-user-service)
+#    Databases: keycloak (Keycloak), homespace_core (modular monolith)
 #    Username: homespace
 #    Password: homespace123
 #
