@@ -1,8 +1,8 @@
 {
   "info": {
     "_postman_id": "0e247e29-dfeb-455d-910c-b0cf732f6968",
-    "name": "User Service - Gateway",
-    "description": "Call user-service endpoints through gateway. Public API base route: /api/v1/**.",
+    "name": "Core API - Gateway",
+    "description": "Call hs-core-api endpoints through the API Gateway. Public API base route: /api/v1/**.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "40740215"
   },
@@ -153,6 +153,75 @@
                 "password"
               ]
             }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Password Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('password status is boolean', () => pm.expect(body.result).to.be.a('boolean'));",
+                  "pm.collectionVariables.set('hasPassword', String(body.result));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/me/password/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "password",
+                "status"
+              ]
+            },
+            "description": "Returns result=true when the current Keycloak account has a password credential; otherwise returns false."
+          },
+          "response": []
+        },
+        {
+          "name": "Set Initial Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newPassword\": \"{{initialPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me/password/initial",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "password",
+                "initial"
+              ]
+            },
+            "description": "Set password for social/federated users who do not have a password yet. Fails with PASSWORD_ALREADY_SET if a password credential already exists."
           },
           "response": []
         },
@@ -746,6 +815,14 @@
     {
       "key": "newPassword",
       "value": "Admin@1234"
+    },
+    {
+      "key": "initialPassword",
+      "value": "Initial@123"
+    },
+    {
+      "key": "hasPassword",
+      "value": ""
     },
     {
       "key": "scope",
