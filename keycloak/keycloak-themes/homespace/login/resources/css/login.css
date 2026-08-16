@@ -1,31 +1,65 @@
-/* Toàn bộ màu sắc của theme nằm ở đây, đổi ở đây là đổi cả trang login. */
+/* ==========================================================================
+   HomeSpace Keycloak Theme - Design System Hiện Đại, Chuẩn Mực, Tinh Tế
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap');
+
 :root {
-    --hs-primary: #0f766e;
-    --hs-primary-hover: #115e59;
-    --hs-primary-deep: #062f2c;
-    --hs-primary-light: #14b8a6;
-    --hs-accent: #f59e0b;
-    --hs-ink: #0f2b2a;
+    --hs-primary: #2563eb;
+    --hs-primary-hover: #1d4ed8;
+    --hs-primary-light: #eff6ff;
+    --hs-ink: #0f172a;
+    --hs-ink-light: #334155;
+    --hs-muted: #64748b;
+    --hs-border: #e2e8f0;
     --hs-surface: #ffffff;
-    --hs-header-height: 86px;
-    --hs-content-width: 1180px;
-    --hs-radius: 8px;
-    --hs-shadow-header: 0 10px 32px rgba(6, 46, 43, 0.16);
-    --hs-shadow-card: 0 24px 64px rgba(4, 33, 31, 0.28);
-    --hs-shadow-logo: 0 8px 18px rgba(6, 46, 43, 0.14);
+    --hs-bg-input: #f8fafc;
+    --hs-header-height: 76px;
+    --hs-content-width: 1200px;
+    --hs-radius-lg: 20px;
+    --hs-radius-md: 10px;
+    --hs-radius-sm: 6px;
+    
     --hs-page-background:
-        radial-gradient(circle at top left, rgba(245, 158, 11, 0.22), transparent 30rem),
-        linear-gradient(135deg, var(--hs-primary-light) 0%, var(--hs-primary) 45%, var(--hs-primary-deep) 100%);
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%),
+        #f8fafc;
 }
 
-body {
-    min-height: 100vh;
-    background: var(--hs-page-background);
-    color: var(--hs-ink);
+*, *::before, *::after {
+    box-sizing: border-box !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.login-pf body {
-    background: var(--hs-page-background);
+/* --------------------------------------------------------------------------
+   1. Nền trang toàn bộ (Sạch sẽ, không khoảng đen, không lặp pattern)
+   -------------------------------------------------------------------------- */
+html,
+body,
+.login-pf,
+.login-pf body,
+.login-pf-page {
+    min-height: 100vh !important;
+    background-color: #f8fafc !important;
+    background-image: var(--hs-page-background) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    color: var(--hs-ink) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Tắt tất cả pseudo elements của PatternFly */
+.login-pf::before,
+.login-pf::after,
+.login-pf-page::before,
+.login-pf-page::after,
+body::before,
+body::after {
+    display: none !important;
+    content: none !important;
 }
 
 .login-pf-page {
@@ -34,166 +68,588 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    padding: 8rem 1rem 2rem;
+    padding: calc(var(--hs-header-height) + 1.5rem) 1rem 2.5rem !important;
 }
 
+/* --------------------------------------------------------------------------
+   2. Top Header Bar
+   -------------------------------------------------------------------------- */
 #kc-header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    right: 0;
+    z-index: 50;
     width: 100%;
     height: var(--hs-header-height);
     margin: 0;
-    padding: 0.75rem 2rem;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: var(--hs-shadow-header);
-    backdrop-filter: blur(10px);
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hs-border);
     display: flex;
     align-items: center;
-}
-
-.login-pf-page .card-pf {
-    width: min(100%, 420px);
-    border: 0;
-    border-radius: var(--hs-radius);
-    box-shadow: var(--hs-shadow-card);
-}
-
-.login-pf-page .login-pf-header {
-    margin-bottom: 1rem;
-}
-
-.login-pf-page .subtitle,
-.login-pf-page .required {
-    display: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 #kc-header-wrapper {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.875rem;
     width: min(100%, var(--hs-content-width));
     margin: 0 auto;
-    color: var(--hs-primary);
-    font-size: 1.45rem;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.2;
-    text-transform: none;
-    text-shadow: none;
-    overflow-wrap: anywhere;
+    color: transparent;
+    font-size: 0;
 }
 
 #kc-header-wrapper::before {
     content: "";
-    flex: 0 0 auto;
-    width: 58px;
-    height: 58px;
-    border-radius: var(--hs-radius);
-    background: url("../img/homespace.svg") center / 52px 52px no-repeat;
-    box-shadow: var(--hs-shadow-logo);
+    display: block;
+    width: 160px;
+    height: 40px;
+    background: url("../img/logo/homespace-horizontal-logo-crop-removebg.png") left center / contain no-repeat;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   3. Card Form Chính & Căn Giữa Cân Đối 100%
+   -------------------------------------------------------------------------- */
+.login-pf-page .card-pf {
+    width: min(100%, 460px) !important;
+    margin: 0 auto !important;
+    padding: 2.25rem 2rem 2rem !important;
+    background: var(--hs-surface) !important;
+    border-radius: var(--hs-radius-lg) !important;
+    border: 1px solid var(--hs-border) !important;
+    box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.03) !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+}
+
+/* Reset toàn bộ container con trong card để khoảng cách lề trái = lề phải */
+#kc-content,
+#kc-content-wrapper,
+#kc-form,
+#kc-form-wrapper,
+#kc-form-login,
+#kc-register-form,
+.form-horizontal {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.login-pf-page .login-pf-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100% !important;
 }
 
 #kc-page-title {
-    color: var(--hs-primary-hover);
-    font-weight: 700;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    color: var(--hs-ink);
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.login-pf-page .subtitle {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. Banner Thông Báo Lỗi / Alerts
+   -------------------------------------------------------------------------- */
+#kc-feedback,
+#kc-feedback-wrapper,
+.alert,
+.alert-error,
+.alert-danger,
+.pf-c-alert {
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: var(--hs-radius-md) !important;
+    margin: 0 0 1.25rem 0 !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    background-color: #fef2f2 !important;
+    border: 1px solid #fecaca !important;
+    color: #b91c1c !important;
+}
+
+.alert-error span,
+.alert-danger span,
+.kc-feedback-text,
+.pf-c-alert__title {
+    color: #b91c1c !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Form Groups, Labels & Dấu sao bắt buộc
+   -------------------------------------------------------------------------- */
+.login-pf-page [class*="col-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none !important;
+}
+
+.form-group {
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.form-group label,
+label[for="username"],
+label[for="password"],
+label[for="password-confirm"],
+label[for="firstName"],
+label[for="lastName"],
+label[for="email"],
+.pf-c-form__label-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--hs-ink-light);
+    margin-bottom: 0.35rem;
+}
+
+.required,
+span.required,
+.pf-c-form__label-required {
+    color: #ef4444 !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    margin-left: 3px !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+}
+
+/* Reset toàn bộ các wrapper bao quanh input */
+div.pf-c-form-control,
+div.form-control,
+.form-group > div,
+.pf-c-input-group,
+.input-group,
+div:has(> input) {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Input Fields (Text & Email)
+   -------------------------------------------------------------------------- */
+input[type="text"],
+input[type="email"] {
+    width: 100% !important;
+    height: 44px !important;
+    padding: 0 0.875rem !important;
+    background-color: var(--hs-bg-input) !important;
+    background-image: none !important;
+    border: 1.5px solid var(--hs-border) !important;
+    border-radius: var(--hs-radius-md) !important;
+    color: var(--hs-ink) !important;
+    font-size: 0.925rem !important;
+    font-weight: 500 !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease !important;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover {
+    border-color: #cbd5e1 !important;
+    background-color: #ffffff !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: var(--hs-primary) !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Password Field & SVG Eye Icon Thuần Túy
+   -------------------------------------------------------------------------- */
+input[type="password"],
+input#password,
+input#password-confirm {
+    width: 100% !important;
+    height: 44px !important;
+    padding: 0 42px 0 0.875rem !important;
+    background-color: var(--hs-bg-input) !important;
+    background-image: none !important;
+    border: 1.5px solid var(--hs-border) !important;
+    border-radius: var(--hs-radius-md) !important;
+    color: var(--hs-ink) !important;
+    font-size: 0.925rem !important;
+    font-weight: 500 !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease !important;
+}
+
+input[type="password"]:hover,
+input#password:hover,
+input#password-confirm:hover {
+    border-color: #cbd5e1 !important;
+    background-color: #ffffff !important;
+}
+
+input[type="password"]:focus,
+input#password:focus,
+input#password-confirm:focus {
+    border-color: var(--hs-primary) !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+
+/* Nút con mắt định vị tuyệt đối với icon SVG Vector tích hợp sẵn */
+.form-group:has(input[type="password"]) button,
+.pf-c-input-group button,
+.input-group button,
+div:has(> input[type="password"]) button,
+button[aria-label*="password"],
+button[aria-label*="Password"],
+button.pf-c-button.pf-m-control {
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 18px 18px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    color: transparent !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.form-group:has(input[type="password"]) button:hover,
+button[aria-label*="password"]:hover,
+button.pf-c-button.pf-m-control:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+}
+
+/* Ẩn text hoặc ký tự lỗi bên trong thẻ i của button */
+.form-group button i,
+button.pf-c-button.pf-m-control i {
+    display: none !important;
+    visibility: hidden !important;
+    font-size: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Validation Error State (Đồng bộ sắc nét 100% trên MỌI input kể cả mật khẩu)
+   -------------------------------------------------------------------------- */
+input.pf-m-error,
+input[type="text"].pf-m-error,
+input[type="password"].pf-m-error,
+input[type="email"].pf-m-error,
+.has-error input,
+.form-group:has(.pf-m-error) input,
+.form-group:has(.help-block-error) input,
+.form-group:has(#input-error-password) input,
+.form-group:has(#input-error-password-confirm) input,
+.pf-c-input-group.pf-m-error input,
+input[aria-invalid="true"] {
+    border: 1.5px solid #ef4444 !important;
+    background-color: #fef2f2 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    color: #991b1b !important;
+}
+
+/* Dòng chữ lỗi màu đỏ ngay dưới ô nhập */
+#input-error,
+#input-error-username,
+#input-error-password,
+#input-error-email,
+#input-error-firstname,
+#input-error-lastname,
+#input-error-password-confirm,
+.pf-c-form__helper-text.pf-m-error,
+.pf-c-form__helper-text,
+.has-error .help-block,
+.help-block-error,
+span.error {
+    color: #dc2626 !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    margin: 0.35rem 0 0.15rem !important;
+    display: block !important;
+    line-height: 1.35 !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Layout Form Đăng Ký (Cân xứng 100% Full Width Khớp Nhau 2 Cột Họ & Tên)
+   -------------------------------------------------------------------------- */
+#kc-register-form {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 12px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#kc-register-form > * {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Họ và Tên chia đều 50% - 50% hoàn hảo khớp mép viền */
+#kc-register-form .form-group:has(#firstName),
+#kc-register-form div:has(> #firstName),
+#kc-register-form div:has(> label[for="firstName"]),
+#kc-register-form div:has(> label[for*="firstName"]),
+#kc-register-form .form-group:has(input[name="firstName"]),
+#kc-register-form .form-group:has(input[name*="firstName"]) {
+    grid-column: 1 / 2 !important;
+    width: 100% !important;
+}
+
+#kc-register-form .form-group:has(#lastName),
+#kc-register-form div:has(> #lastName),
+#kc-register-form div:has(> label[for="lastName"]),
+#kc-register-form div:has(> label[for*="lastName"]),
+#kc-register-form .form-group:has(input[name="lastName"]),
+#kc-register-form .form-group:has(input[name*="lastName"]) {
+    grid-column: 2 / 3 !important;
+    width: 100% !important;
+}
+
+/* Sắp xếp thứ tự: Nút Đăng Ký trước, Link Quay Lại Đăng Nhập sau */
+#kc-register-form #kc-form-buttons {
+    order: 10 !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
 }
 
 #kc-register-form #kc-form-options,
-form[action*="registration"] #kc-form-options {
-    margin: 1.1rem 0 0.75rem;
+#kc-register-form form a[href*="authenticate"],
+#kc-register-form a[href*="authenticate"],
+#kc-register-form div:has(> a[href*="authenticate"]) {
+    order: 20 !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
 }
 
-#kc-register-form #kc-form-buttons,
-form[action*="registration"] #kc-form-buttons {
-    margin-top: 0.5rem;
+@media (max-width: 480px) {
+    #kc-register-form {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
-#kc-logo-wrapper {
-    display: none;
-    width: 88px;
-    height: 88px;
-    margin: 0 auto 1rem;
-    border-radius: var(--hs-radius);
-    background: url("../img/homespace.svg") center / 88px 88px no-repeat;
+/* --------------------------------------------------------------------------
+   10. Checkbox & Quên mật khẩu trên Form Đăng Nhập (Cùng 1 hàng ngang)
+   -------------------------------------------------------------------------- */
+#kc-form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.75rem 0 1.25rem !important;
+    font-size: 0.85rem;
+    width: 100% !important;
+    padding: 0 !important;
 }
 
-.pf-c-button.pf-m-primary,
-input[type="submit"] {
-    border: 0;
-    border-radius: 6px;
-    background: var(--hs-primary);
-    font-weight: 700;
-}
-
-.pf-c-button.pf-m-primary:hover,
-input[type="submit"]:hover {
-    background: var(--hs-primary-hover);
-}
-
-.pf-c-form-control,
-input[type="text"],
-input[type="password"] {
-    border-radius: 6px;
-}
-
-.pf-c-form-control:focus,
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-bottom-color: var(--hs-primary);
-    box-shadow: 0 1px 0 0 var(--hs-primary);
-}
-
-a {
-    color: var(--hs-primary);
-}
-
-#kc-form-options,
-#kc-form-buttons {
-    margin-top: 1rem;
-}
-
-#kc-form-options a,
-#kc-registration a[href*="login-actions/authenticate"],
-form a[href*="login-actions/authenticate"] {
+.checkbox {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    width: fit-content;
-    margin-bottom: 0.25rem;
-    color: var(--hs-primary);
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 160ms ease, transform 160ms ease;
+    gap: 0.45rem;
+    cursor: pointer;
 }
 
-#kc-form-options a::before,
-#kc-registration a[href*="login-actions/authenticate"]::before,
-form a[href*="login-actions/authenticate"]::before {
-    content: "\00ab";
-    font-size: 1rem;
-    line-height: 1;
+.checkbox label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--hs-muted);
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--hs-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Quên mật khẩu link */
+#kc-form-options a,
+span a[href*="login-actions/reset-credentials"] {
+    color: var(--hs-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease;
 }
 
 #kc-form-options a:hover,
-#kc-registration a[href*="login-actions/authenticate"]:hover,
-form a[href*="login-actions/authenticate"]:hover {
+span a[href*="login-actions/reset-credentials"]:hover {
     color: var(--hs-primary-hover);
     text-decoration: underline;
-    text-underline-offset: 0.2rem;
-    transform: translateX(-2px);
 }
 
+/* --------------------------------------------------------------------------
+   11. Nút Submit (Đăng nhập / Đăng ký - 100% Full Width)
+   -------------------------------------------------------------------------- */
+#kc-form-buttons {
+    margin-top: 1rem !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.pf-c-button.pf-m-primary,
+input[type="submit"],
+#kc-login,
+input[value="Đăng ký"],
+input[value="Register"] {
+    width: 100% !important;
+    height: 44px;
+    background: var(--hs-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--hs-radius-md);
+    font-size: 0.925rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf-c-button.pf-m-primary:hover,
+input[type="submit"]:hover,
+#kc-login:hover {
+    background: var(--hs-primary-hover);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.pf-c-button.pf-m-primary:active,
+input[type="submit"]:active,
+#kc-login:active {
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   12. Footer Navigation Links (Chưa có tài khoản? / Đã có tài khoản?)
+   -------------------------------------------------------------------------- */
+#kc-info,
+#kc-registration-container {
+    margin-top: 1.25rem !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid var(--hs-border) !important;
+    text-align: center;
+    width: 100% !important;
+}
+
+#kc-info-wrapper,
+#kc-registration {
+    font-size: 0.85rem;
+    color: var(--hs-muted);
+    font-weight: 500;
+}
+
+#kc-info-wrapper a,
+#kc-registration a,
+#kc-registration a[href*="login-actions/registration"],
+#kc-form-options a[href*="login-actions/authenticate"],
+#kc-registration a[href*="login-actions/authenticate"] {
+    color: var(--hs-primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 0.25rem;
+}
+
+#kc-info-wrapper a:hover,
+#kc-registration a:hover,
+#kc-registration a[href*="login-actions/registration"]:hover {
+    color: var(--hs-primary-hover);
+    text-decoration: underline;
+}
+
+/* Back to login link */
+form a[href*="login-actions/authenticate"],
+#kc-register-form a[href*="login-actions/authenticate"] {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--hs-primary) !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+}
+
+form a[href*="login-actions/authenticate"]:hover,
+#kc-register-form a[href*="login-actions/authenticate"]:hover {
+    text-decoration: underline !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Language Switcher (VI | EN ở Header)
+   -------------------------------------------------------------------------- */
 #kc-locale {
     position: fixed;
     top: 0;
     right: max(2rem, calc((100vw - var(--hs-content-width)) / 2 + 2rem));
-    z-index: 11;
-    width: auto;
+    z-index: 60;
     height: var(--hs-header-height);
     margin: 0;
     display: flex;
@@ -204,88 +660,55 @@ form a[href*="login-actions/authenticate"]:hover {
     position: relative;
     display: flex;
     align-items: center;
-    min-width: auto;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-}
-
-#kc-locale-dropdown a {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 0.25rem;
-    font-size: 1.25rem;
-    color: var(--hs-primary);
-    font-weight: 700;
-    line-height: 1.25;
-    text-decoration: none;
+    background: #f1f5f9;
+    border: 1px solid var(--hs-border);
+    border-radius: 9999px;
+    padding: 3px;
 }
 
 #kc-current-locale-link {
     display: none;
 }
 
-#kc-current-locale-link::after {
-    content: none;
-}
-
 #kc-locale-dropdown ul {
     position: static;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    min-width: auto;
     margin: 0;
     padding: 0;
-    border: 0;
+    list-style: none;
     background: transparent;
+    border: 0;
     box-shadow: none;
 }
 
 #kc-locale-dropdown li {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    list-style: none;
-}
-
-#kc-locale-dropdown li:not(:last-child)::after {
-    content: "";
-    display: block;
-    width: 1px;
-    height: 1.6rem;
-    margin-left: 0.25rem;
-    background: rgba(15, 118, 110, 0.24);
-}
-
-#kc-locale-dropdown li a:hover {
-    background: rgba(15, 118, 110, 0.08);
-    text-decoration: none;
-}
-
-#kc-locale-dropdown li a[aria-current="true"],
-#kc-locale-dropdown li a:hover {
-    color: var(--hs-primary-hover);
+    margin: 0;
+    padding: 0;
 }
 
 #kc-locale-dropdown a[href*="kc_locale=en"],
 #kc-locale-dropdown a[href*="kc_locale=vi"] {
     position: relative;
-    width: 48px;
-    height: 44px;
+    width: 34px;
+    height: 26px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    border-radius: var(--hs-radius);
+    border-radius: 9999px;
     color: transparent !important;
     font-size: 0 !important;
-    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    text-decoration: none;
 }
 
 #kc-locale-dropdown a[href*="kc_locale=en"]::after,
 #kc-locale-dropdown a[href*="kc_locale=vi"]::after {
-    color: var(--hs-primary) !important;
-    font-size: 1.25rem !important;
-    font-weight: 800;
-    line-height: 1.25;
+    color: var(--hs-muted) !important;
+    font-size: 0.75rem !important;
+    font-weight: 700;
+    line-height: 1;
 }
 
 #kc-locale-dropdown a[href*="kc_locale=en"]::after {
@@ -296,42 +719,43 @@ form a[href*="login-actions/authenticate"]:hover {
     content: "VI";
 }
 
-#kc-locale-dropdown a[href*="kc_locale=en"]:hover,
-#kc-locale-dropdown a[href*="kc_locale=vi"]:hover {
-    transform: translateY(-1px);
+#kc-locale-dropdown a[href*="kc_locale=en"]:hover::after,
+#kc-locale-dropdown a[href*="kc_locale=vi"]:hover::after {
+    color: var(--hs-primary) !important;
 }
 
 html[lang="en"] #kc-locale-dropdown a[href*="kc_locale=en"],
 html[lang="vi"] #kc-locale-dropdown a[href*="kc_locale=vi"] {
-    background: transparent;
+    background: var(--hs-primary);
 }
 
-html[lang="en"] #kc-locale-dropdown a[href*="kc_locale=en"]::before,
-html[lang="vi"] #kc-locale-dropdown a[href*="kc_locale=vi"]::before {
-    content: "";
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
-    left: 10px;
-    height: 3px;
-    border-radius: 999px;
-    background: var(--hs-accent);
+html[lang="en"] #kc-locale-dropdown a[href*="kc_locale=en"]::after,
+html[lang="vi"] #kc-locale-dropdown a[href*="kc_locale=vi"]::after {
+    color: #ffffff !important;
 }
 
+/* --------------------------------------------------------------------------
+   14. Mobile Responsiveness
+   -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
     .login-pf-page {
-        padding-top: 7rem;
+        padding: 5.5rem 1rem 1.5rem !important;
     }
 
     #kc-header {
-        padding: 0.75rem 1rem;
+        padding: 0 1rem;
     }
 
     #kc-locale {
         right: 1rem;
     }
 
-    #kc-header-wrapper {
-        font-size: 1.3rem;
+    .login-pf-page .card-pf {
+        padding: 1.75rem 1.25rem 1.5rem !important;
+        border-radius: 16px;
+    }
+
+    #kc-page-title {
+        font-size: 1.35rem;
     }
 }
