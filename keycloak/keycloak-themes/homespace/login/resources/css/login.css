@@ -588,7 +588,135 @@ input[type="submit"]:active,
 }
 
 /* --------------------------------------------------------------------------
-   12. Footer Navigation Links (Chưa có tài khoản? / Đã có tài khoản?)
+   12. Social Identity Providers (Google, v.v. - Đẹp chuẩn Hiện Đại)
+   -------------------------------------------------------------------------- */
+#kc-social-providers {
+    margin-top: 1.25rem !important;
+    padding-top: 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+#kc-social-providers hr {
+    display: none !important;
+}
+
+#kc-social-providers h4,
+#kc-social-providers h2,
+#kc-social-providers .kc-social-title,
+#kc-social-providers .pf-c-title {
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    color: var(--hs-muted) !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    margin: 1.25rem 0 0.85rem !important;
+    width: 100% !important;
+}
+
+#kc-social-providers h4::before,
+#kc-social-providers h4::after,
+#kc-social-providers h2::before,
+#kc-social-providers h2::after,
+#kc-social-providers .kc-social-title::before,
+#kc-social-providers .kc-social-title::after {
+    content: "" !important;
+    flex: 1 !important;
+    border-bottom: 1px solid var(--hs-border) !important;
+}
+
+#kc-social-providers h4::before,
+#kc-social-providers h2::before,
+#kc-social-providers .kc-social-title::before {
+    margin-right: 0.75rem !important;
+}
+
+#kc-social-providers h4::after,
+#kc-social-providers h2::after,
+#kc-social-providers .kc-social-title::after {
+    margin-left: 0.75rem !important;
+}
+
+#kc-social-providers ul,
+#kc-social-providers .pf-c-form__group {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+}
+
+#kc-social-providers li {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#kc-social-providers a,
+#kc-social-providers .zocial,
+#kc-social-providers .pf-c-button {
+    width: 100% !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.65rem !important;
+    background: #ffffff !important;
+    border: 1.5px solid var(--hs-border) !important;
+    border-radius: var(--hs-radius-md) !important;
+    color: var(--hs-ink) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.15s ease !important;
+    box-sizing: border-box !important;
+}
+
+#kc-social-providers a:hover,
+#kc-social-providers .zocial:hover,
+#kc-social-providers .pf-c-button:hover {
+    border-color: #cbd5e1 !important;
+    background: #f8fafc !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+    color: var(--hs-ink) !important;
+}
+
+/* Ẩn các ký tự font icon bị lỗi trong nút social */
+#kc-social-providers i,
+#kc-social-providers .fa,
+#kc-social-providers .pf-c-button__icon,
+#kc-social-providers .kc-social-provider-icon {
+    display: none !important;
+    visibility: hidden !important;
+    font-size: 0 !important;
+}
+
+/* Official Google G 4-Color Vector SVG Icon */
+#social-google::before,
+a[href*="google"]::before,
+a.google::before,
+a.zocial.google::before,
+#kc-social-providers a[id*="google"]::before,
+#kc-social-providers a[href*="provider=google"]::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3C/svg%3E") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 20px 20px !important;
+    margin-right: 0.35rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Footer Navigation Links (Chưa có tài khoản? / Đã có tài khoản?)
    -------------------------------------------------------------------------- */
 #kc-info,
 #kc-registration-container {
@@ -643,7 +771,7 @@ form a[href*="login-actions/authenticate"]:hover,
 }
 
 /* --------------------------------------------------------------------------
-   13. Language Switcher (VI | EN ở Header)
+   14. Language Switcher (VI | EN ở Header)
    -------------------------------------------------------------------------- */
 #kc-locale {
     position: fixed;
@@ -735,7 +863,7 @@ html[lang="vi"] #kc-locale-dropdown a[href*="kc_locale=vi"]::after {
 }
 
 /* --------------------------------------------------------------------------
-   14. Mobile Responsiveness
+   15. Mobile Responsiveness
    -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
     .login-pf-page {
