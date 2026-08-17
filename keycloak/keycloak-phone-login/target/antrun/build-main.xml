@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <mkdir dir="../provider" />
+    <copy file="target/keycloak-phone-login.jar" tofile="../provider/keycloak-phone-login.jar" />
+  </target>
+</project>
