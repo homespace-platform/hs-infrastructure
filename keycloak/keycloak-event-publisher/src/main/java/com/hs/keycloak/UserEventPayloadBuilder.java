@@ -16,6 +16,7 @@ public class UserEventPayloadBuilder {
 
     private static final Logger log = Logger.getLogger(UserEventPayloadBuilder.class.getName());
     private static final String PICTURE_ATTRIBUTE = "picture";
+    private static final String PHONE_NUMBER_ATTRIBUTE = "phoneNumber";
 
     private final KeycloakSession session;
     private final ObjectMapper mapper;
@@ -73,6 +74,11 @@ public class UserEventPayloadBuilder {
             if (avatarUrl != null && !avatarUrl.isBlank()) {
                 payload.put("avatarUrl", avatarUrl);
             }
+
+            String phoneNumber = user.getFirstAttribute(PHONE_NUMBER_ATTRIBUTE);
+            if (phoneNumber != null && !phoneNumber.isBlank()) {
+                payload.put("phoneNumber", phoneNumber);
+            }
         } catch (Exception e) {
             log.warning("Could not load user profile from Keycloak session: " + e.getMessage());
         }
@@ -104,6 +110,11 @@ public class UserEventPayloadBuilder {
             String avatarUrl = getFirstAttribute(node, PICTURE_ATTRIBUTE);
             if (avatarUrl != null && !avatarUrl.isBlank()) {
                 payload.put("avatarUrl", avatarUrl);
+            }
+
+            String phoneNumber = getFirstAttribute(node, PHONE_NUMBER_ATTRIBUTE);
+            if (phoneNumber != null && !phoneNumber.isBlank()) {
+                payload.put("phoneNumber", phoneNumber);
             }
         } catch (Exception e) {
             log.warning("Could not parse admin event representation: " + e.getMessage());

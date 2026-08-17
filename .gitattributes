@@ -1,0 +1,2 @@
+# GitHub Linguist: exclude CSS from language statistics
+*.css linguist-vendored
