@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserEventPayloadBuilder {
 
     private static final Logger log = Logger.getLogger(UserEventPayloadBuilder.class.getName());
+    private static final String PICTURE_ATTRIBUTE = "picture";
 
     private final KeycloakSession session;
     private final ObjectMapper mapper;
@@ -67,6 +68,11 @@ public class UserEventPayloadBuilder {
             payload.put("lastName", user.getLastName());
             payload.put("enabled", user.isEnabled());
             payload.put("emailVerified", user.isEmailVerified());
+
+            String avatarUrl = user.getFirstAttribute(PICTURE_ATTRIBUTE);
+            if (avatarUrl != null && !avatarUrl.isBlank()) {
+                payload.put("avatarUrl", avatarUrl);
+            }
         } catch (Exception e) {
             log.warning("Could not load user profile from Keycloak session: " + e.getMessage());
         }
@@ -94,6 +100,11 @@ public class UserEventPayloadBuilder {
             if (emailVerified != null && !emailVerified.isNull()) {
                 payload.put("emailVerified", emailVerified.asBoolean());
             }
+
+            String avatarUrl = getFirstAttribute(node, PICTURE_ATTRIBUTE);
+            if (avatarUrl != null && !avatarUrl.isBlank()) {
+                payload.put("avatarUrl", avatarUrl);
+            }
         } catch (Exception e) {
             log.warning("Could not parse admin event representation: " + e.getMessage());
         }
@@ -106,5 +117,14 @@ public class UserEventPayloadBuilder {
         }
 
         return value.asText();
+    }
+
+    private String getFirstAttribute(JsonNode node, String attributeName) {
+        JsonNode value = node.path("attributes").path(attributeName);
+        if (value.isArray()) {
+            value = value.path(0);
+        }
+
+        return value.isTextual() ? value.asText() : null;
     }
 }
