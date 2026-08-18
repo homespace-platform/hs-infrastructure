@@ -3,3 +3,6 @@
 
 ### ENV ###
 .env
+
+### Maven ###
+target/
