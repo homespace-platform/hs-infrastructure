@@ -68,17 +68,9 @@ public class UserEventPayloadBuilder {
             payload.put("firstName", user.getFirstName());
             payload.put("lastName", user.getLastName());
             payload.put("enabled", user.isEnabled());
-            payload.put("emailVerified", user.isEmailVerified());
 
-            String avatarUrl = user.getFirstAttribute(PICTURE_ATTRIBUTE);
-            if (avatarUrl != null && !avatarUrl.isBlank()) {
-                payload.put("avatarUrl", avatarUrl);
-            }
-
-            String phoneNumber = user.getFirstAttribute(PHONE_NUMBER_ATTRIBUTE);
-            if (phoneNumber != null && !phoneNumber.isBlank()) {
-                payload.put("phoneNumber", phoneNumber);
-            }
+            payload.put("avatarUrl", normalizeAttribute(user.getFirstAttribute(PICTURE_ATTRIBUTE)));
+            payload.put("phoneNumber", normalizeAttribute(user.getFirstAttribute(PHONE_NUMBER_ATTRIBUTE)));
         } catch (Exception e) {
             log.warning("Could not load user profile from Keycloak session: " + e.getMessage());
         }
@@ -102,19 +94,12 @@ public class UserEventPayloadBuilder {
                 payload.put("enabled", enabled.asBoolean());
             }
 
-            JsonNode emailVerified = node.findValue("emailVerified");
-            if (emailVerified != null && !emailVerified.isNull()) {
-                payload.put("emailVerified", emailVerified.asBoolean());
-            }
-
-            String avatarUrl = getFirstAttribute(node, PICTURE_ATTRIBUTE);
-            if (avatarUrl != null && !avatarUrl.isBlank()) {
-                payload.put("avatarUrl", avatarUrl);
-            }
-
-            String phoneNumber = getFirstAttribute(node, PHONE_NUMBER_ATTRIBUTE);
-            if (phoneNumber != null && !phoneNumber.isBlank()) {
-                payload.put("phoneNumber", phoneNumber);
+            // Keycloak sends the attributes object on profile updates. If an
+            // attribute was removed, its key is absent from that object; emit an
+            // explicit null so downstream consumers can clear their stored value.
+            if (node.has("attributes") && node.path("attributes").isObject()) {
+                payload.put("avatarUrl", normalizeAttribute(getFirstAttribute(node, PICTURE_ATTRIBUTE)));
+                payload.put("phoneNumber", normalizeAttribute(getFirstAttribute(node, PHONE_NUMBER_ATTRIBUTE)));
             }
         } catch (Exception e) {
             log.warning("Could not parse admin event representation: " + e.getMessage());
@@ -137,5 +122,9 @@ public class UserEventPayloadBuilder {
         }
 
         return value.isTextual() ? value.asText() : null;
+    }
+
+    private String normalizeAttribute(String value) {
+        return value == null || value.isBlank() ? null : value;
     }
 }

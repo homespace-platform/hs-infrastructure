@@ -236,7 +236,7 @@
                   "if (body.result?.id) pm.collectionVariables.set('userId', body.result.id);",
                   "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);",
                   "pm.test('full profile fields returned', () => {",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt');",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt');",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -396,7 +396,7 @@
                   "const body = pm.response.json();",
                   "pm.test('full user profile returned', () => {",
                   "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('userId'));",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
                   "});"
                 ],
                 "type": "text/javascript"
