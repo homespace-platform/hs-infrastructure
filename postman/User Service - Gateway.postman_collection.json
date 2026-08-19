@@ -102,7 +102,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Admin\",\n  \"lastName\": \"Tester\",\n  \"phone\": \"0901234567\",\n  \"dob\": \"2000-01-01\",\n  \"gender\": \"MALE\"\n}",
+              "raw": "{\n  \"firstName\": \"Admin\",\n  \"lastName\": \"Tester\",\n  \"phone\": \"{{phoneNumber}}\",\n  \"dob\": \"2000-01-01\",\n  \"gender\": \"MALE\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -234,7 +234,11 @@
                 "exec": [
                   "const body = pm.response.json();",
                   "if (body.result?.id) pm.collectionVariables.set('userId', body.result.id);",
-                  "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);"
+                  "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);",
+                  "pm.test('profile exposes phone and avatarUrl fields', () => {",
+                  "  pm.expect(body.result).to.have.property('phone');",
+                  "  pm.expect(body.result).to.have.property('avatarUrl');",
+                  "});"
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -271,7 +275,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"{{username}}\",\n  \"email\": \"{{userEmail}}\",\n  \"firstName\": \"Admin\",\n  \"lastName\": \"Tester\",\n  \"phone\": \"0901234567\",\n  \"dob\": \"2000-01-01\",\n  \"gender\": \"MALE\"\n}",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"email\": \"{{userEmail}}\",\n  \"firstName\": \"Admin\",\n  \"lastName\": \"Tester\",\n  \"phone\": \"{{phoneNumber}}\",\n  \"dob\": \"2000-01-01\",\n  \"gender\": \"MALE\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -309,6 +313,40 @@
                 "verify"
               ]
             }
+          },
+          "response": []
+        },
+        {
+          "name": "Update My Avatar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"avatarUrl\": \"{{avatarUrl}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me/avatar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "avatar"
+              ]
+            },
+            "description": "Updates avatarUrl in Keycloak attribute 'picture' and synchronizes it to the core database."
           },
           "response": []
         }
@@ -839,6 +877,14 @@
     {
       "key": "userEmail",
       "value": "admin@example.com"
+    },
+    {
+      "key": "avatarUrl",
+      "value": "https://example.com/avatar.jpg"
+    },
+    {
+      "key": "phoneNumber",
+      "value": "0901234567"
     },
     {
       "key": "roleId",
