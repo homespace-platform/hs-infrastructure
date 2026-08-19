@@ -1,0 +1,316 @@
+{
+  "info": {
+    "_postman_id": "8bf7a678-5209-49d5-b45e-3225056a3761",
+    "name": "Storage Service - Gateway",
+    "description": "Test the HomeSpace storage flow through API Gateway. Run requests in order. Before uploading, select a local file and set storageFileName, storageContentType and storageFileSize to match that file exactly.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "1. Get Token - Password Grant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.access_token) pm.collectionVariables.set('accessToken', body.access_token);",
+                  "pm.test('access token saved', () => pm.expect(pm.collectionVariables.get('accessToken')).to.not.be.empty);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "grant_type", "value": "password", "type": "text" },
+                { "key": "client_id", "value": "{{clientId}}", "type": "text" },
+                { "key": "username", "value": "{{username}}", "type": "text" },
+                { "key": "password", "value": "{{password}}", "type": "text" },
+                { "key": "scope", "value": "openid profile email", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/token",
+              "host": ["{{keycloakUrl}}"],
+              "path": ["realms", "{{realm}}", "protocol", "openid-connect", "token"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Storage Upload Flow",
+      "item": [
+        {
+          "name": "2. Create Presigned Upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('presigned upload created', () => {",
+                  "  pm.response.to.have.status(200);",
+                  "  pm.expect(body.result.storageId).to.not.be.empty;",
+                  "  pm.expect(body.result.uploadUrl).to.not.be.empty;",
+                  "  pm.expect(body.result.method).to.eql('PUT');",
+                  "});",
+                  "pm.collectionVariables.set('storageId', body.result.storageId);",
+                  "pm.collectionVariables.set('uploadUrl', body.result.uploadUrl);",
+                  "pm.collectionVariables.set('objectKey', body.result.objectKey);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileName\": \"{{storageFileName}}\",\n  \"contentType\": \"{{storageContentType}}\",\n  \"size\": {{storageFileSize}},\n  \"purpose\": \"{{storagePurpose}}\",\n  \"visibility\": \"{{storageVisibility}}\",\n  \"referenceType\": \"{{storageReferenceType}}\",\n  \"referenceId\": \"{{storageReferenceId}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/storage/uploads",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "uploads"]
+            },
+            "description": "storageFileSize must be the exact file size in bytes. The Content-Type must also match the PUT request."
+          },
+          "response": []
+        },
+        {
+          "name": "3. PUT File Directly To S3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('S3 upload succeeded', () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));",
+                  "const etag = pm.response.headers.get('ETag');",
+                  "if (etag) pm.collectionVariables.set('storageEtag', etag.replaceAll('\\\"', ''));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "{{storageContentType}}", "type": "text" }
+            ],
+            "body": {
+              "mode": "file",
+              "file": { "src": "{{storageFilePath}}" }
+            },
+            "url": { "raw": "{{uploadUrl}}", "host": ["{{uploadUrl}}"] },
+            "description": "Choose the same local file described in step 2. Do not add Authorization; the presigned URL already authorizes this PUT."
+          },
+          "response": []
+        },
+        {
+          "name": "4. Complete Upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('upload is ready', () => {",
+                  "  pm.response.to.have.status(200);",
+                  "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('storageId'));",
+                  "  pm.expect(body.result.status).to.eql('READY');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/storage/{{storageId}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "{{storageId}}", "complete"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Storage Queries",
+      "item": [
+        {
+          "name": "5. Get Storage Metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/storage/{{storageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "{{storageId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Create View URL",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.result?.url) pm.collectionVariables.set('viewUrl', body.result.url);",
+                  "pm.test('view URL returned', () => pm.expect(body.result.url).to.not.be.empty);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/storage/{{storageId}}/view-url",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "{{storageId}}", "view-url"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Create Download URL",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.result?.url) pm.collectionVariables.set('downloadUrl', body.result.url);",
+                  "pm.test('download URL returned', () => pm.expect(body.result.url).to.not.be.empty);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/storage/{{storageId}}/download-url",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "{{storageId}}", "download-url"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. List My Storage Objects",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('paged storage objects returned', () => {",
+                  "  pm.expect(body.result).to.be.an('array');",
+                  "  pm.expect(body.page).to.be.a('number');",
+                  "  pm.expect(body.totalElements).to.be.a('number');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/storage?page=1&size=20&referenceType={{storageReferenceType}}&referenceId={{storageReferenceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "referenceType", "value": "{{storageReferenceType}}" },
+                { "key": "referenceId", "value": "{{storageReferenceId}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9. Delete Storage Object",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/storage/{{storageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["storage", "{{storageId}}"]
+            },
+            "description": "Run this last. It removes the S3 object and marks its metadata inactive."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api/v1" },
+    { "key": "keycloakUrl", "value": "http://localhost:9000" },
+    { "key": "realm", "value": "homespace-platform" },
+    { "key": "clientId", "value": "homespace-id" },
+    { "key": "username", "value": "admin" },
+    { "key": "password", "value": "admin" },
+    { "key": "accessToken", "value": "" },
+    { "key": "storageFilePath", "value": "" },
+    { "key": "storageFileName", "value": "avatar.png" },
+    { "key": "storageContentType", "value": "image/png" },
+    { "key": "storageFileSize", "value": "1024" },
+    { "key": "storagePurpose", "value": "USER_AVATAR" },
+    { "key": "storageVisibility", "value": "PRIVATE" },
+    { "key": "storageReferenceType", "value": "" },
+    { "key": "storageReferenceId", "value": "" },
+    { "key": "storageId", "value": "" },
+    { "key": "uploadUrl", "value": "" },
+    { "key": "objectKey", "value": "" },
+    { "key": "storageEtag", "value": "" },
+    { "key": "viewUrl", "value": "" },
+    { "key": "downloadUrl", "value": "" }
+  ]
+}
