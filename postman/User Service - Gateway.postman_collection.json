@@ -235,9 +235,8 @@
                   "const body = pm.response.json();",
                   "if (body.result?.id) pm.collectionVariables.set('userId', body.result.id);",
                   "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);",
-                  "pm.test('profile exposes phone and avatarUrl fields', () => {",
-                  "  pm.expect(body.result).to.have.property('phone');",
-                  "  pm.expect(body.result).to.have.property('avatarUrl');",
+                  "pm.test('full profile fields returned', () => {",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt');",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -335,6 +334,93 @@
     {
       "name": "Admin Users",
       "item": [
+        {
+          "name": "List Users - Page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "const page = body.result;",
+                  "pm.test('paged users returned', () => {",
+                  "  pm.expect(page.result).to.be.an('array');",
+                  "  pm.expect(page.page).to.be.a('number');",
+                  "  pm.expect(page.totalElements).to.be.a('number');",
+                  "});",
+                  "if (page.result?.[0]?.id) pm.collectionVariables.set('userId', page.result[0].id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users?page=0&size=10&sort=createdAt,desc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "description": "Spring request page index is zero-based."
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sort",
+                  "value": "createdAt,desc"
+                }
+              ]
+            },
+            "description": "Returns a paginated list of users. Response PageResponse.page is one-based."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('full user profile returned', () => {",
+                  "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('userId'));",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "Returns all persisted profile fields for a user. Requires ADMIN authority."
+          },
+          "response": []
+        },
         {
           "name": "Disable User",
           "request": {
