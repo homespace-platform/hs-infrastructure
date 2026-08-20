@@ -307,7 +307,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"avatarUrl\": \"{{avatarUrl}}\"\n}",
+              "raw": "{\n  \"storageId\": \"{{avatarStorageId}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -325,7 +325,7 @@
                 "avatar"
               ]
             },
-            "description": "Updates avatarUrl in Keycloak attribute 'picture' and synchronizes it to the core database."
+            "description": "Links a completed PUBLIC USER_AVATAR storage object owned by the current user. The API derives its permanent public S3 URL, updates Keycloak attribute 'picture', and synchronizes the core database. Run the Storage Service upload flow first, then copy storageId into avatarStorageId."
           },
           "response": []
         }
@@ -945,8 +945,9 @@
       "value": "admin@example.com"
     },
     {
-      "key": "avatarUrl",
-      "value": "https://example.com/avatar.jpg"
+      "key": "avatarStorageId",
+      "value": "",
+      "description": "storageId returned by the Storage Service USER_AVATAR upload flow after Complete Upload"
     },
     {
       "key": "phoneNumber",
