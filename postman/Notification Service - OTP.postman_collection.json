@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "4b1164f4-9615-4dd8-bc4b-f2e5f118ca9b",
+    "name": "Notification Service - OTP",
+    "description": "Test email and SMS OTP through HomeSpace Gateway. In dev profile, copy the OTP from hs-api-service logs into otpCode.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "1. Get Token - Password Grant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const body = pm.response.json();",
+                  "if (body.access_token) pm.collectionVariables.set('accessToken', body.access_token);",
+                  "pm.test('access token saved', () => pm.expect(pm.collectionVariables.get('accessToken')).to.not.be.empty);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "grant_type", "value": "password", "type": "text" },
+                { "key": "client_id", "value": "{{clientId}}", "type": "text" },
+                { "key": "username", "value": "{{username}}", "type": "text" },
+                { "key": "password", "value": "{{password}}", "type": "text" },
+                { "key": "scope", "value": "openid profile email", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/token",
+              "host": ["{{keycloakUrl}}"],
+              "path": ["realms", "{{realm}}", "protocol", "openid-connect", "token"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Create Email OTP",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "const body = pm.response.json();",
+            "pm.test('email OTP challenge created', () => {",
+            "  pm.response.to.have.status(200);",
+            "  pm.expect(body.result.challengeId).to.not.be.empty;",
+            "});",
+            "pm.collectionVariables.set('challengeId', body.result.challengeId);"
+          ]
+        }
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"EMAIL\",\n  \"purpose\": \"LOGIN\",\n  \"destination\": \"{{otpEmail}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/notifications/otp/challenges",
+        "description": "With SPRING_PROFILES_ACTIVE=dev, read the code from the hs-api-service terminal and set otpCode. The API response intentionally never contains the OTP."
+      }
+    },
+    {
+      "name": "3. Verify OTP",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "const body = pm.response.json();",
+            "pm.test('OTP verified', () => {",
+            "  pm.response.to.have.status(200);",
+            "  pm.expect(body.result.verified).to.eql(true);",
+            "});"
+          ]
+        }
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"{{otpCode}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/notifications/otp/challenges/{{challengeId}}/verify"
+      }
+    },
+    {
+      "name": "4. Resend OTP",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "const body = pm.response.json();",
+            "pm.test('new challenge created', () => pm.expect(body.result.challengeId).to.not.be.empty);",
+            "pm.collectionVariables.set('challengeId', body.result.challengeId);"
+          ]
+        }
+      }],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseUrl}}/notifications/otp/challenges/{{challengeId}}/resend",
+        "description": "Wait at least 60 seconds after the previous send. This returns a new challengeId."
+      }
+    },
+    {
+      "name": "5. Create SMS OTP (Dev Log Only)",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            "const body = pm.response.json();",
+            "pm.test('SMS OTP challenge created in dev', () => pm.response.to.have.status(200));",
+            "pm.collectionVariables.set('challengeId', body.result.challengeId);"
+          ]
+        }
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": \"SMS\",\n  \"purpose\": \"LOGIN\",\n  \"destination\": \"{{otpPhone}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/notifications/otp/challenges",
+        "description": "SMS provider is intentionally not integrated. This works only in dev profile and prints the OTP to logs."
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api/v1" },
+    { "key": "keycloakUrl", "value": "http://localhost:9000" },
+    { "key": "realm", "value": "homespace-platform" },
+    { "key": "clientId", "value": "homespace-id" },
+    { "key": "username", "value": "admin" },
+    { "key": "password", "value": "admin" },
+    { "key": "accessToken", "value": "" },
+    { "key": "otpEmail", "value": "your-email@gmail.com" },
+    { "key": "otpPhone", "value": "0353999798" },
+    { "key": "challengeId", "value": "" },
+    { "key": "otpCode", "value": "" }
+  ]
+}
