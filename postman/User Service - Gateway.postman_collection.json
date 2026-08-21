@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "0e247e29-dfeb-455d-910c-b0cf732f6968",
-    "name": "Core API - Gateway",
+    "_postman_id": "541ba16f-88c6-4f5a-a7dc-4465d2c2f4e7",
+    "name": "User Service - Gateway",
     "description": "Call hs-core-api endpoints through the API Gateway. Public API base route: /api/v1/**.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "40740215"
@@ -236,7 +236,7 @@
                   "if (body.result?.id) pm.collectionVariables.set('userId', body.result.id);",
                   "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);",
                   "pm.test('full profile fields returned', () => {",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'avatarUrl', 'avatarStorageId', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt');",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -307,7 +307,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"storageId\": \"{{avatarStorageId}}\"\n}",
+              "raw": "{\n  \"avatarUrl\": \"{{avatarUrl}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -325,7 +325,7 @@
                 "avatar"
               ]
             },
-            "description": "Links a completed PUBLIC USER_AVATAR storage object owned by the current user. The API derives its permanent public S3 URL, updates Keycloak attribute 'picture', and synchronizes the core database. Run the Storage Service upload flow first, then copy storageId into avatarStorageId."
+            "description": "Updates avatarUrl in Keycloak attribute 'picture' and synchronizes it to the core database."
           },
           "response": []
         }
@@ -396,7 +396,7 @@
                   "const body = pm.response.json();",
                   "pm.test('full user profile returned', () => {",
                   "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('userId'));",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'avatarUrl', 'avatarStorageId', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -945,9 +945,8 @@
       "value": "admin@example.com"
     },
     {
-      "key": "avatarStorageId",
-      "value": "",
-      "description": "storageId returned by the Storage Service USER_AVATAR upload flow after Complete Upload"
+      "key": "avatarUrl",
+      "value": "https://example.com/avatar.jpg"
     },
     {
       "key": "phoneNumber",
