@@ -1,0 +1,11 @@
+/*
+ * The administration portal is provisioned by HomeSpace operators.
+ * Self-registration and external identity providers are intentionally hidden
+ * for this client while password recovery remains available.
+ */
+#kc-registration-container,
+#kc-registration,
+#kc-social-providers,
+.kc-social-section {
+    display: none !important;
+}

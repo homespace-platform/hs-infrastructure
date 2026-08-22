@@ -303,7 +303,17 @@
         }
       ],
       "homespace-id": [],
-      "homespace-admin-id": [],
+      "homespace-admin-id": [
+        {
+          "id": "b89f44aa-7baf-4f23-8471-b932516fbad8",
+          "name": "ADMIN_PORTAL_ACCESS",
+          "description": "Allows access to the HomeSpace administration portal",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "ebaa2d7c-f219-4fa7-abdc-b824691d13a9",
+          "attributes": {}
+        }
+      ],
       "security-admin-console": [],
       "admin-cli": [],
       "account-console": [],
@@ -711,6 +721,7 @@
       "frontchannelLogout": true,
       "protocol": "openid-connect",
       "attributes": {
+        "login_theme": "homespace-admin",
         "realm_client": "false",
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
