@@ -512,6 +512,27 @@
           "response": []
         },
         {
+          "name": "Resend Invitation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}/resend-invitation",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{userId}}",
+                "resend-invitation"
+              ]
+            },
+            "description": "Sends a new Keycloak execute-actions email (verify email + set password). The previous 12-hour action link is replaced. The user must be enabled. Fails if the account already completed those actions."
+          },
+          "response": []
+        },
+        {
           "name": "Assign Role",
           "request": {
             "method": "POST",
