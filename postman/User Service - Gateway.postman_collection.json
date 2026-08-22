@@ -335,6 +335,56 @@
       "name": "Admin Users",
       "item": [
         {
+          "name": "Create User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('user accepted for provisioning', () => {",
+                  "  pm.response.to.have.status(201);",
+                  "  pm.expect(body.result.id).to.be.a('string').and.not.empty;",
+                  "  pm.expect(body.result.provisioningStatus).to.eql('PROVISIONING');",
+                  "});",
+                  "if (body.result?.id) pm.collectionVariables.set('createdUserId', body.result.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{adminCreateUsername}}\",\n  \"email\": \"{{adminCreateEmail}}\",\n  \"firstName\": \"System\",\n  \"lastName\": \"User\",\n  \"phone\": \"{{adminCreatePhone}}\",\n  \"enabled\": true,\n  \"sendInvitation\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            },
+            "description": "Creates the account in Keycloak. Keycloak events then provision the database record through Kafka. When enabled, invitation email requests email verification and password setup."
+          },
+          "response": []
+        },
+        {
           "name": "List Users - Page",
           "event": [
             {
@@ -974,6 +1024,22 @@
     },
     {
       "key": "idToken",
+      "value": ""
+    },
+    {
+      "key": "adminCreateUsername",
+      "value": "system.user"
+    },
+    {
+      "key": "adminCreateEmail",
+      "value": "system.user@example.com"
+    },
+    {
+      "key": "adminCreatePhone",
+      "value": "0901234568"
+    },
+    {
+      "key": "createdUserId",
       "value": ""
     }
   ]
