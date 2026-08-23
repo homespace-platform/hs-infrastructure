@@ -627,38 +627,6 @@
       "name": "Admin Roles",
       "item": [
         {
-          "name": "Create Role",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"{{roleName}}\",\n  \"description\": \"Temporary role from Postman\",\n  \"permissionIdList\": []\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/admin/roles",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "roles"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "List Roles - Page",
           "event": [
             {
@@ -695,9 +663,16 @@
                 {
                   "key": "size",
                   "value": "10"
+                },
+                {
+                  "key": "includePermissions",
+                  "value": "true",
+                  "disabled": true,
+                  "description": "Set true to embed each role's permissions. Default is false / omitted."
                 }
               ]
-            }
+            },
+            "description": "Paged role list. Permissions are omitted unless includePermissions=true."
           },
           "response": []
         },
@@ -730,7 +705,8 @@
                 "roles",
                 "all"
               ]
-            }
+            },
+            "description": "Returns every role without permissions. Use GET /admin/roles?includePermissions=true when the permission list is needed."
           },
           "response": []
         },
@@ -765,7 +741,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"{{roleName}}\",\n  \"description\": \"Updated from Postman\",\n  \"permissionIdList\": []\n}",
+              "raw": "{\n  \"description\": \"Updated from Postman\",\n  \"permissionIdList\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -810,38 +786,6 @@
     {
       "name": "Admin Permissions",
       "item": [
-        {
-          "name": "Create Permission",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"{{permissionName}}\",\n  \"description\": \"Temporary permission from Postman\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/admin/permissions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "permissions"
-              ]
-            }
-          },
-          "response": []
-        },
         {
           "name": "List Permissions - Page",
           "event": [
@@ -930,7 +874,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"{{permissionName}}\",\n  \"description\": \"Updated from Postman\"\n}",
+              "raw": "{\n  \"description\": \"Updated from Postman\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -991,7 +935,7 @@
         "requests": {},
         "exec": [
           "if (!pm.collectionVariables.get('adminAuthorities')) {",
-          "  pm.collectionVariables.set('adminAuthorities', 'USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE');",
+          "  pm.collectionVariables.set('adminAuthorities', 'USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_UPDATE,PERMISSION_DELETE');",
           "}",
           "if (!pm.collectionVariables.get('roleName')) pm.collectionVariables.set('roleName', 'TEST_ROLE');",
           "if (!pm.collectionVariables.get('permissionName')) pm.collectionVariables.set('permissionName', 'TEST_PERMISSION');"
@@ -1097,7 +1041,7 @@
     },
     {
       "key": "adminAuthorities",
-      "value": "USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE"
+      "value": "USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_UPDATE,PERMISSION_DELETE"
     },
     {
       "key": "idToken",
