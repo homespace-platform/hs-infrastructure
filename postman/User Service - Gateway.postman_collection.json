@@ -446,7 +446,13 @@
                   "const body = pm.response.json();",
                   "pm.test('full user profile returned', () => {",
                   "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('userId'));",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "  pm.expect(body.result).to.include.keys('id', 'username', 'email', 'firstName', 'lastName', 'avatarUrl', 'avatarStorageId', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "  ['createdBy', 'updatedBy'].forEach((field) => {",
+                  "    const actor = body.result[field];",
+                  "    if (actor) {",
+                  "      pm.expect(actor).to.include.keys('id', 'fullName', 'username', 'phone', 'email');",
+                  "    }",
+                  "  });",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -468,6 +474,56 @@
               ]
             },
             "description": "Returns all persisted profile fields for a user. Requires ADMIN authority."
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.test('user updated', () => {",
+                  "  pm.expect(body.result.id).to.eql(pm.collectionVariables.get('userId'));",
+                  "  pm.expect(body.result.firstName).to.eql('Van Minh');",
+                  "  pm.expect(body.result.gender).to.eql('MALE');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{adminCreateUsername}}\",\n  \"email\": \"{{adminCreateEmail}}\",\n  \"firstName\": \"Van Minh\",\n  \"lastName\": \"Nguyen\",\n  \"phone\": \"{{adminCreatePhone}}\",\n  \"dob\": \"2000-08-06\",\n  \"gender\": \"MALE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "Updates the profile of any user by ID. Requires ADMIN plus USER_UPDATE authority.\n\nAccepts username, email, firstName, lastName, phone, dob and gender. All fields are optional and omitted or blank fields keep their current value, so this doubles as a partial update.\n\nusername, email, firstName, lastName and phone are pushed to Keycloak and mirrored back through the Kafka sync. dob and gender exist only in the database.\n\nHandled by dedicated endpoints instead: account status through Enable / Disable User, role through Assign Role, onboarding through Onboarding Me, and the avatar through the storage upload flow at PUT /users/me/avatar. id and the audit columns are managed by the system.\n\nChanging the email resets Keycloak email verification, so follow it with Resend Invitation."
           },
           "response": []
         },
@@ -935,7 +991,7 @@
         "requests": {},
         "exec": [
           "if (!pm.collectionVariables.get('adminAuthorities')) {",
-          "  pm.collectionVariables.set('adminAuthorities', 'USER_VIEW,USER_CREATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE');",
+          "  pm.collectionVariables.set('adminAuthorities', 'USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE');",
           "}",
           "if (!pm.collectionVariables.get('roleName')) pm.collectionVariables.set('roleName', 'TEST_ROLE');",
           "if (!pm.collectionVariables.get('permissionName')) pm.collectionVariables.set('permissionName', 'TEST_PERMISSION');"
@@ -1041,7 +1097,7 @@
     },
     {
       "key": "adminAuthorities",
-      "value": "USER_VIEW,USER_CREATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE"
+      "value": "USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_DELETE,PERMISSION_VIEW,PERMISSION_CREATE,PERMISSION_UPDATE,PERMISSION_DELETE"
     },
     {
       "key": "idToken",
