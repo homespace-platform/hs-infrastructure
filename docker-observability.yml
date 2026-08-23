@@ -7,7 +7,7 @@ services:
         container_name: hs-pgadmin
         restart: unless-stopped
         environment:
-            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-homespace@homespace.com}
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-homespace.platform.cskh@gmail.com}
             PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-homespace123}
             PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
         ports:
@@ -73,7 +73,7 @@ networks:
 #
 #  pgAdmin:
 #    URL: http://localhost:5050
-#    Login email: homespace@homespace.com
+#    Login email: homespace.platform.cskh@gmail.com
 #    Login password: homespace123
 #    PostgreSQL host: postgres
 #    PostgreSQL port: 5432

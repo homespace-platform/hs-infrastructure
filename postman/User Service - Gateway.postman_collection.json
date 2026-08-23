@@ -81,7 +81,8 @@
                 "openid-connect",
                 "token"
               ]
-            }
+            },
+            "description": "Signs in with the bootstrap admin seeded by hs-core-api on first run (BOOTSTRAP_ADMIN_USERNAME / BOOTSTRAP_ADMIN_PASSWORD, default homespace / Homespace@123), so no variable needs editing before running the collection."
           },
           "response": []
         }
@@ -125,6 +126,24 @@
         },
         {
           "name": "Update Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  const previous = pm.collectionVariables.get('oldPassword');",
+                  "  const current = pm.collectionVariables.get('newPassword');",
+                  "  pm.collectionVariables.set('oldPassword', current);",
+                  "  pm.collectionVariables.set('newPassword', previous);",
+                  "  pm.collectionVariables.set('password', current);",
+                  "  pm.test('login password rotated', () => pm.expect(pm.collectionVariables.get('password')).to.eql(current));",
+                  "}"
+                ]
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [
@@ -152,7 +171,8 @@
                 "me",
                 "password"
               ]
-            }
+            },
+            "description": "On success the collection swaps oldPassword and newPassword and points the login password at the new value, so Get Token keeps working without editing variables."
           },
           "response": []
         },
@@ -867,7 +887,10 @@
           "  pm.collectionVariables.set('adminAuthorities', 'USER_VIEW,USER_CREATE,USER_UPDATE,ROLE_VIEW,ROLE_UPDATE,PERMISSION_VIEW,PERMISSION_UPDATE');",
           "}",
           "if (!pm.collectionVariables.get('roleName')) pm.collectionVariables.set('roleName', 'TEST_ROLE');",
-          "if (!pm.collectionVariables.get('permissionName')) pm.collectionVariables.set('permissionName', 'TEST_PERMISSION');"
+          "if (!pm.collectionVariables.get('permissionName')) pm.collectionVariables.set('permissionName', 'TEST_PERMISSION');",
+          "// Matches the BOOTSTRAP_ADMIN_* defaults seeded by hs-core-api on first run.",
+          "if (!pm.collectionVariables.get('username')) pm.collectionVariables.set('username', 'homespace');",
+          "if (!pm.collectionVariables.get('password')) pm.collectionVariables.set('password', 'Homespace@123');"
         ]
       }
     },
@@ -906,19 +929,19 @@
     },
     {
       "key": "username",
-      "value": "admin"
+      "value": "homespace"
     },
     {
       "key": "password",
-      "value": "admin"
+      "value": "Homespace@123"
     },
     {
       "key": "oldPassword",
-      "value": "Admin@123"
+      "value": "Homespace@123"
     },
     {
       "key": "newPassword",
-      "value": "Admin@1234"
+      "value": "Homespace@1234"
     },
     {
       "key": "initialPassword",
@@ -942,7 +965,7 @@
     },
     {
       "key": "userEmail",
-      "value": "admin@example.com"
+      "value": "homespace.platform.cskh@gmail.com"
     },
     {
       "key": "avatarUrl",
