@@ -1,0 +1,280 @@
+{
+  "info": {
+    "_postman_id": "a9b1c2d3-e4f5-6789-abcd-ef0123456789",
+    "name": "Location Service",
+    "description": "Postman collection for testing Vietnam Administrative Location Service APIs (running on port 9999).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:9999",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Kiểm tra trạng thái hoạt động của Location Service"
+      },
+      "response": []
+    },
+    {
+      "name": "Provinces (Tỉnh / Thành phố)",
+      "item": [
+        {
+          "name": "1. Lấy tất cả Tỉnh / Thành phố",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces"
+              ]
+            },
+            "description": "Lấy danh sách tất cả các đơn vị hành chính cấp Tỉnh/Thành phố trực thuộc Trung ương"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Chi tiết Tỉnh/Thành theo mã (TP. Hồ Chí Minh - 79)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/79",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "79"
+              ]
+            },
+            "description": "Lấy thông tin chi tiết của Thành phố Hồ Chí Minh (Code: 79)"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Chi tiết Tỉnh/Thành theo mã (Hà Nội - 01)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "01"
+              ]
+            },
+            "description": "Lấy thông tin chi tiết của Thủ đô Hà Nội (Code: 01)"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Chi tiết Tỉnh/Thành theo mã (Đồng Nai - 75)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/75",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "75"
+              ]
+            },
+            "description": "Lấy thông tin chi tiết của Tỉnh/Thành phố Đồng Nai (Code: 75)"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Tỉnh/Thành không tồn tại (Test 404)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "999"
+              ]
+            },
+            "description": "Kiểm tra mã lỗi 404 khi mã tỉnh/thành không tồn tại"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wards (Phường / Xã / Thị trấn)",
+      "item": [
+        {
+          "name": "1. Lấy danh sách Phường/Xã thuộc TP.HCM (Code 79)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/79/wards",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "79",
+                "wards"
+              ]
+            },
+            "description": "Lấy danh sách tất cả các Phường/Xã/Thị trấn trực thuộc Thành phố Hồ Chí Minh"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Lấy danh sách Phường/Xã thuộc Hà Nội (Code 01)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/provinces/01/wards",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "provinces",
+                "01",
+                "wards"
+              ]
+            },
+            "description": "Lấy danh sách tất cả các Phường/Xã/Thị trấn trực thuộc Hà Nội"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Chi tiết Phường/Xã theo mã",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/wards/26734",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "wards",
+                "26734"
+              ]
+            },
+            "description": "Lấy thông tin chi tiết một Phường/Xã cụ thể theo mã định danh"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Phường/Xã không tồn tại (Test 404)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/wards/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "wards",
+                "999999"
+              ]
+            },
+            "description": "Kiểm tra mã lỗi 404 khi mã phường/xã không tồn tại"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
