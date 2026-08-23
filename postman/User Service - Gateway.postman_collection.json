@@ -505,7 +505,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"{{adminCreateUsername}}\",\n  \"email\": \"{{adminCreateEmail}}\",\n  \"firstName\": \"Van Minh\",\n  \"lastName\": \"Nguyen\",\n  \"phone\": \"{{adminCreatePhone}}\",\n  \"dob\": \"2000-08-06\",\n  \"gender\": \"MALE\"\n}",
+              "raw": "{\n  \"username\": \"{{adminCreateUsername}}\",\n  \"email\": \"{{adminCreateEmail}}\",\n  \"firstName\": \"Van Minh\",\n  \"lastName\": \"Nguyen\",\n  \"phone\": \"{{adminCreatePhone}}\",\n  \"dob\": \"2000-08-06\",\n  \"gender\": \"MALE\",\n  \"roleId\": \"{{roleId}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -523,7 +523,7 @@
                 "{{userId}}"
               ]
             },
-            "description": "Updates the profile of any user by ID. Requires ADMIN plus USER_UPDATE authority.\n\nAccepts username, email, firstName, lastName, phone, dob and gender. All fields are optional and omitted or blank fields keep their current value, so this doubles as a partial update.\n\nusername, email, firstName, lastName and phone are pushed to Keycloak and mirrored back through the Kafka sync. dob and gender exist only in the database.\n\nHandled by dedicated endpoints instead: account status through Enable / Disable User, role through Assign Role, onboarding through Onboarding Me, and the avatar through the storage upload flow at PUT /users/me/avatar. id and the audit columns are managed by the system.\n\nChanging the email resets Keycloak email verification, so follow it with Resend Invitation."
+            "description": "Updates the profile of any user by ID. Requires ADMIN plus USER_UPDATE authority.\n\nAccepts username, email, firstName, lastName, phone, dob, gender and roleId. All fields are optional and omitted or blank fields keep their current value, so this doubles as a partial update.\n\nusername, email, firstName, lastName and phone are pushed to Keycloak and mirrored back through the Kafka sync. dob, gender and role exist only in the database.\n\nYou cannot change your own roleId (code 2018).\n\nHandled by dedicated endpoints instead: account status through Enable / Disable User, onboarding through Onboarding Me, and the avatar through the storage upload flow at PUT /users/me/avatar. id and the audit columns are managed by the system.\n\nChanging the email resets Keycloak email verification, so follow it with Resend Invitation."
           },
           "response": []
         },
@@ -585,39 +585,6 @@
               ]
             },
             "description": "Sends a new Keycloak execute-actions email (verify email + set password). The previous 12-hour action link is replaced. The user must be enabled. Fails if the account already completed those actions."
-          },
-          "response": []
-        },
-        {
-          "name": "Assign Role",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"roleId\": \"{{roleId}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/admin/users/assign-role",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin",
-                "users",
-                "assign-role"
-              ]
-            }
           },
           "response": []
         }
