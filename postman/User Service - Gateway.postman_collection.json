@@ -331,7 +331,7 @@
                 "address"
               ]
             },
-            "description": "Returns the current user's saved address. 404 ADDRESS_NOT_EXISTED when none is saved yet."
+            "description": "Returns the current user's active address. 404 ADDRESS_NOT_EXISTED when none is saved or it was soft-deleted."
           },
           "response": []
         },
@@ -384,7 +384,8 @@
                 "me",
                 "address"
               ]
-            }
+            },
+            "description": "Soft-deletes the current user's address (active=false). The row is kept. GET returns 404 until PUT, which reactivates the same row."
           },
           "response": []
         },
