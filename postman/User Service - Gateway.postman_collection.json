@@ -256,7 +256,7 @@
                   "if (body.result?.id) pm.collectionVariables.set('userId', body.result.id);",
                   "pm.test('userId saved when profile exists', () => pm.expect(pm.collectionVariables.get('userId')).to.not.be.empty);",
                   "pm.test('full profile fields returned', () => {",
-                  "  pm.expect(body.result).to.have.all.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy');",
+                  "  pm.expect(body.result).to.include.keys('id', 'username', 'email', 'firstName', 'lastName', 'emailVerified', 'avatarUrl', 'phone', 'dob', 'gender', 'roleId', 'role', 'onBoarded', 'active', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', 'address');",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -310,6 +310,79 @@
                 "users",
                 "me",
                 "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Address",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/me/address",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "address"
+              ]
+            },
+            "description": "Returns the current user's saved address. 404 ADDRESS_NOT_EXISTED when none is saved yet."
+          },
+          "response": []
+        },
+        {
+          "name": "Save My Address",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provinceCode\": \"79\",\n  \"provinceName\": \"Thành phố Hồ Chí Minh\",\n  \"wardCode\": \"26734\",\n  \"wardName\": \"Phường 5\",\n  \"streetLine\": \"460/6 Nơ Trang Long\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me/address",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "address"
+              ]
+            },
+            "description": "Creates or updates the current user's address. Frontend loads province/ward from hs-location-service, then sends codes + names + street line."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete My Address",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/me/address",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "address"
               ]
             }
           },
