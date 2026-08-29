@@ -721,11 +721,11 @@
       "frontchannelLogout": true,
       "protocol": "openid-connect",
       "attributes": {
-        "login_theme": "homespace-admin",
         "realm_client": "false",
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
+        "login_theme": "homespace-admin",
         "post.logout.redirect.uris": "http://localhost:5000/*",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
@@ -1648,18 +1648,18 @@
     "starttls": "true",
     "auth": "true",
     "writeTimeout": "10000",
-    "envelopeFrom": "homespace.platform.cskh@gmail.com",
+    "envelopeFrom": "zolaracskh@gmail.com",
     "ssl": "false",
     "timeout": "10000",
     "password": "**********",
     "port": "587",
     "host": "smtp.gmail.com",
-    "replyTo": "homespace.platform.cskh@gmail.com",
-    "from": "homespace.platform.cskh@gmail.com",
+    "replyTo": "zolaracskh@gmail.com",
+    "from": "zolaracskh@gmail.com",
     "fromDisplayName": "HomeSpace Platform",
     "authType": "basic",
     "connectionTimeout": "10000",
-    "user": "homespace.platform.cskh@gmail.com"
+    "user": "zolaracskh@gmail.com"
   },
   "loginTheme": "homespace",
   "eventsEnabled": false,
@@ -1777,7 +1777,7 @@
       "hideOnLogin": false,
       "config": {
         "acceptsPromptNoneForwardFromClient": "false",
-        "clientId": "136108297335-ip7frit2aui3lis1tuu03jts4uatdgmb.apps.googleusercontent.com",
+        "clientId": "866361947626-uslhe8eunph9bmrjnc5eqovrjcrtc78n.apps.googleusercontent.com",
         "disableUserInfo": "false",
         "showInAccountConsole": "ALWAYS",
         "filteredByClaim": "false",
@@ -1819,13 +1819,13 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-property-mapper",
+            "saml-user-attribute-mapper",
+            "oidc-address-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-user-property-mapper",
             "oidc-full-name-mapper",
             "saml-role-list-mapper",
-            "saml-user-attribute-mapper",
-            "saml-user-property-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper",
+            "oidc-usermodel-property-mapper",
             "oidc-usermodel-attribute-mapper"
           ]
         }
@@ -1855,13 +1855,13 @@
         "config": {
           "allowed-protocol-mapper-types": [
             "saml-role-list-mapper",
-            "saml-user-attribute-mapper",
+            "oidc-usermodel-property-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-full-name-mapper",
             "saml-user-property-mapper",
             "oidc-address-mapper",
-            "oidc-usermodel-property-mapper",
-            "oidc-usermodel-attribute-mapper"
+            "oidc-usermodel-attribute-mapper",
+            "oidc-full-name-mapper",
+            "saml-user-attribute-mapper"
           ]
         }
       },
