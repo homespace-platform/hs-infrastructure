@@ -247,11 +247,17 @@
                 "type": "text/javascript",
                 "exec": [
                   "const body = pm.response.json();",
+                  "const expectedStatus = pm.collectionVariables.get('storageStatus');",
                   "pm.test('paged storage objects returned', () => {",
                   "  pm.expect(body.result).to.be.an('array');",
                   "  pm.expect(body.page).to.be.a('number');",
                   "  pm.expect(body.totalElements).to.be.a('number');",
-                  "});"
+                  "});",
+                  "if (expectedStatus) {",
+                  "  pm.test('only requested status returned', () => {",
+                  "    body.result.forEach(item => pm.expect(item.status).to.eql(expectedStatus));",
+                  "  });",
+                  "}"
                 ]
               }
             }
@@ -260,16 +266,19 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/storage?page=1&size=20&referenceType={{storageReferenceType}}&referenceId={{storageReferenceId}}",
+              "raw": "{{baseUrl}}/storage?page=1&size=20&referenceType={{storageReferenceType}}&referenceId={{storageReferenceId}}&purpose={{storagePurpose}}&status={{storageStatus}}",
               "host": ["{{baseUrl}}"],
               "path": ["storage"],
               "query": [
                 { "key": "page", "value": "1" },
                 { "key": "size", "value": "20" },
-                { "key": "referenceType", "value": "{{storageReferenceType}}" },
-                { "key": "referenceId", "value": "{{storageReferenceId}}" }
+                { "key": "referenceType", "value": "{{storageReferenceType}}", "description": "Optional business reference, e.g. USER" },
+                { "key": "referenceId", "value": "{{storageReferenceId}}", "description": "Optional business reference id, e.g. PROFILE" },
+                { "key": "purpose", "value": "{{storagePurpose}}", "description": "Optional file purpose, e.g. USER_AVATAR" },
+                { "key": "status", "value": "{{storageStatus}}", "description": "Defaults to READY; only completed uploads are viewable" }
               ]
-            }
+            },
+            "description": "Lists the current user's storage objects. By default only READY files are returned because PENDING uploads are not complete yet. For avatar history, set referenceType=USER, referenceId=PROFILE, purpose=USER_AVATAR and status=READY."
           },
           "response": []
         },
@@ -303,9 +312,10 @@
     { "key": "storageContentType", "value": "image/png" },
     { "key": "storageFileSize", "value": "1024" },
     { "key": "storagePurpose", "value": "USER_AVATAR" },
+    { "key": "storageStatus", "value": "READY" },
     { "key": "storageVisibility", "value": "PRIVATE" },
-    { "key": "storageReferenceType", "value": "" },
-    { "key": "storageReferenceId", "value": "" },
+    { "key": "storageReferenceType", "value": "USER" },
+    { "key": "storageReferenceId", "value": "PROFILE" },
     { "key": "storageId", "value": "" },
     { "key": "uploadUrl", "value": "" },
     { "key": "objectKey", "value": "" },
