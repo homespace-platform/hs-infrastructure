@@ -278,7 +278,7 @@
                 { "key": "status", "value": "{{storageStatus}}", "description": "Defaults to READY; only completed uploads are viewable" }
               ]
             },
-            "description": "Lists the current user's storage objects. By default only READY files are returned because PENDING uploads are not complete yet. For avatar history, set referenceType=USER, referenceId=PROFILE, purpose=USER_AVATAR and status=READY."
+            "description": "Lists the current user's storage objects. By default only READY files are returned because PENDING uploads are not complete yet. For avatar history, set referenceType=USER, referenceId={user UUID from profile}, purpose=USER_AVATAR and status=READY."
           },
           "response": []
         },
@@ -315,7 +315,7 @@
     { "key": "storageStatus", "value": "READY" },
     { "key": "storageVisibility", "value": "PRIVATE" },
     { "key": "storageReferenceType", "value": "USER" },
-    { "key": "storageReferenceId", "value": "PROFILE" },
+    { "key": "storageReferenceId", "value": "", "description": "User UUID (profile.id), not PROFILE" },
     { "key": "storageId", "value": "" },
     { "key": "uploadUrl", "value": "" },
     { "key": "objectKey", "value": "" },
