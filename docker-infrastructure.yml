@@ -128,11 +128,13 @@ services:
             - ./keycloak/provider:/opt/keycloak/providers
             - ./keycloak/keycloak-themes:/opt/keycloak/themes:ro
         healthcheck:
-            test: ['CMD-SHELL', "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/9000; printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q '200 OK' <&3\""]
-            interval: 30s
-            timeout: 10s
-            retries: 5
-            start_period: 40s
+            # Management port inside container = 9000 (host: http://localhost:9001/health/ready).
+            # First boot builds custom providers then starts — allow up to ~5 min before failing.
+            test: ['CMD-SHELL', "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/9000; printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; cat <&3 | head -n 1 | grep -q 200\""]
+            interval: 10s
+            timeout: 5s
+            retries: 30
+            start_period: 240s
         depends_on:
             postgres:
                 condition: service_healthy
@@ -187,11 +189,14 @@ networks:
 #  =================================================================
 #  Usage
 #  =================================================================
-#  Start infrastructure:
-#    docker compose -f docker-infrastructure.yml up -d
+#  Start infrastructure (blocks until all healthchecks pass, incl. Keycloak :9000):
+#    docker compose -f docker-infrastructure.yml up -d --wait
 #
 #  Stop infrastructure:
 #    docker compose -f docker-infrastructure.yml down
+#
+#  Check Keycloak health manually:
+#    curl -sf http://localhost:9001/health/ready
 #
 #  PostgreSQL:
 #    Host in Docker: postgres

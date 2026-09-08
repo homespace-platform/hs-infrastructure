@@ -63,7 +63,7 @@ networks:
 #  Usage
 #  =================================================================
 #  Start infrastructure first:
-#    docker compose -f docker-infrastructure.yml up -d
+#    docker compose -f docker-infrastructure.yml up -d --wait
 #
 #  Start observability tools:
 #    docker compose -f docker-observability.yml up -d
