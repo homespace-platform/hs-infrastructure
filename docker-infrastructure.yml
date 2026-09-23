@@ -68,6 +68,22 @@ services:
             timeout: 5s
             retries: 5
 
+    # DOCX -> PDF conversion required before VNPT SmartCA signing.
+    # The core API runs on the host and calls http://localhost:3001.
+    gotenberg:
+        image: gotenberg/gotenberg:8
+        container_name: hs-gotenberg
+        restart: unless-stopped
+        ports:
+            - '127.0.0.1:3001:3000'
+        networks:
+            - hs-network
+        healthcheck:
+            test: ['CMD', 'curl', '--fail', '--silent', 'http://localhost:3000/health']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
     #  =================================================================
     #  Kafka
     #  =================================================================
