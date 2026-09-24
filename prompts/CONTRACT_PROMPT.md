@@ -59,6 +59,17 @@ Tên file xuất ra bắt buộc:
 - Không dùng dấu chấm thủ công (ví dụ: `Họ tên: ....................`).
 - Không tạo placeholder ngoài danh mục 63 trường được hỗ trợ.
 
+### 7. Quy chuẩn trình bày chuyên nghiệp và tương thích luồng ký SMARTCA
+- Khổ giấy A4 dọc; lề trái/phải 2,5 cm, lề trên 3 cm, lề dưới 2,5 cm. Đặt Header/Footer cách mép giấy 1,25 cm để phần đầu trang không chạm Quốc hiệu.
+- Header chạy trang chỉ là dòng nhận diện nhỏ, màu xám nhạt, cỡ 8–9 pt, căn phải và nằm trong vùng Header của Word. Không đặt Quốc hiệu, tiêu ngữ hoặc tên hợp đồng trong Header. Nội dung đầu trang phải bắt đầu thấp hơn Header tối thiểu 1 cm.
+- Trình bày Quốc hiệu và tiêu ngữ ở đầu phần thân trang thứ nhất, căn giữa. Dành khoảng cách sau tiêu ngữ 10–12 pt; sau đó mới đến tên hợp đồng. Tên hợp đồng viết hoa, đậm, căn giữa, cỡ 16 pt; dòng số hợp đồng/ngày ký cỡ 11–12 pt và có khoảng cách rõ ràng với phần căn cứ pháp lý.
+- Toàn văn dùng Times New Roman; thân bài 12 pt, giãn dòng 1,15, căn đều hai lề; khoảng cách sau đoạn 4 pt. Tiêu đề điều khoản 13 pt đậm, cách đoạn trước 8 pt và sau 4 pt. Không giảm cỡ chữ dưới 10 pt để ép nội dung vừa trang.
+- Tạo khoảng cách bằng thiết lập Paragraph/Line Spacing, không chèn nhiều dòng trống, nhiều dấu cách hoặc Tab để căn chỉnh. Không dùng căn đều kiểu Distributed, hộp văn bản, cột, hình/shape trang trí hoặc bảng lồng để dàn trang.
+- Giữ tiêu đề điều khoản đi cùng đoạn nội dung kế tiếp; không ngắt hàng bảng giữa hai trang nếu Word cho phép, lặp lại hàng tiêu đề của bảng khi bảng sang trang. Các bảng động phải có độ rộng cột hợp lý, nội dung không tràn lề.
+- Không chèn ngắt trang tùy tiện giữa các điều, không để một tiêu đề đứng lẻ ở cuối trang, không tạo trang trắng hoặc một trang cuối chỉ có vài dòng. Tự kiểm tra bố cục sau khi xuất DOCX/PDF.
+- **Quy tắc ký SMARTCA:** Backend HomeSpace hiện tự nối một trang ký A4 vào cuối PDF khi dùng chế độ `SMARTCA`; backend tự đặt vùng ký tại tọa độ cố định trên trang cuối, không tìm theo placeholder/văn bản trong DOCX. Vì vậy **không tạo mục “Chữ ký các bên”, không tạo trang ký, khung ký, dòng chấm ký hoặc placeholder chữ ký trong DOCX**. Kết thúc mẫu sau điều khoản hiệu lực. Không tự thêm trang ký vì sẽ tạo trang ký trùng trong PDF.
+- Không thay đổi tên, cú pháp hoặc cách viết placeholder; mỗi placeholder vẫn phải nằm trọn trong một Word run để poi-tl thay thế chính xác.
+
 ---
 
 ## II. DANH MỤC 63 MÃ TRƯỜNG VÀ BẢNG ĐỘNG ĐƯỢC HỖ TRỢ (SCHEMA V3)
@@ -173,6 +184,8 @@ Tên file xuất ra bắt buộc:
 2. Không để sót placeholder rác không có trong danh mục 63 trường trên.
 3. Các bảng động `{{#chargesTable}}`, `{{#equipmentTable}}`, `{{#propertyFeaturesTable}}`, `{{#amenitiesTable}}`, `{{#initialPaymentTable}}` phải giữ nguyên ký tự `#` ở đầu tên bảng.
 4. Đảm bảo file được lưu đúng định dạng Word 2007+ (.docx).
+5. Mở/xuất xem toàn bộ trang để kiểm tra khoảng cách giữa Header với Quốc hiệu, khoảng cách tiêu đề, lề, bảng và lỗi tiêu đề/đoạn bị tách không đẹp.
+6. DOCX mẫu không có trang ký. Khi hợp đồng chạy ở chế độ SMARTCA, backend sẽ tự nối đúng một trang ký riêng vào PDF; không thêm trang ký thứ hai vào mẫu.
 
 ---
 
@@ -191,6 +204,12 @@ Soạn toàn văn file Word mẫu "HỢP ĐỒNG THUÊ NHÀ NGUYÊN CĂN" (dành
 
 TÊN FILE WORD ĐẦU RA BẮT BUỘC:
 HomeSpace_01_Hop_Dong_Thue_Nha_Nguyen_Can.docx
+
+QUY CHUẨN DÀN TRANG BẮT BUỘC:
+Tạo DOCX khổ A4 dọc, lề trái/phải 2,5 cm, lề trên 3 cm, lề dưới 2,5 cm; Header/Footer cách mép giấy 1,25 cm. Header chỉ là dòng nhận diện nhỏ 8–9 pt màu xám nhạt căn phải, nằm trong vùng Header; Quốc hiệu, tiêu ngữ và tên hợp đồng phải nằm trong phần thân trang, có khoảng cách thoáng, không được sát/chạm Header. Dùng Times New Roman; thân bài 12 pt, giãn dòng 1,15, căn đều hai lề, sau đoạn 4 pt; tiêu đề điều khoản 13 pt đậm (trước 8 pt, sau 4 pt); tên hợp đồng 16 pt đậm căn giữa. Dùng Paragraph Spacing thay cho dòng trống/Tab/dấu cách để tạo khoảng cách; không để tiêu đề đứng lẻ, bảng tràn lề, trang trắng hoặc trang cuối chỉ có vài dòng. Tự kiểm tra bố cục DOCX/PDF sau khi tạo.
+
+QUY TẮC TRANG KÝ SMARTCA (BẮT BUỘC):
+Trong chế độ SMARTCA, backend HomeSpace tự nối một trang ký A4 vào cuối PDF và đặt vùng ký ở tọa độ cố định trên trang cuối; backend không dò placeholder hay đoạn chữ ký trong DOCX. Vì vậy không tạo phần “Chữ ký các bên”, không tạo khung/dòng ký/placeholder chữ ký và không ngắt trang dành riêng cho chữ ký trong DOCX. Kết thúc mẫu ngay sau điều khoản hiệu lực để tránh có hai trang ký. Không thay đổi bất kỳ placeholder hoặc bảng động Schema V3 nào.
 
 I. CĂN CỨ PHÁP LÝ
 - Bộ luật Dân sự số 91/2015/QH13;
@@ -286,9 +305,6 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - Hợp đồng được giao kết điện tử/xác nhận thông qua nền tảng HomeSpace phù hợp Luật Giao dịch điện tử.
     - Phiên bản schema: {{contract.schemaVersion}}, Số hiệu bản sửa đổi: {{contract.revisionNumber}}.
     - Hợp đồng có hiệu lực kể từ thời điểm hai bên hoàn tất xác nhận/ký điện tử.
-14. CHỮ KÝ CÁC BÊN:
-    - ĐẠI DIỆN BÊN A (Ký, ghi rõ họ tên)
-    - ĐẠI DIỆN BÊN B (Ký, ghi rõ họ tên)
 ```
 
 ---
@@ -304,6 +320,12 @@ Soạn toàn văn file Word mẫu "HỢP ĐỒNG THUÊ CĂN HỘ CHUNG CƯ" (dà
 
 TÊN FILE WORD ĐẦU RA BẮT BUỘC:
 HomeSpace_02_Hop_Dong_Thue_Can_Ho_Chung_Cu.docx
+
+QUY CHUẨN DÀN TRANG BẮT BUỘC:
+Tạo DOCX khổ A4 dọc, lề trái/phải 2,5 cm, lề trên 3 cm, lề dưới 2,5 cm; Header/Footer cách mép giấy 1,25 cm. Header chỉ là dòng nhận diện nhỏ 8–9 pt màu xám nhạt căn phải, nằm trong vùng Header; Quốc hiệu, tiêu ngữ và tên hợp đồng phải nằm trong phần thân trang, có khoảng cách thoáng, không được sát/chạm Header. Dùng Times New Roman; thân bài 12 pt, giãn dòng 1,15, căn đều hai lề, sau đoạn 4 pt; tiêu đề điều khoản 13 pt đậm (trước 8 pt, sau 4 pt); tên hợp đồng 16 pt đậm căn giữa. Dùng Paragraph Spacing thay cho dòng trống/Tab/dấu cách để tạo khoảng cách; không để tiêu đề đứng lẻ, bảng tràn lề, trang trắng hoặc trang cuối chỉ có vài dòng. Tự kiểm tra bố cục DOCX/PDF sau khi tạo.
+
+QUY TẮC TRANG KÝ SMARTCA (BẮT BUỘC):
+Trong chế độ SMARTCA, backend HomeSpace tự nối một trang ký A4 vào cuối PDF và đặt vùng ký ở tọa độ cố định trên trang cuối; backend không dò placeholder hay đoạn chữ ký trong DOCX. Vì vậy không tạo phần “Chữ ký các bên”, không tạo khung/dòng ký/placeholder chữ ký và không ngắt trang dành riêng cho chữ ký trong DOCX. Kết thúc mẫu ngay sau điều khoản hiệu lực để tránh có hai trang ký. Không thay đổi bất kỳ placeholder hoặc bảng động Schema V3 nào.
 
 I. CĂN CỨ PHÁP LÝ
 - Bộ luật Dân sự số 91/2015/QH13;
@@ -399,9 +421,6 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - Hợp đồng được giao kết điện tử qua nền tảng HomeSpace theo Luật Giao dịch điện tử.
     - Phiên bản schema: {{contract.schemaVersion}}, Số hiệu bản sửa đổi: {{contract.revisionNumber}}.
     - Hợp đồng có hiệu lực sau khi hai bên hoàn tất xác nhận điện tử.
-14. CHỮ KÝ CÁC BÊN:
-    - ĐẠI DIỆN BÊN A (Ký, ghi rõ họ tên)
-    - ĐẠI DIỆN BÊN B (Ký, ghi rõ họ tên)
 ```
 
 ---
@@ -417,6 +436,12 @@ Soạn toàn văn file Word mẫu "HỢP ĐỒNG THUÊ PHÒNG TRỌ" (dành cho 
 
 TÊN FILE WORD ĐẦU RA BẮT BUỘC:
 HomeSpace_03_Hop_Dong_Thue_Phong_Tro.docx
+
+QUY CHUẨN DÀN TRANG BẮT BUỘC:
+Tạo DOCX khổ A4 dọc, lề trái/phải 2,5 cm, lề trên 3 cm, lề dưới 2,5 cm; Header/Footer cách mép giấy 1,25 cm. Header chỉ là dòng nhận diện nhỏ 8–9 pt màu xám nhạt căn phải, nằm trong vùng Header; Quốc hiệu, tiêu ngữ và tên hợp đồng phải nằm trong phần thân trang, có khoảng cách thoáng, không được sát/chạm Header. Dùng Times New Roman; thân bài 12 pt, giãn dòng 1,15, căn đều hai lề, sau đoạn 4 pt; tiêu đề điều khoản 13 pt đậm (trước 8 pt, sau 4 pt); tên hợp đồng 16 pt đậm căn giữa. Dùng Paragraph Spacing thay cho dòng trống/Tab/dấu cách để tạo khoảng cách; không để tiêu đề đứng lẻ, bảng tràn lề, trang trắng hoặc trang cuối chỉ có vài dòng. Tự kiểm tra bố cục DOCX/PDF sau khi tạo.
+
+QUY TẮC TRANG KÝ SMARTCA (BẮT BUỘC):
+Trong chế độ SMARTCA, backend HomeSpace tự nối một trang ký A4 vào cuối PDF và đặt vùng ký ở tọa độ cố định trên trang cuối; backend không dò placeholder hay đoạn chữ ký trong DOCX. Vì vậy không tạo phần “Chữ ký các bên”, không tạo khung/dòng ký/placeholder chữ ký và không ngắt trang dành riêng cho chữ ký trong DOCX. Kết thúc mẫu ngay sau điều khoản hiệu lực để tránh có hai trang ký. Không thay đổi bất kỳ placeholder hoặc bảng động Schema V3 nào.
 
 I. CĂN CỨ PHÁP LÝ
 - Bộ luật Dân sự số 91/2015/QH13;
@@ -514,7 +539,4 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - Hợp đồng được giao kết điện tử qua nền tảng HomeSpace theo Luật Giao dịch điện tử.
     - Phiên bản schema: {{contract.schemaVersion}}, Số hiệu bản sửa đổi: {{contract.revisionNumber}}.
     - Hợp đồng có hiệu lực sau khi hai bên hoàn tất xác nhận điện tử.
-14. CHỮ KÝ CÁC BÊN:
-    - ĐẠI DIỆN BÊN A (Ký, ghi rõ họ tên)
-    - ĐẠI DIỆN BÊN B (Ký, ghi rõ họ tên)
 ```
