@@ -24,6 +24,29 @@ services:
             retries: 5
 
     #  =================================================================
+    #  PostgreSQL AI (pgvector for RAG)
+    #  =================================================================
+    postgres-ai:
+        image: pgvector/pgvector:pg16
+        container_name: hs-postgres-ai
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: ${POSTGRES_AI_DB:-homespace_ai}
+            POSTGRES_USER: ${POSTGRES_AI_USER:-homespace}
+            POSTGRES_PASSWORD: ${POSTGRES_AI_PASSWORD:-homespace123}
+        ports:
+            - '5433:5432'
+        volumes:
+            - hs-postgres-ai-data:/var/lib/postgresql/data
+        networks:
+            - hs-network
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    #  =================================================================
     #  MongoDB
     #  =================================================================
     mongodb:
@@ -196,6 +219,8 @@ volumes:
         name: hs-redis-data
     hs-kafka-data:
         name: hs-kafka-data
+    hs-postgres-ai-data:
+        name: hs-postgres-ai-data
 
 networks:
     hs-network:
