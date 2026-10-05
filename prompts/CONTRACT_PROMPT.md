@@ -3,7 +3,7 @@
 Tài liệu này là đặc tả chuẩn hóa (Contract Schema V3) để tạo ba mẫu hợp đồng Word (.docx) cho nền tảng HomeSpace. Mỗi mẫu gắn liền với một loại bất động sản cụ thể và sử dụng công nghệ tạo tài liệu [poi-tl](https://github.com/Sayi/poi-tl).
 
 > **LƯU Ý PHÁP LÝ QUAN TRỌNG:**
-> Các mẫu hợp đồng và prompt trong tài liệu này được thiết kế để chuẩn hóa luồng nghiệp vụ giao dịch bất động sản trực tuyến. Tài liệu **không** tuyên bố là "được chứng nhận bởi luật sư" hoặc thay thế tư vấn pháp lý chính thức. Mọi mẫu hợp đồng cần được chuyên gia pháp lý rà soát để phù hợp với điều kiện thực tế của từng địa phương và đối tượng giao dịch trước khi đưa vào môi trường Production.
+> Các mẫu hợp đồng và prompt trong tài liệu này được thiết kế để chuẩn hóa luồng nghiệp vụ giao dịch bất động sản trực tuyến. Tài liệu **không** tuyên bố là "được chứng nhận bởi luật sư" hoặc thay thế tư vấn pháp lý chính thức. Đặc biệt, điều khoản chấm dứt do quá hạn 5 ngày và ghi nhận toàn bộ cọc cho chủ nhà phải được luật sư rà soát với [Điều 172 Luật Nhà ở 2023](https://vbpl.moj.gov.vn/hanam/Pages/vbpq-toanvan.aspx?ItemID=169032&Keyword=) và tình huống thực tế trước khi đưa vào Production; prompt không được khẳng định điều khoản này mặc nhiên đủ căn cứ cưỡng chế thu hồi nhà.
 
 ---
 
@@ -59,7 +59,18 @@ Tên file xuất ra bắt buộc:
 - Không dùng dấu chấm thủ công (ví dụ: `Họ tên: ....................`).
 - Không tạo placeholder ngoài danh mục 63 trường được hỗ trợ.
 
-### 7. Quy chuẩn trình bày chuyên nghiệp và tương thích luồng ký SMARTCA
+### 7. Quy tắc hóa đơn hàng tháng, quá hạn và chấm dứt — áp dụng cho cả ba mẫu
+- `{{contract.signingDate}}` là **ngày ký**; `{{lease.startDateText}}` là **ngày bắt đầu kỳ thuê/chu kỳ hóa đơn**. Không tự coi hai ngày này là một; nếu nghiệp vụ muốn trùng ngày thì phải nhập cùng ngày ở dữ liệu nguồn. Kỳ thuê chạy từ ngày bắt đầu đến trước cùng ngày tháng kế tiếp; ngày cuối in tại `{{lease.endDateText}}` là ngày cuối cùng của toàn thời hạn thuê.
+- Khoản thanh toán ban đầu gồm tiền thuê kỳ đầu và tiền cọc (nếu có). Không ghi rằng phí điện, nước và dịch vụ cuối kỳ đã được thanh toán nếu bảng xác nhận ban đầu không thể hiện. Từ hóa đơn cuối kỳ đầu tiên trở đi: quyết toán phí cố định/điện/nước/phát sinh của kỳ vừa kết thúc **và tiền thuê của kỳ kế tiếp**, nếu kỳ kế tiếp còn nằm trong thời hạn hợp đồng. Kỳ cuối chỉ quyết toán chi phí, không thu tiền thuê vượt thời hạn. Không thu lại tiền thuê kỳ đầu đã trả ban đầu.
+- Hạn thanh toán phải dùng nguyên văn `{{rent.paymentDueDay}}` (backend hiện tính chậm nhất 23:59 ngày thứ 4 sau khi kết thúc từng kỳ thuê, theo giờ Việt Nam). **Không** hard-code “ngày 01”, “ngày 05 hằng tháng” hoặc suy từ ngày ký. Chủ nhà có thể chốt chỉ số và phát hành hóa đơn ngay khi dữ liệu kỳ đã đầy đủ; người thuê được xem và thanh toán ngay. Không viết rằng người thuê bắt buộc đợi job tự phát hành lúc 10:00.
+- Chỉ số điện/nước cuối kỳ và khoản phát sinh theo sử dụng thực tế được quyết toán trên hóa đơn; đơn giá và cách tính lấy từ `{{#chargesTable}}`. Không cộng số ước tính vào khoản thanh toán ban đầu. Phí gửi xe phụ thuộc số xe đăng ký và biểu phí trong bảng; không tự bịa mức phí.
+- Phí chậm thanh toán có thể **không áp dụng**, **một lần** hoặc **mỗi ngày trễ** theo cấu hình chủ nhà đã chốt trước khi ký. Số tiền/cách tính và ngày bắt đầu tính thực tế do backend nối vào `{{contract.specialTerms}}`; không viết cứng “100.000 đ/ngày”, tiền thuê một ngày, số ngày ân hạn hoặc một trần phạt tự nghĩ ra. Phí được ghi riêng trên hóa đơn quá hạn; khi người thuê báo chuyển khoản thì tạm dừng cập nhật để đối soát.
+- Từ 00:00 **ngày quá hạn thứ 5** theo giờ Việt Nam, HomeSpace mở lựa chọn cho chủ nhà, **không tự động** chấm dứt: (1) cho chuyển công nợ và phí phạt đã chốt sang hóa đơn kỳ tiếp theo nếu còn kỳ; phí phạt của khoản chuyển dừng tăng và khoản cũ chỉ được cộng **một lần**; hoặc (2) đề nghị hai bên chấm dứt sớm. Nếu người thuê đồng ý, chủ nhà xác nhận đã nhận lại phòng và tài sản rồi mới hoàn tất. Nếu người thuê từ chối, hợp đồng vẫn hiệu lực, tin đăng chưa mở lại, cọc chưa chuyển chủ; chủ nhà có thể rút đề nghị hoặc thực hiện nhánh chấm dứt theo điều khoản **đã nằm trong bản ký**, sau khi thông báo và thực tế nhận lại phòng/chìa khóa/tài sản. Chỉ khi hoàn tất bàn giao hệ thống mới đổi trạng thái hợp đồng, cọc và tin đăng. Công nợ chưa thanh toán vẫn được theo dõi riêng; HomeSpace không tự thu tiền hoặc cưỡng chế thu hồi.
+- `{{contract.specialTerms}}` là **một khối duy nhất** gồm điều khoản quá hạn/chấm dứt lưu trong revision và điều khoản phí chậm trả do backend sinh từ cấu hình. Đặt placeholder này **đúng một lần** trong Điều xử lý vi phạm/chấm dứt của mỗi DOCX; không đặt thêm ở Điều thú cưng/nội quy, không sao chép nguyên văn điều khoản này lần hai, không tách hoặc tự thay thế bằng `{{...}}` khác. Nếu người soạn sửa/xóa câu điều khoản 5 ngày ở bản nháp, backend sẽ không cho dùng nhánh chấm dứt theo điều khoản đó.
+- `{{rent.amountNumber}}` đã có đơn vị `/tháng`; `{{deposit.amountNumber}}` và các tổng tiền đã có `VNĐ`. Không nối thêm `VNĐ/tháng` hoặc `VNĐ` phía sau placeholder khiến hợp đồng bị lặp đơn vị.
+- Các nội dung chấm dứt sau 5 ngày và ghi nhận toàn bộ cọc cho chủ nhà là điều khoản sản phẩm cần rà soát pháp lý trước khi dùng thực tế; **không khẳng định** chỉ cần hai bên ký là có thể tự cưỡng chế lấy lại nhà. Luật Nhà ở 2023 có quy định riêng về căn cứ đơn phương chấm dứt do không trả tiền thuê. Chuyên gia pháp lý cần đối chiếu Điều 172, nghĩa vụ thông báo và chứng cứ bàn giao trước khi phát hành bản chính thức.
+
+### 8. Quy chuẩn trình bày chuyên nghiệp và tương thích luồng ký SMARTCA
 - Khổ giấy A4 dọc; lề trái/phải 2,5 cm, lề trên 3 cm, lề dưới 2,5 cm. Đặt Header/Footer cách mép giấy 1,25 cm để phần đầu trang không chạm Quốc hiệu.
 - Header chạy trang chỉ là dòng nhận diện nhỏ, màu xám nhạt, cỡ 8–9 pt, căn phải và nằm trong vùng Header của Word. Không đặt Quốc hiệu, tiêu ngữ hoặc tên hợp đồng trong Header. Nội dung đầu trang phải bắt đầu thấp hơn Header tối thiểu 1 cm.
 - Trình bày Quốc hiệu và tiêu ngữ ở đầu phần thân trang thứ nhất, căn giữa. Dành khoảng cách sau tiêu ngữ 10–12 pt; sau đó mới đến tên hợp đồng. Tên hợp đồng viết hoa, đậm, căn giữa, cỡ 16 pt; dòng số hợp đồng/ngày ký cỡ 11–12 pt và có khoảng cách rõ ràng với phần căn cứ pháp lý.
@@ -82,7 +93,7 @@ Tên file xuất ra bắt buộc:
 | `{{contract.signingCity}}` | Không | Tỉnh/thành phố nơi xác lập hợp đồng |
 | `{{contract.schemaVersion}}` | Không | Phiên bản schema dữ liệu hợp đồng (`3`) |
 | `{{contract.revisionNumber}}` | Không | Số hiệu bản sửa đổi hiện tại (`1, 2, ...`) |
-| `{{contract.specialTerms}}` | Không | Các điều khoản thỏa thuận bổ sung đã được hai bên xác nhận |
+| `{{contract.specialTerms}}` | Không | Điều khoản quá hạn/chấm dứt của revision cộng điều khoản phí chậm trả theo cấu hình; dùng đúng một lần trong Điều xử lý vi phạm/chấm dứt |
 
 ### 2. Nhóm Bên A (Chủ nhà / Landlord)
 | Mã trường | Bắt buộc | Mô tả & Ý nghĩa |
@@ -139,7 +150,7 @@ Tên file xuất ra bắt buộc:
 | `{{rent.amountNumber}}` | Có | Giá thuê hàng tháng bằng số định dạng vi-VN (ví dụ: `8.500.000 VNĐ`) |
 | `{{rent.amountWords}}` | Có | Giá thuê hàng tháng bằng chữ |
 | `{{rent.paymentCycle}}` | Có | Chu kỳ thanh toán (Hàng tháng / 3 tháng / ...) |
-| `{{rent.paymentDueDay}}` | Có | Hạn thanh toán định kỳ (ví dụ: `Ngày 05 hàng tháng`) |
+| `{{rent.paymentDueDay}}` | Có | Hạn thanh toán theo từng kỳ thuê; backend hiện trả mô tả “chậm nhất 23:59 ngày thứ 4 sau khi kết thúc mỗi kỳ thuê; hạn cụ thể ghi trên hóa đơn” |
 | `{{rent.paymentMethod}}` | Không | Phương thức thanh toán: Chuyển khoản trực tiếp ngân hàng |
 
 ### 7. Nhóm Tiền đặt cọc (Deposit)
@@ -147,7 +158,7 @@ Tên file xuất ra bắt buộc:
 |---|:---:|---|
 | `{{deposit.amountNumber}}` | Có | Tiền đặt cọc bằng số định dạng vi-VN |
 | `{{deposit.amountWords}}` | Có | Tiền đặt cọc bằng chữ |
-| `{{deposit.description}}` | Không | Điều kiện và thời hạn hoàn trả tiền đặt cọc |
+| `{{deposit.description}}` | Không | Quy tắc hoàn cọc thông thường; đọc cùng điều khoản vi phạm/chấm dứt trong `{{contract.specialTerms}}`, không tuyên bố cọc luôn được hoàn toàn bộ |
 
 ### 8. Nhóm Thanh toán ban đầu (Initial Payment - Schema V3)
 | Mã trường | Bắt buộc | Mô tả & Ý nghĩa |
@@ -186,6 +197,7 @@ Tên file xuất ra bắt buộc:
 4. Đảm bảo file được lưu đúng định dạng Word 2007+ (.docx).
 5. Mở/xuất xem toàn bộ trang để kiểm tra khoảng cách giữa Header với Quốc hiệu, khoảng cách tiêu đề, lề, bảng và lỗi tiêu đề/đoạn bị tách không đẹp.
 6. DOCX mẫu không có trang ký. Khi hợp đồng chạy ở chế độ SMARTCA, backend sẽ tự nối đúng một trang ký riêng vào PDF; không thêm trang ký thứ hai vào mẫu.
+7. Kiểm tra `{{contract.specialTerms}}` xuất hiện đúng một lần trong Điều xử lý vi phạm/chấm dứt; không lặp đơn vị sau `{{rent.amountNumber}}` hoặc `{{deposit.amountNumber}}`, không ghi cố định ngày 05 hằng tháng.
 
 ---
 
@@ -233,7 +245,7 @@ II. QUY TẮC BẮT BUỘC VỀ DỮ LIỆU
 2. TUYỆT ĐỐI KHÔNG đưa branchId, tên chi nhánh, mã chi nhánh vào văn bản.
 3. Không tự tạo thêm placeholder mới. Không dùng dấu chấm thủ công (....).
 4. Thanh toán chuyển khoản trực tiếp: Tiền thuê, tiền cọc và hoàn cọc được chuyển khoản trực tiếp giữa tài khoản ngân hàng của Bên A và Bên B.
-5. Ghi nhận rõ đầy đủ 7 điều khoản chuyển khoản trực tiếp:
+ 5. Ghi nhận rõ đầy đủ 7 điều khoản chuyển khoản trực tiếp:
    - Phương thức thanh toán trực tiếp vào tài khoản Bên A.
    - Vai trò HomeSpace: Chỉ tính toán khoản phải trả, tạo thông tin VietQR, lưu trữ chứng từ và ghi nhận trạng thái xác nhận; không nhận tiền, không giữ tiền, không chuyển tiền thay các bên.
    - Xác nhận hai chiều: Bên B báo chuyển, Bên A xác nhận đã nhận đủ.
@@ -241,6 +253,8 @@ II. QUY TẮC BẮT BUỘC VỀ DỮ LIỆU
    - Xử lý sai lệch, tranh chấp và phối hợp cung cấp sao kê/biên lai ngân hàng.
    - Thay đổi tài khoản ngân hàng phải thông báo và xác nhận trước.
    - Hoàn cọc trực tiếp vào tài khoản Bên B sau khi quyết toán và bàn giao.
+6. Luồng hóa đơn hàng tháng: phân biệt ngày ký `{{contract.signingDate}}` với ngày bắt đầu kỳ thuê `{{lease.startDateText}}`; tiền ban đầu là thuê kỳ đầu + cọc, hóa đơn cuối kỳ quyết toán phí của kỳ vừa qua và thu tiền phòng kỳ sau nếu còn thời hạn. Dùng đúng `{{rent.paymentDueDay}}`, không cố định ngày 05. Người thuê được trả ngay sau khi chủ nhà phát hành hóa đơn; phí điện/nước tính theo chỉ số thực tế và `{{#chargesTable}}`.
+7. Quá hạn: phí một lần/mỗi ngày/không áp dụng và mức tiền chỉ lấy từ `{{contract.specialTerms}}`, không tự bịa số. Từ 00:00 ngày quá hạn thứ 5, chủ nhà có thể chuyển nợ sang kỳ sau hoặc đề nghị chấm dứt; khi người thuê từ chối, hợp đồng vẫn hiệu lực và chủ nhà có thể rút đề nghị hoặc xử lý theo đúng điều khoản đã ký. Không tự chấm dứt, giữ cọc hay đăng lại nhà trước khi chủ nhà xác nhận đã thông báo và thực tế nhận lại nhà/chìa khóa/tài sản. Đặt `{{contract.specialTerms}}` đúng một lần ở Điều 9, không lặp ở Điều 8. Nội dung 5 ngày/giữ cọc cần rà soát pháp lý trước khi dùng thật.
 
 III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
 1. QUỐC HIỆU - TIÊU NGỮ - TÊN HỢP ĐỒNG: HỢP ĐỒNG THUÊ NHÀ NGUYÊN CĂN
@@ -262,11 +276,12 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
    - Ngày bàn giao: {{lease.handoverDateText}}.
    - Bàn giao chỉ số công tơ điện ban đầu: {{meters.electricityInitial}}; nước ban đầu: {{meters.waterInitial}} (nếu chưa có sẽ lập tại Biên bản bàn giao khi nhận nhà).
 6. ĐIỀU 3: GIÁ THUÊ, TIỀN CỌC VÀ PHƯƠNG THỨC CHUYỂN KHOẢN TRỰC TIẾP
-   - Giá thuê: {{rent.amountNumber}} VNĐ/tháng (Bằng chữ: {{rent.amountWords}}).
+   - Giá thuê: {{rent.amountNumber}} (Bằng chữ: {{rent.amountWords}}).
    - Chu kỳ thanh toán: {{rent.paymentCycle}}; Hạn thanh toán định kỳ: {{rent.paymentDueDay}}.
    - Phương thức thanh toán: {{rent.paymentMethod}}.
-   - Tiền đặt cọc: {{deposit.amountNumber}} VNĐ (Bằng chữ: {{deposit.amountWords}}).
+   - Tiền đặt cọc: {{deposit.amountNumber}} (Bằng chữ: {{deposit.amountWords}}).
    - Điều kiện hoàn trả/khấu trừ cọc: {{deposit.description}}.
+   - Khoản ban đầu gồm tiền thuê kỳ đầu và cọc; không thu lại tiền thuê kỳ đầu trong hóa đơn quyết toán kỳ đầu. Mỗi hóa đơn cuối kỳ gồm dịch vụ/điện/nước/phát sinh của kỳ vừa qua và tiền thuê kỳ sau nếu còn kỳ thuê; kỳ cuối không thu tiền thuê ngoài thời hạn. Hạn cụ thể theo {{rent.paymentDueDay}} và hóa đơn, không mặc định ngày 05 hằng tháng.
    - Quy định chi tiết về chuyển khoản trực tiếp và vai trò HomeSpace:
      + Bên B thanh toán tiền thuê, tiền đặt cọc và các khoản phải trả khác bằng hình thức chuyển khoản trực tiếp vào tài khoản do Bên A chỉ định trong Hợp đồng này.
      + HomeSpace cung cấp công cụ tính toán khoản phải trả, tạo thông tin VietQR, lưu trữ yêu cầu thanh toán và ghi nhận trạng thái do các bên khai báo. HomeSpace không nhận tiền, không giữ tiền, không chuyển tiền thay các bên và không thay thế ngân hàng xác nhận việc ghi Có hoặc ghi Nợ trên tài khoản.
@@ -297,9 +312,11 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - Chuyển khoản tiền thuê và chi phí đầy đủ, đúng hạn vào tài khoản ngân hàng của Bên A.
 11. ĐIỀU 8: ĐIỀU KHOẢN ĐẶC THÙ VỀ THÚ CƯNG VÀ NỘI QUY
     - Quy định về nuôi thú cưng (nếu được phép theo Bảng tiện ích): Bên B cam kết giữ vệ sinh, đảm bảo an toàn, không gây tiếng ồn ảnh hưởng xung quanh và bồi thường 100% nếu gây thiệt hại.
-    - Điều khoản đặc biệt khác: {{contract.specialTerms}}
+    - Không đặt điều khoản phí chậm trả/chấm dứt ở Điều này; nội dung đó nằm ở Điều 9.
 12. ĐIỀU 9: CHẤM DỨT HỢP ĐỒNG VÀ GIẢI QUYẾT TRANH CHẤP
-    - Quy định thông báo trước khi chấm dứt hợp đồng; hoàn trả nhà và quyết toán hoàn cọc chuyển khoản trực tiếp.
+    - Quy định thông báo trước khi chấm dứt hợp đồng; hoàn trả nhà và quyết toán số cọc còn phải hoàn bằng chuyển khoản trực tiếp.
+    - Nếu hóa đơn quá hạn, phí chậm thanh toán (nếu có) chỉ tính theo mức và cách tính đã ghi trong điều khoản được điền; không ghi số cố định khác. Từ ngày quá hạn thứ 5, chủ nhà có thể cho chuyển nợ sang kỳ tiếp theo hoặc đề nghị hai bên chấm dứt. Nếu người thuê từ chối, đề nghị có thể được rút; trường hợp xử lý chấm dứt theo điều khoản đã ký cần thông báo và thực tế nhận lại nhà, chìa khóa, tài sản trước khi mở lại tin đăng. Tiền cọc/công nợ được ghi nhận theo điều khoản ký và đối chiếu bàn giao, không phải HomeSpace tự giữ tiền.
+    - Toàn văn điều khoản quá hạn, phí chậm trả và phương án chấm dứt đã được backend chốt: {{contract.specialTerms}}
     - Trường hợp bất khả kháng; giải quyết tranh chấp thông qua thương lượng hoặc Tòa án có thẩm quyền.
 13. ĐIỀU 10: GIAO KẾT ĐIỆN TỬ VÀ HIỆU LỰC
     - Hợp đồng được giao kết điện tử/xác nhận thông qua nền tảng HomeSpace phù hợp Luật Giao dịch điện tử.
@@ -357,7 +374,8 @@ II. QUY TẮC BẮT BUỘC VỀ DỮ LIỆU
    - Xử lý sai lệch, tranh chấp và cung cấp chứng từ ngân hàng.
    - Thay đổi tài khoản ngân hàng phải thông báo và xác nhận trước.
    - Hoàn cọc chuyển khoản trực tiếp vào tài khoản Bên B sau bàn giao và quyết toán.
-6. Nguyên tắc tiện ích chung: "Đối với tiện ích dùng chung (hồ bơi, phòng gym, thang máy nếu có), Bên B được quyền sử dụng theo nội quy, khung giờ và tình trạng vận hành của Ban Quản lý tòa nhà, không cấu thành cam kết vận hành liên tục tuyệt đối."
+ 6. Nguyên tắc tiện ích chung: "Đối với tiện ích dùng chung (hồ bơi, phòng gym, thang máy nếu có), Bên B được quyền sử dụng theo nội quy, khung giờ và tình trạng vận hành của Ban Quản lý tòa nhà, không cấu thành cam kết vận hành liên tục tuyệt đối."
+7. Luồng hóa đơn và quá hạn: `{{contract.signingDate}}` khác `{{lease.startDateText}}`; tiền ban đầu là thuê kỳ đầu + cọc. Hóa đơn cuối kỳ quyết toán phí dịch vụ, gửi xe, điện/nước thực dùng của kỳ vừa qua và thu tiền thuê kỳ sau nếu còn kỳ; kỳ cuối không thu thêm tiền phòng ngoài hợp đồng. Dùng `{{rent.paymentDueDay}}`, không mặc định ngày 05; khi chủ nhà chốt số và phát hành, người thuê có thể xem/trả ngay. Phí chậm trả chỉ theo mức/cách tính nằm trong `{{contract.specialTerms}}`, không tự đặt con số. Từ 00:00 ngày quá hạn thứ 5, chủ nhà có thể chuyển nợ sang kỳ sau hoặc đề nghị chấm dứt. Nếu người thuê từ chối, hợp đồng vẫn hiệu lực, chủ nhà có thể rút đề nghị hoặc xử lý theo điều khoản ký sau khi thông báo và nhận lại căn hộ, thẻ cư dân, chìa khóa, tài sản. Không tự đổi cọc/trạng thái căn hộ khi chưa bàn giao; rà soát pháp lý điều khoản 5 ngày/giữ cọc trước khi dùng thật. Đặt `{{contract.specialTerms}}` đúng một lần ở Điều 9.
 
 III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
 1. QUỐC HIỆU - TIÊU NGỮ - TÊN HỢP ĐỒNG: HỢP ĐỒNG THUÊ CĂN HỘ CHUNG CƯ
@@ -379,11 +397,12 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
    - Ngày bàn giao: {{lease.handoverDateText}}.
    - Chỉ số điện ban đầu: {{meters.electricityInitial}}; nước ban đầu: {{meters.waterInitial}} (hoặc lập tại Biên bản bàn giao khi nhận bàn giao căn hộ).
 6. ĐIỀU 3: GIÁ THUÊ, TIỀN CỌC VÀ CHUYỂN KHOẢN TRỰC TIẾP
-   - Giá thuê căn hộ: {{rent.amountNumber}} VNĐ/tháng (Bằng chữ: {{rent.amountWords}}).
+   - Giá thuê căn hộ: {{rent.amountNumber}} (Bằng chữ: {{rent.amountWords}}).
    - Chu kỳ thanh toán: {{rent.paymentCycle}}; Hạn thanh toán định kỳ: {{rent.paymentDueDay}}.
    - Phương thức thanh toán: {{rent.paymentMethod}}.
-   - Tiền đặt cọc: {{deposit.amountNumber}} VNĐ (Bằng chữ: {{deposit.amountWords}}).
+   - Tiền đặt cọc: {{deposit.amountNumber}} (Bằng chữ: {{deposit.amountWords}}).
    - Điều kiện hoàn cọc: {{deposit.description}}.
+   - Khoản ban đầu gồm thuê kỳ đầu và cọc; không thu lại tiền thuê kỳ đầu ở hóa đơn quyết toán kỳ đầu. Hóa đơn sau thu phí quản lý/gửi xe/điện/nước kỳ vừa qua và tiền phòng kỳ tới nếu còn thời hạn. Hạn theo {{rent.paymentDueDay}} và hóa đơn, không theo ngày 05 cố định.
    - Điều khoản chuyển khoản trực tiếp và vai trò HomeSpace:
      + Bên B thanh toán bằng hình thức chuyển khoản trực tiếp vào tài khoản ngân hàng Bên A chỉ định trong Hợp đồng này.
      + HomeSpace cung cấp công cụ tính toán khoản phải trả, tạo VietQR, lưu trữ yêu cầu thanh toán và ghi nhận trạng thái do các bên khai báo; HomeSpace không nhận tiền, không giữ tiền, không chuyển tiền thay các bên.
@@ -412,11 +431,13 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - Chấp hành nghiêm chỉnh Nội quy tòa nhà chung cư, quy chế cư dân, quy định gửi xe.
     - Cư trú đúng số lượng: {{tenant.occupantCount}} người; gửi xe đúng số lượng: {{tenant.motorbikeCount}} xe máy, {{tenant.carCount}} ô tô.
     - Chuyển khoản tiền thuê và các chi phí đúng hạn vào tài khoản ngân hàng của Bên A.
-11. ĐIỀU 8: ĐIỀU KHOẢN VỀ VẬT NUÔI VÀ THỎA THUẬN KHÁC
+11. ĐIỀU 8: ĐIỀU KHOẢN VỀ VẬT NUÔI VÀ NỘI QUY
     - Quy định vật nuôi: Chỉ được nuôi thú cưng nếu Nội quy chung cư và Bảng tiện ích cho phép; Bên B chịu hoàn toàn trách nhiệm vệ sinh, an toàn.
-    - Điều khoản đặc biệt: {{contract.specialTerms}}
+    - Không đặt điều khoản phí chậm trả/chấm dứt ở Điều này; nội dung đó nằm ở Điều 9.
 12. ĐIỀU 9: CHẤM DỨT HỢP ĐỒNG VÀ XỬ LÝ VI PHẠM
-    - Thông báo trước khi kết thúc hợp đồng; bàn giao lại thẻ cư dân, hiện trạng căn hộ và thanh toán trực tiếp các nghĩa vụ hoàn cọc/quyết toán.
+    - Thông báo trước khi kết thúc hợp đồng; bàn giao lại thẻ cư dân, chìa khóa, hiện trạng căn hộ và chuyển khoản trực tiếp số cọc còn phải hoàn sau quyết toán.
+    - Phí chậm trả theo điều khoản đã ký và hiển thị riêng trên hóa đơn; không bịa mức tiền. Từ ngày quá hạn thứ 5, chủ nhà có thể cho chuyển nợ sang kỳ tiếp theo hoặc đề nghị chấm dứt. Nếu người thuê từ chối, đề nghị có thể được rút; nhánh chấm dứt theo điều khoản đã ký chỉ hoàn tất khi đã thông báo và thực tế nhận lại căn hộ, thẻ/chìa khóa, tài sản. Khi đó cọc và công nợ được ghi nhận theo điều khoản ký; HomeSpace không tự chiếm hữu hay cưỡng chế căn hộ.
+    - Toàn văn điều khoản quá hạn, phí chậm trả và phương án chấm dứt đã được backend chốt: {{contract.specialTerms}}
 13. ĐIỀU 10: GIAO KẾT ĐIỆN TỬ VÀ HIỆU LỰC
     - Hợp đồng được giao kết điện tử qua nền tảng HomeSpace theo Luật Giao dịch điện tử.
     - Phiên bản schema: {{contract.schemaVersion}}, Số hiệu bản sửa đổi: {{contract.revisionNumber}}.
@@ -473,7 +494,8 @@ II. QUY TẮC BẮT BUỘC VỀ DỮ LIỆU
    - Sai lệch thông tin thì phối hợp cung cấp chứng từ ngân hàng để đối soát.
    - Thay đổi tài khoản nhận tiền phải thông báo và xác nhận trước bằng văn bản/thông điệp dữ liệu.
    - Hoàn cọc chuyển khoản trực tiếp vào tài khoản Bên B sau bàn giao và quyết toán.
-6. Nguyên tắc tiện ích chung: "Đối với tiện ích dùng chung (khu giặt phơi, nhà để xe, lối đi chung nếu có), Bên B được quyền sử dụng theo nội quy nhà trọ, khung giờ và tình trạng vận hành thực tế, không cấu thành cam kết vận hành liên tục tuyệt đối."
+ 6. Nguyên tắc tiện ích chung: "Đối với tiện ích dùng chung (khu giặt phơi, nhà để xe, lối đi chung nếu có), Bên B được quyền sử dụng theo nội quy nhà trọ, khung giờ và tình trạng vận hành thực tế, không cấu thành cam kết vận hành liên tục tuyệt đối."
+7. Luồng hóa đơn và quá hạn: `{{contract.signingDate}}` là ngày ký, `{{lease.startDateText}}` là ngày đầu kỳ thuê. Khoản ban đầu chỉ gồm tiền phòng kỳ đầu và cọc nếu có. Hóa đơn cuối kỳ quyết toán dịch vụ, gửi xe, điện/nước thực dùng của kỳ vừa qua và thu tiền phòng kỳ sau nếu còn thời hạn; kỳ cuối chỉ quyết toán phí. Dùng đúng `{{rent.paymentDueDay}}`, không ghi “ngày 01” hoặc “ngày 05” cố định. Khi chủ nhà chốt chỉ số/phát hành, người thuê được xem và thanh toán ngay. Phí chậm trả một lần/mỗi ngày/không áp dụng chỉ theo `{{contract.specialTerms}}`, không tự suy bằng giá thuê một ngày. Từ 00:00 ngày quá hạn thứ 5, chủ nhà có thể chuyển nợ sang kỳ sau hoặc đề nghị hai bên chấm dứt; nếu người thuê từ chối, hợp đồng vẫn hiệu lực, chủ nhà có thể rút đề nghị hoặc xử lý theo điều khoản đã ký sau khi thông báo và thực tế nhận lại phòng, chìa khóa, tài sản. Cọc/tin đăng không tự đổi trước bàn giao. Nội dung 5 ngày/giữ cọc phải được rà soát pháp lý trước khi dùng thật. Đặt `{{contract.specialTerms}}` đúng một lần ở Điều 9.
 
 III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
 1. QUỐC HIỆU - TIÊU NGỮ - TÊN HỢP ĐỒNG: HỢP ĐỒNG THUÊ PHÒNG TRỌ
@@ -495,11 +517,12 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
    - Ngày bàn giao nhận phòng: {{lease.handoverDateText}}.
    - Chỉ số công tơ điện lúc nhận phòng: {{meters.electricityInitial}}; chỉ số đồng hồ nước: {{meters.waterInitial}} (nếu dùng đồng hồ riêng, hoặc cập nhật tại Biên bản bàn giao nhận phòng).
 6. ĐIỀU 3: TIỀN THUÊ PHÒNG, ĐẶT CỌC VÀ CHUYỂN KHOẢN TRỰC TIẾP
-   - Tiền thuê phòng: {{rent.amountNumber}} VNĐ/tháng (Bằng chữ: {{rent.amountWords}}).
+   - Tiền thuê phòng: {{rent.amountNumber}} (Bằng chữ: {{rent.amountWords}}).
    - Chu kỳ thanh toán: {{rent.paymentCycle}}; Hạn thanh toán định kỳ: {{rent.paymentDueDay}}.
    - Phương thức thanh toán: {{rent.paymentMethod}}.
-   - Tiền đặt cọc: {{deposit.amountNumber}} VNĐ (Bằng chữ: {{deposit.amountWords}}).
+   - Tiền đặt cọc: {{deposit.amountNumber}} (Bằng chữ: {{deposit.amountWords}}).
    - Điều kiện hoàn cọc: {{deposit.description}}.
+   - Tiền ban đầu là thuê kỳ đầu và cọc; hóa đơn cuối kỳ đầu không thu lại tiền phòng đã trả. Những kỳ tiếp theo thu phí cố định, gửi xe, điện/nước thực dùng và tiền phòng kỳ kế nếu còn thời hạn. Hạn theo {{rent.paymentDueDay}} và từng hóa đơn.
    - Điều khoản chuyển khoản trực tiếp và vai trò HomeSpace:
      + Bên B thanh toán bằng hình thức chuyển khoản trực tiếp vào tài khoản ngân hàng của Bên A chỉ định trong Hợp đồng này.
      + HomeSpace cung cấp công cụ tính toán khoản phải trả, tạo thông tin VietQR, lưu trữ yêu cầu thanh toán và ghi nhận trạng thái do các bên khai báo. HomeSpace không nhận tiền, không giữ tiền, không chuyển tiền thay các bên.
@@ -529,12 +552,14 @@ III. CẤU TRÚC ĐIỀU KHOẢN CHI TIẾT
     - TUÂN THỦ NGHIÊM NGẶT PCCC: Không sạc pin/ắc quy xe điện qua đêm không có người trông coi; không đun nấu bằng bếp gas mini không bảo đảm an toàn; không che chắn hành lang, cầu thang thoát nạn.
     - Chuyển khoản tiền thuê và chi phí đầy đủ, đúng hạn vào tài khoản ngân hàng của Bên A.
     - Giữ gìn an ninh trật tự, không mở nhạc lớn sau 22h00; giữ vệ sinh khu vực chung (sân phơi, nhà xe, hành lang).
-11. ĐIỀU 8: QUY ĐỊNH VỀ VẬT NUÔI VÀ THỎA THUẬN KHÁC
+11. ĐIỀU 8: QUY ĐỊNH VỀ VẬT NUÔI VÀ NỘI QUY
     - Quy định vật nuôi: Chỉ được nuôi nếu khu trọ cho phép (thể hiện tại Bảng tiện ích); Bên B chịu trách nhiệm giữ gìn vệ sinh và không gây ồn ào.
-    - Thỏa thuận bổ sung: {{contract.specialTerms}}
+    - Không đặt điều khoản phí chậm trả/chấm dứt ở Điều này; nội dung đó nằm ở Điều 9.
 12. ĐIỀU 9: CHẤM DỨT HỢP ĐỒNG VÀ HOÀN TRẢ PHÒNG
     - Bên B muốn trả phòng trước hạn phải báo trước tối thiểu theo thỏa thuận, dọn dẹp sạch sẽ và bàn giao lại chìa khóa, hiện trạng phòng.
-    - Quyết toán và chuyển khoản hoàn cọc trực tiếp vào tài khoản ngân hàng của Bên B.
+    - Quyết toán và chuyển khoản số cọc còn phải hoàn trực tiếp vào tài khoản ngân hàng của Bên B.
+    - Phí chậm trả chỉ theo điều khoản ký, hiển thị riêng trên hóa đơn. Từ ngày quá hạn thứ 5, chủ nhà có thể cho chuyển nợ sang kỳ tiếp theo hoặc đề nghị hai bên chấm dứt; nếu người thuê từ chối thì hợp đồng vẫn hiệu lực, chủ nhà có thể rút đề nghị hoặc xử lý theo điều khoản ký sau khi thông báo và thực tế nhận lại phòng/chìa khóa/tài sản. Cọc và công nợ theo điều khoản ký và bàn giao, không phải HomeSpace tự giữ hay cưỡng chế phòng.
+    - Toàn văn điều khoản quá hạn, phí chậm trả và phương án chấm dứt đã được backend chốt: {{contract.specialTerms}}
 13. ĐIỀU 10: GIAO KẾT ĐIỆN TỬ VÀ HIỆU LỰC
     - Hợp đồng được giao kết điện tử qua nền tảng HomeSpace theo Luật Giao dịch điện tử.
     - Phiên bản schema: {{contract.schemaVersion}}, Số hiệu bản sửa đổi: {{contract.revisionNumber}}.
