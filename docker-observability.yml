@@ -75,11 +75,8 @@ networks:
 #    URL: http://localhost:5050
 #    Login email: zolaracskh@gmail.com
 #    Login password: homespace123
-#    PostgreSQL host: postgres
-#    PostgreSQL port: 5432
-#    PostgreSQL database: keycloak
-#    PostgreSQL username: homespace
-#    PostgreSQL password: homespace123
+#    PostgreSQL Core host: postgres (port 5432, db: keycloak, user: homespace, pass: homespace123)
+#    PostgreSQL AI (pgvector) host: postgres-ai (port 5432, db: homespace_ai, user: homespace, pass: homespace123)
 #
 #  RedisInsight:
 #    URL: http://localhost:5540

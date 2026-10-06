@@ -8,6 +8,15 @@
             "MaintenanceDB": "keycloak",
             "Username": "homespace",
             "SSLMode": "prefer"
+        },
+        "2": {
+            "Name": "ai-pgvector",
+            "Group": "Servers",
+            "Host": "postgres-ai",
+            "Port": 5432,
+            "MaintenanceDB": "homespace_ai",
+            "Username": "homespace",
+            "SSLMode": "prefer"
         }
     }
 }
