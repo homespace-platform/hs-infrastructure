@@ -1,7 +1,8 @@
 -- HomeSpace: 100 tin đăng mẫu cho thử nghiệm tìm kiếm AI
 -- Chạy trên homespace_core bằng pgAdmin (Query Tool).
 -- Chỉ dành cho local/dev. Tạo 34 HOUSE, 33 APARTMENT, 33 ROOM; không xóa dữ liệu hiện có.
--- Chạy lại an toàn: ID được tạo xác định theo mã seed, các bản ghi được upsert.
+-- Chỉ cần chạy file này sau khi migration, bootstrap ADMIN và catalog của listing service đã sẵn sàng.
+-- Không cần chạy file sửa bổ sung. ID được tạo xác định, các bản ghi được upsert.
 -- Tin thuộc tài khoản bootstrap username=homespace (role ADMIN trong DB local hiện tại).
 -- Ảnh: dùng đúng 3 object S3 do người dùng cung cấp; cả 3 ảnh được gắn vào mỗi tin.
 
@@ -33,10 +34,10 @@ WITH numbered AS (
            (ARRAY['Thành phố Hồ Chí Minh','Thành phố Hà Nội','Thành phố Đà Nẵng','Thành phố Đồng Nai'])[(n % 4) + 1] AS province_name,
            (ARRAY['79','01','48','75'])[(n % 4) + 1] AS province_code,
            (ARRAY[
-              'Phường Bến Thành','Phường Tân Định','Phường Thảo Điền','Phường Bình Thạnh',
-              'Phường Cầu Giấy','Phường Tây Hồ','Phường Hai Bà Trưng','Phường Hà Đông',
-              'Phường Hải Châu','Phường Sơn Trà','Phường Ngũ Hành Sơn','Phường Thanh Khê',
-              'Phường Biên Hòa','Phường Long Khánh','Phường Trấn Biên','Phường Tam Hiệp'
+              'Phường Bến Thành','Phường Cầu Giấy','Phường Hải Châu','Phường Biên Hòa',
+              'Phường Thảo Điền','Phường Tây Hồ','Phường Sơn Trà','Phường Long Khánh',
+              'Phường Gò Vấp','Phường Hai Bà Trưng','Phường Ngũ Hành Sơn','Phường Trấn Biên',
+              'Phường Bình Thạnh','Phường Hà Đông','Phường Thanh Khê','Phường Tam Hiệp'
            ])[(n % 16) + 1] AS ward_name,
            (ARRAY[
               'đường Nguyễn Trãi','đường Lê Văn Sỹ','đường Phan Xích Long','đường Võ Oanh',
@@ -96,7 +97,9 @@ SELECT listing_id::text, owner_id, NULL, title, description, category, 'PUBLISHE
        now(), owner_id, now(), now(), now() + interval '180 days', 0, current_date + (n % 4),
        area_m2, price_amount, 'VND', price_unit, (n % 3 = 0), deposit_type, deposit_amount,
        deposit_months, 'MONTHLY', min_lease_months, (n % 2 = 0), false,
-       CASE WHEN category = 'ROOM' THEN 1 + (n % 3) ELSE 1 + (n % 4) END,
+       CASE WHEN category = 'ROOM' THEN
+           CASE WHEN n % 5 = 1 THEN 0 ELSE 1 + (n % 2) END
+           ELSE 1 + (n % 4) END,
        CASE WHEN category = 'HOUSE' AND n % 4 = 0 THEN 1 ELSE 0 END,
        0, true, now() - (n || ' hours')::interval, now(), owner_id, owner_id
 FROM hs_seed_rows
@@ -200,7 +203,7 @@ SELECT listing_id::text, room_code, n % 5,
        CASE WHEN n % 6 = 0 THEN 'CURFEW' ELSE 'FLEXIBLE' END,
        CASE WHEN n % 3 = 0 THEN 'SHARED' ELSE 'PRIVATE' END,
        CASE WHEN n % 4 = 0 THEN 'SHARED' ELSE 'PRIVATE' END,
-       1 + (n % 3), n % 3,
+       1 + (n % 3), CASE WHEN n % 5 = 1 THEN 0 ELSE 1 + (n % 2) END,
        CASE WHEN n % 5 = 0 THEN 'PAID' WHEN n % 5 = 1 THEN 'NONE' ELSE 'FREE' END
 FROM hs_seed_rows WHERE category='ROOM'
 ON CONFLICT (listing_id) DO UPDATE SET room_code=excluded.room_code,
@@ -223,9 +226,10 @@ WITH charge_seed AS (
       ('MANAGEMENT','PER_MONTH',(CASE WHEN s.category='ROOM' THEN 0 ELSE 150000 + (s.n % 5)*50000 END)::numeric,'tháng',s.category='ROOM',NULL::text,3),
       ('INTERNET','PER_MONTH',(CASE WHEN s.n % 4=0 THEN 0 ELSE 80000 + (s.n % 4)*20000 END)::numeric,'tháng',s.n % 4=0,NULL::text,4),
       ('SERVICE_OR_GARBAGE','PER_PERSON_MONTH',(20000 + (s.n % 5)*10000)::numeric,'người/tháng',false,NULL::text,5),
-      ('MOTORBIKE_PARKING','PER_VEHICLE_MONTH',(CASE WHEN s.category='HOUSE' THEN 0 ELSE 80000 + (s.n % 4)*20000 END)::numeric,'xe/tháng',s.category='HOUSE',NULL::text,6),
+      ('MOTORBIKE_PARKING','PER_VEHICLE_MONTH',(CASE WHEN s.category='HOUSE' OR (s.category='ROOM' AND s.n % 5 <> 0) THEN 0 ELSE 80000 + (s.n % 4)*20000 END)::numeric,'xe/tháng',s.category='HOUSE' OR (s.category='ROOM' AND s.n % 5 NOT IN (0,1)),NULL::text,6),
       ('CAR_PARKING','PER_VEHICLE_MONTH',(CASE WHEN s.category='APARTMENT' THEN 500000 + (s.n % 4)*100000 ELSE 0 END)::numeric,'xe/tháng',s.category<>'APARTMENT',NULL::text,7)
     ) AS v(charge_type,billing_method,amount,unit,included,custom_name,sort_order)
+    WHERE NOT (s.category='ROOM' AND s.n % 5 = 1 AND v.charge_type='MOTORBIKE_PARKING')
 )
 INSERT INTO listing_charges (
     id, listing_id, charge_type, billing_method, amount, currency, unit, included_in_rent,
@@ -365,6 +369,44 @@ ON CONFLICT (id) DO UPDATE SET listing_id=excluded.listing_id,
     active=true, updated_at=now(), updated_by=excluded.updated_by;
 
 -- Quick summary before commit; the temp seed table is dropped by COMMIT.
+DO $$
+BEGIN
+    IF (SELECT count(*) FROM hs_seed_rows) <> 100 THEN
+        RAISE EXCEPTION 'Seed phải tạo đúng 100 tin đăng';
+    END IF;
+    IF (
+        SELECT count(*) FROM listings l
+        JOIN hs_seed_rows s ON s.listing_id::text=l.id
+        WHERE l.active IS TRUE AND l.status='PUBLISHED'
+    ) <> 100 OR (
+        SELECT count(*) FROM addresses a
+        JOIN hs_seed_rows s ON s.listing_id::text=a.listing_id
+        WHERE a.active IS TRUE
+    ) <> 100 THEN
+        RAISE EXCEPTION 'Seed chưa tạo đủ 100 tin và địa chỉ đang hoạt động';
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM hs_seed_rows s
+        JOIN addresses a ON a.listing_id=s.listing_id::text
+        WHERE a.province_code<>s.province_code OR a.ward_name<>s.ward_name
+           OR a.full_address NOT LIKE '%' || s.ward_name || ', ' || s.province_name
+    ) THEN
+        RAISE EXCEPTION 'Địa chỉ seed không khớp tỉnh/phường';
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM hs_seed_rows s
+        JOIN listing_room_details r ON r.listing_id=s.listing_id::text
+        JOIN listings l ON l.id=s.listing_id::text
+        WHERE s.category='ROOM' AND (
+            (r.parking_policy='NONE' AND r.max_vehicles<>0) OR
+            (r.parking_policy IN ('FREE','PAID') AND r.max_vehicles<=0) OR
+            l.max_motorbike_count<>r.max_vehicles
+        )
+    ) THEN
+        RAISE EXCEPTION 'Số xe và chính sách gửi xe của phòng trọ không nhất quán';
+    END IF;
+END $$;
+
 SELECT category, status, count(*) AS listing_count
 FROM listings
 WHERE id IN (SELECT listing_id::text FROM hs_seed_rows)
