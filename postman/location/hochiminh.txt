@@ -1,0 +1,1530 @@
+{
+        "code": "79",
+        "name": "Hồ Chí Minh",
+        "full_name": "Thành phố Hồ Chí Minh",
+        "type": "city",
+        "type_name": "Thành phố",
+        "postal_code_prefixes": [
+            "70",
+            "71",
+            "72",
+            "73",
+            "74",
+            "75",
+            "78"
+        ]
+},
+[
+    {
+        "code": "25747",
+        "name": "Thủ Dầu Một",
+        "full_name": "Phường Thủ Dầu Một",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75123"
+    },
+    {
+        "code": "25750",
+        "name": "Phú Lợi",
+        "full_name": "Phường Phú Lợi",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75110"
+    },
+    {
+        "code": "25760",
+        "name": "Bình Dương",
+        "full_name": "Phường Bình Dương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75121"
+    },
+    {
+        "code": "25768",
+        "name": "Phú An",
+        "full_name": "Phường Phú An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75124"
+    },
+    {
+        "code": "25771",
+        "name": "Chánh Hiệp",
+        "full_name": "Phường Chánh Hiệp",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75122"
+    },
+    {
+        "code": "25777",
+        "name": "Dầu Tiếng",
+        "full_name": "Xã Dầu Tiếng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75806"
+    },
+    {
+        "code": "25780",
+        "name": "Minh Thạnh",
+        "full_name": "Xã Minh Thạnh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75815"
+    },
+    {
+        "code": "25792",
+        "name": "Long Hoà",
+        "full_name": "Xã Long Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75812"
+    },
+    {
+        "code": "25807",
+        "name": "Thanh An",
+        "full_name": "Xã Thanh An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75807"
+    },
+    {
+        "code": "25813",
+        "name": "Bến Cát",
+        "full_name": "Phường Bến Cát",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75915"
+    },
+    {
+        "code": "25819",
+        "name": "Trừ Văn Thố",
+        "full_name": "Xã Trừ Văn Thố",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75707"
+    },
+    {
+        "code": "25822",
+        "name": "Bàu Bàng",
+        "full_name": "Xã Bàu Bàng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75713"
+    },
+    {
+        "code": "25837",
+        "name": "Chánh Phú Hoà",
+        "full_name": "Phường Chánh Phú Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75913"
+    },
+    {
+        "code": "25840",
+        "name": "Long Nguyên",
+        "full_name": "Phường Long Nguyên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75709"
+    },
+    {
+        "code": "25843",
+        "name": "Tây Nam",
+        "full_name": "Phường Tây Nam",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75914"
+    },
+    {
+        "code": "25846",
+        "name": "Thới Hoà",
+        "full_name": "Phường Thới Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75911"
+    },
+    {
+        "code": "25849",
+        "name": "Hoà Lợi",
+        "full_name": "Phường Hoà Lợi",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75912"
+    },
+    {
+        "code": "25858",
+        "name": "Phú Giáo",
+        "full_name": "Xã Phú Giáo",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75618"
+    },
+    {
+        "code": "25864",
+        "name": "Phước Thành",
+        "full_name": "Xã Phước Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75617"
+    },
+    {
+        "code": "25867",
+        "name": "An Long",
+        "full_name": "Xã An Long",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75610"
+    },
+    {
+        "code": "25882",
+        "name": "Phước Hoà",
+        "full_name": "Xã Phước Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75614"
+    },
+    {
+        "code": "25888",
+        "name": "Tân Uyên",
+        "full_name": "Phường Tân Uyên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75419"
+    },
+    {
+        "code": "25891",
+        "name": "Tân Khánh",
+        "full_name": "Phường Tân Khánh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75420"
+    },
+    {
+        "code": "25906",
+        "name": "Bắc Tân Uyên",
+        "full_name": "Xã Bắc Tân Uyên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75516"
+    },
+    {
+        "code": "25909",
+        "name": "Thường Tân",
+        "full_name": "Xã Thường Tân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "75515"
+    },
+    {
+        "code": "25912",
+        "name": "Vĩnh Tân",
+        "full_name": "Phường Vĩnh Tân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75409"
+    },
+    {
+        "code": "25915",
+        "name": "Bình Cơ",
+        "full_name": "Phường Bình Cơ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75418"
+    },
+    {
+        "code": "25920",
+        "name": "Tân Hiệp",
+        "full_name": "Phường Tân Hiệp",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75408"
+    },
+    {
+        "code": "25942",
+        "name": "Dĩ An",
+        "full_name": "Phường Dĩ An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75306"
+    },
+    {
+        "code": "25945",
+        "name": "Tân Đông Hiệp",
+        "full_name": "Phường Tân Đông Hiệp",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75311"
+    },
+    {
+        "code": "25951",
+        "name": "Đông Hoà",
+        "full_name": "Phường Đông Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75308"
+    },
+    {
+        "code": "25966",
+        "name": "Lái Thiêu",
+        "full_name": "Phường Lái Thiêu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75206"
+    },
+    {
+        "code": "25969",
+        "name": "Thuận Giao",
+        "full_name": "Phường Thuận Giao",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75211"
+    },
+    {
+        "code": "25975",
+        "name": "An Phú",
+        "full_name": "Phường An Phú",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75209"
+    },
+    {
+        "code": "25978",
+        "name": "Thuận An",
+        "full_name": "Phường Thuận An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75216"
+    },
+    {
+        "code": "25987",
+        "name": "Bình Hoà",
+        "full_name": "Phường Bình Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "75208"
+    },
+    {
+        "code": "26506",
+        "name": "Vũng Tàu",
+        "full_name": "Phường Vũng Tàu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78223"
+    },
+    {
+        "code": "26526",
+        "name": "Tam Thắng",
+        "full_name": "Phường Tam Thắng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78224"
+    },
+    {
+        "code": "26536",
+        "name": "Rạch Dừa",
+        "full_name": "Phường Rạch Dừa",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78219"
+    },
+    {
+        "code": "26542",
+        "name": "Phước Thắng",
+        "full_name": "Phường Phước Thắng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78225"
+    },
+    {
+        "code": "26545",
+        "name": "Long Sơn",
+        "full_name": "Xã Long Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78222"
+    },
+    {
+        "code": "26560",
+        "name": "Bà Rịa",
+        "full_name": "Phường Bà Rịa",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78117"
+    },
+    {
+        "code": "26566",
+        "name": "Long Hương",
+        "full_name": "Phường Long Hương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78116"
+    },
+    {
+        "code": "26572",
+        "name": "Tam Long",
+        "full_name": "Phường Tam Long",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78118"
+    },
+    {
+        "code": "26575",
+        "name": "Ngãi Giao",
+        "full_name": "Xã Ngãi Giao",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78606"
+    },
+    {
+        "code": "26584",
+        "name": "Xuân Sơn",
+        "full_name": "Xã Xuân Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78619"
+    },
+    {
+        "code": "26590",
+        "name": "Bình Giã",
+        "full_name": "Xã Bình Giã",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78607"
+    },
+    {
+        "code": "26596",
+        "name": "Châu Đức",
+        "full_name": "Xã Châu Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78622"
+    },
+    {
+        "code": "26608",
+        "name": "Kim Long",
+        "full_name": "Xã Kim Long",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78611"
+    },
+    {
+        "code": "26617",
+        "name": "Nghĩa Thành",
+        "full_name": "Xã Nghĩa Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78617"
+    },
+    {
+        "code": "26620",
+        "name": "Hồ Tràm",
+        "full_name": "Xã Hồ Tràm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78519"
+    },
+    {
+        "code": "26632",
+        "name": "Xuyên Mộc",
+        "full_name": "Xã Xuyên Mộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78518"
+    },
+    {
+        "code": "26638",
+        "name": "Bàu Lâm",
+        "full_name": "Xã Bàu Lâm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78514"
+    },
+    {
+        "code": "26641",
+        "name": "Hoà Hội",
+        "full_name": "Xã Hoà Hội",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78511"
+    },
+    {
+        "code": "26647",
+        "name": "Hoà Hiệp",
+        "full_name": "Xã Hoà Hiệp",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78512"
+    },
+    {
+        "code": "26656",
+        "name": "Bình Châu",
+        "full_name": "Xã Bình Châu",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78510"
+    },
+    {
+        "code": "26659",
+        "name": "Long Điền",
+        "full_name": "Xã Long Điền",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78406"
+    },
+    {
+        "code": "26662",
+        "name": "Long Hải",
+        "full_name": "Xã Long Hải",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78412"
+    },
+    {
+        "code": "26680",
+        "name": "Đất Đỏ",
+        "full_name": "Xã Đất Đỏ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78306"
+    },
+    {
+        "code": "26686",
+        "name": "Phước Hải",
+        "full_name": "Xã Phước Hải",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78313"
+    },
+    {
+        "code": "26704",
+        "name": "Phú Mỹ",
+        "full_name": "Phường Phú Mỹ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78706"
+    },
+    {
+        "code": "26710",
+        "name": "Tân Hải",
+        "full_name": "Phường Tân Hải",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78714"
+    },
+    {
+        "code": "26713",
+        "name": "Tân Phước",
+        "full_name": "Phường Tân Phước",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78711"
+    },
+    {
+        "code": "26725",
+        "name": "Tân Thành",
+        "full_name": "Phường Tân Thành",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "78716"
+    },
+    {
+        "code": "26728",
+        "name": "Châu Pha",
+        "full_name": "Xã Châu Pha",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "78712"
+    },
+    {
+        "code": "26732",
+        "name": "Côn Đảo",
+        "full_name": "Đặc khu Côn Đảo",
+        "type": "special_zone",
+        "type_name": "Đặc khu",
+        "province_code": "79",
+        "postal_code": "78807"
+    },
+    {
+        "code": "26737",
+        "name": "Tân Định",
+        "full_name": "Phường Tân Định",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71008"
+    },
+    {
+        "code": "26740",
+        "name": "Sài Gòn",
+        "full_name": "Phường Sài Gòn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71016"
+    },
+    {
+        "code": "26743",
+        "name": "Bến Thành",
+        "full_name": "Phường Bến Thành",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71009"
+    },
+    {
+        "code": "26758",
+        "name": "Cầu Ông Lãnh",
+        "full_name": "Phường Cầu Ông Lãnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71011"
+    },
+    {
+        "code": "26767",
+        "name": "An Phú Đông",
+        "full_name": "Phường An Phú Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71516"
+    },
+    {
+        "code": "26773",
+        "name": "Thới An",
+        "full_name": "Phường Thới An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71513"
+    },
+    {
+        "code": "26782",
+        "name": "Tân Thới Hiệp",
+        "full_name": "Phường Tân Thới Hiệp",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71511"
+    },
+    {
+        "code": "26785",
+        "name": "Trung Mỹ Tây",
+        "full_name": "Phường Trung Mỹ Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71507"
+    },
+    {
+        "code": "26791",
+        "name": "Đông Hưng Thuận",
+        "full_name": "Phường Đông Hưng Thuận",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71508"
+    },
+    {
+        "code": "26800",
+        "name": "Linh Xuân",
+        "full_name": "Phường Linh Xuân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71309"
+    },
+    {
+        "code": "26803",
+        "name": "Tam Bình",
+        "full_name": "Phường Tam Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71312"
+    },
+    {
+        "code": "26809",
+        "name": "Hiệp Bình",
+        "full_name": "Phường Hiệp Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71318"
+    },
+    {
+        "code": "26824",
+        "name": "Thủ Đức",
+        "full_name": "Phường Thủ Đức",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71319"
+    },
+    {
+        "code": "26833",
+        "name": "Long Bình",
+        "full_name": "Phường Long Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71217"
+    },
+    {
+        "code": "26842",
+        "name": "Tăng Nhơn Phú",
+        "full_name": "Phường Tăng Nhơn Phú",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71320"
+    },
+    {
+        "code": "26848",
+        "name": "Phước Long",
+        "full_name": "Phường Phước Long",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71321"
+    },
+    {
+        "code": "26857",
+        "name": "Long Phước",
+        "full_name": "Phường Long Phước",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71214"
+    },
+    {
+        "code": "26860",
+        "name": "Long Trường",
+        "full_name": "Phường Long Trường",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71213"
+    },
+    {
+        "code": "26876",
+        "name": "An Nhơn",
+        "full_name": "Phường An Nhơn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71424"
+    },
+    {
+        "code": "26878",
+        "name": "An Hội Đông",
+        "full_name": "Phường An Hội Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71425"
+    },
+    {
+        "code": "26882",
+        "name": "An Hội Tây",
+        "full_name": "Phường An Hội Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71427"
+    },
+    {
+        "code": "26884",
+        "name": "Gò Vấp",
+        "full_name": "Phường Gò Vấp",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71422"
+    },
+    {
+        "code": "26890",
+        "name": "Hạnh Thông",
+        "full_name": "Phường Hạnh Thông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71423"
+    },
+    {
+        "code": "26898",
+        "name": "Thông Tây Hội",
+        "full_name": "Phường Thông Tây Hội",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71426"
+    },
+    {
+        "code": "26905",
+        "name": "Bình Lợi Trung",
+        "full_name": "Phường Bình Lợi Trung",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72329"
+    },
+    {
+        "code": "26911",
+        "name": "Bình Quới",
+        "full_name": "Phường Bình Quới",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72328"
+    },
+    {
+        "code": "26929",
+        "name": "Bình Thạnh",
+        "full_name": "Phường Bình Thạnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72326"
+    },
+    {
+        "code": "26944",
+        "name": "Gia Định",
+        "full_name": "Phường Gia Định",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72330"
+    },
+    {
+        "code": "26956",
+        "name": "Thạnh Mỹ Tây",
+        "full_name": "Phường Thạnh Mỹ Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72331"
+    },
+    {
+        "code": "26968",
+        "name": "Tân Sơn Nhất",
+        "full_name": "Phường Tân Sơn Nhất",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72121"
+    },
+    {
+        "code": "26977",
+        "name": "Tân Sơn Hoà",
+        "full_name": "Phường Tân Sơn Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72122"
+    },
+    {
+        "code": "26983",
+        "name": "Bảy Hiền",
+        "full_name": "Phường Bảy Hiền",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72124"
+    },
+    {
+        "code": "26995",
+        "name": "Tân Hoà",
+        "full_name": "Phường Tân Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72125"
+    },
+    {
+        "code": "27004",
+        "name": "Tân Bình",
+        "full_name": "Phường Tân Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72123"
+    },
+    {
+        "code": "27007",
+        "name": "Tân Sơn",
+        "full_name": "Phường Tân Sơn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72126"
+    },
+    {
+        "code": "27013",
+        "name": "Tây Thạnh",
+        "full_name": "Phường Tây Thạnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72009"
+    },
+    {
+        "code": "27019",
+        "name": "Tân Sơn Nhì",
+        "full_name": "Phường Tân Sơn Nhì",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72008"
+    },
+    {
+        "code": "27022",
+        "name": "Phú Thọ Hoà",
+        "full_name": "Phường Phú Thọ Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72012"
+    },
+    {
+        "code": "27028",
+        "name": "Phú Thạnh",
+        "full_name": "Phường Phú Thạnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72013"
+    },
+    {
+        "code": "27031",
+        "name": "Tân Phú",
+        "full_name": "Phường Tân Phú",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72017"
+    },
+    {
+        "code": "27043",
+        "name": "Đức Nhuận",
+        "full_name": "Phường Đức Nhuận",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72223"
+    },
+    {
+        "code": "27058",
+        "name": "Cầu Kiệu",
+        "full_name": "Phường Cầu Kiệu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72222"
+    },
+    {
+        "code": "27073",
+        "name": "Phú Nhuận",
+        "full_name": "Phường Phú Nhuận",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72221"
+    },
+    {
+        "code": "27094",
+        "name": "An Khánh",
+        "full_name": "Phường An Khánh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71108"
+    },
+    {
+        "code": "27097",
+        "name": "Bình Trưng",
+        "full_name": "Phường Bình Trưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71322"
+    },
+    {
+        "code": "27112",
+        "name": "Cát Lái",
+        "full_name": "Phường Cát Lái",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71115"
+    },
+    {
+        "code": "27139",
+        "name": "Xuân Hoà",
+        "full_name": "Phường Xuân Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72421"
+    },
+    {
+        "code": "27142",
+        "name": "Nhiêu Lộc",
+        "full_name": "Phường Nhiêu Lộc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72422"
+    },
+    {
+        "code": "27154",
+        "name": "Bàn Cờ",
+        "full_name": "Phường Bàn Cờ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72420"
+    },
+    {
+        "code": "27163",
+        "name": "Hoà Hưng",
+        "full_name": "Phường Hoà Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72523"
+    },
+    {
+        "code": "27169",
+        "name": "Diên Hồng",
+        "full_name": "Phường Diên Hồng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72521"
+    },
+    {
+        "code": "27190",
+        "name": "Vườn Lài",
+        "full_name": "Phường Vườn Lài",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72522"
+    },
+    {
+        "code": "27211",
+        "name": "Hoà Bình",
+        "full_name": "Phường Hoà Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72623"
+    },
+    {
+        "code": "27226",
+        "name": "Phú Thọ",
+        "full_name": "Phường Phú Thọ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72625"
+    },
+    {
+        "code": "27232",
+        "name": "Bình Thới",
+        "full_name": "Phường Bình Thới",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72622"
+    },
+    {
+        "code": "27238",
+        "name": "Minh Phụng",
+        "full_name": "Phường Minh Phụng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72624"
+    },
+    {
+        "code": "27259",
+        "name": "Xóm Chiếu",
+        "full_name": "Phường Xóm Chiếu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72823"
+    },
+    {
+        "code": "27265",
+        "name": "Khánh Hội",
+        "full_name": "Phường Khánh Hội",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72822"
+    },
+    {
+        "code": "27286",
+        "name": "Vĩnh Hội",
+        "full_name": "Phường Vĩnh Hội",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72821"
+    },
+    {
+        "code": "27301",
+        "name": "Chợ Quán",
+        "full_name": "Phường Chợ Quán",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72722"
+    },
+    {
+        "code": "27316",
+        "name": "An Đông",
+        "full_name": "Phường An Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72721"
+    },
+    {
+        "code": "27343",
+        "name": "Chợ Lớn",
+        "full_name": "Phường Chợ Lớn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72723"
+    },
+    {
+        "code": "27349",
+        "name": "Phú Lâm",
+        "full_name": "Phường Phú Lâm",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73123"
+    },
+    {
+        "code": "27364",
+        "name": "Bình Phú",
+        "full_name": "Phường Bình Phú",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73122"
+    },
+    {
+        "code": "27367",
+        "name": "Bình Tây",
+        "full_name": "Phường Bình Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73121"
+    },
+    {
+        "code": "27373",
+        "name": "Bình Tiên",
+        "full_name": "Phường Bình Tiên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73120"
+    },
+    {
+        "code": "27418",
+        "name": "Chánh Hưng",
+        "full_name": "Phường Chánh Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73023"
+    },
+    {
+        "code": "27424",
+        "name": "Bình Đông",
+        "full_name": "Phường Bình Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73024"
+    },
+    {
+        "code": "27427",
+        "name": "Phú Định",
+        "full_name": "Phường Phú Định",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "73022"
+    },
+    {
+        "code": "27439",
+        "name": "Bình Hưng Hoà",
+        "full_name": "Phường Bình Hưng Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71913"
+    },
+    {
+        "code": "27442",
+        "name": "Bình Tân",
+        "full_name": "Phường Bình Tân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71916"
+    },
+    {
+        "code": "27448",
+        "name": "Bình Trị Đông",
+        "full_name": "Phường Bình Trị Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71910"
+    },
+    {
+        "code": "27457",
+        "name": "Tân Tạo",
+        "full_name": "Phường Tân Tạo",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71915"
+    },
+    {
+        "code": "27460",
+        "name": "An Lạc",
+        "full_name": "Phường An Lạc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "71906"
+    },
+    {
+        "code": "27475",
+        "name": "Tân Hưng",
+        "full_name": "Phường Tân Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72912"
+    },
+    {
+        "code": "27478",
+        "name": "Tân Thuận",
+        "full_name": "Phường Tân Thuận",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72917"
+    },
+    {
+        "code": "27484",
+        "name": "Phú Thuận",
+        "full_name": "Phường Phú Thuận",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72907"
+    },
+    {
+        "code": "27487",
+        "name": "Tân Mỹ",
+        "full_name": "Phường Tân Mỹ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "79",
+        "postal_code": "72916"
+    },
+    {
+        "code": "27496",
+        "name": "Tân An Hội",
+        "full_name": "Xã Tân An Hội",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71607"
+    },
+    {
+        "code": "27508",
+        "name": "An Nhơn Tây",
+        "full_name": "Xã An Nhơn Tây",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71619"
+    },
+    {
+        "code": "27511",
+        "name": "Nhuận Đức",
+        "full_name": "Xã Nhuận Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71618"
+    },
+    {
+        "code": "27526",
+        "name": "Thái Mỹ",
+        "full_name": "Xã Thái Mỹ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71625"
+    },
+    {
+        "code": "27541",
+        "name": "Phú Hoà Đông",
+        "full_name": "Xã Phú Hoà Đông",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71616"
+    },
+    {
+        "code": "27544",
+        "name": "Bình Mỹ",
+        "full_name": "Xã Bình Mỹ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71611"
+    },
+    {
+        "code": "27553",
+        "name": "Củ Chi",
+        "full_name": "Xã Củ Chi",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71627"
+    },
+    {
+        "code": "27559",
+        "name": "Hóc Môn",
+        "full_name": "Xã Hóc Môn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71706"
+    },
+    {
+        "code": "27568",
+        "name": "Đông Thạnh",
+        "full_name": "Xã Đông Thạnh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71708"
+    },
+    {
+        "code": "27577",
+        "name": "Xuân Thới Sơn",
+        "full_name": "Xã Xuân Thới Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71712"
+    },
+    {
+        "code": "27592",
+        "name": "Bà Điểm",
+        "full_name": "Xã Bà Điểm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71714"
+    },
+    {
+        "code": "27595",
+        "name": "Tân Nhựt",
+        "full_name": "Xã Tân Nhựt",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71816"
+    },
+    {
+        "code": "27601",
+        "name": "Vĩnh Lộc",
+        "full_name": "Xã Vĩnh Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71823"
+    },
+    {
+        "code": "27604",
+        "name": "Tân Vĩnh Lộc",
+        "full_name": "Xã Tân Vĩnh Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71822"
+    },
+    {
+        "code": "27610",
+        "name": "Bình Lợi",
+        "full_name": "Xã Bình Lợi",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71818"
+    },
+    {
+        "code": "27619",
+        "name": "Bình Hưng",
+        "full_name": "Xã Bình Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71813"
+    },
+    {
+        "code": "27628",
+        "name": "Hưng Long",
+        "full_name": "Xã Hưng Long",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71809"
+    },
+    {
+        "code": "27637",
+        "name": "Bình Chánh",
+        "full_name": "Xã Bình Chánh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "71814"
+    },
+    {
+        "code": "27655",
+        "name": "Nhà Bè",
+        "full_name": "Xã Nhà Bè",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "73206"
+    },
+    {
+        "code": "27658",
+        "name": "Hiệp Phước",
+        "full_name": "Xã Hiệp Phước",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "73212"
+    },
+    {
+        "code": "27664",
+        "name": "Cần Giờ",
+        "full_name": "Xã Cần Giờ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "72018"
+    },
+    {
+        "code": "27667",
+        "name": "Bình Khánh",
+        "full_name": "Xã Bình Khánh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "73310"
+    },
+    {
+        "code": "27673",
+        "name": "An Thới Đông",
+        "full_name": "Xã An Thới Đông",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "73311"
+    },
+    {
+        "code": "27676",
+        "name": "Thạnh An",
+        "full_name": "Xã Thạnh An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "79",
+        "postal_code": "73308"
+    }
+]

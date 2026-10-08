@@ -1,0 +1,1040 @@
+{
+        "code": "31",
+        "name": "Hải Phòng",
+        "full_name": "Thành phố Hải Phòng",
+        "type": "city",
+        "type_name": "Thành phố",
+        "postal_code_prefixes": [
+            "03",
+            "04",
+            "05"
+        ]
+},
+[
+    {
+        "code": "10507",
+        "name": "Thành Đông",
+        "full_name": "Phường Thành Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03128"
+    },
+    {
+        "code": "10525",
+        "name": "Hải Dương",
+        "full_name": "Phường Hải Dương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03127"
+    },
+    {
+        "code": "10532",
+        "name": "Lê Thanh Nghị",
+        "full_name": "Phường Lê Thanh Nghị",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03112"
+    },
+    {
+        "code": "10537",
+        "name": "Tân Hưng",
+        "full_name": "Phường Tân Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03120"
+    },
+    {
+        "code": "10543",
+        "name": "Việt Hoà",
+        "full_name": "Phường Việt Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03125"
+    },
+    {
+        "code": "10546",
+        "name": "Chí Linh",
+        "full_name": "Phường Chí Linh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03527"
+    },
+    {
+        "code": "10549",
+        "name": "Chu Văn An",
+        "full_name": "Phường Chu Văn An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03526"
+    },
+    {
+        "code": "10552",
+        "name": "Nguyễn Trãi",
+        "full_name": "Phường Nguyễn Trãi",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03529"
+    },
+    {
+        "code": "10570",
+        "name": "Trần Hưng Đạo",
+        "full_name": "Phường Trần Hưng Đạo",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03528"
+    },
+    {
+        "code": "10573",
+        "name": "Trần Nhân Tông",
+        "full_name": "Phường Trần Nhân Tông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03530"
+    },
+    {
+        "code": "10603",
+        "name": "Lê Đại Hành",
+        "full_name": "Phường Lê Đại Hành",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03531"
+    },
+    {
+        "code": "10606",
+        "name": "Nam Sách",
+        "full_name": "Xã Nam Sách",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03556"
+    },
+    {
+        "code": "10615",
+        "name": "Hợp Tiến",
+        "full_name": "Xã Hợp Tiến",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03564"
+    },
+    {
+        "code": "10633",
+        "name": "Trần Phú",
+        "full_name": "Xã Trần Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03566"
+    },
+    {
+        "code": "10642",
+        "name": "Thái Tân",
+        "full_name": "Xã Thái Tân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03570"
+    },
+    {
+        "code": "10645",
+        "name": "An Phú",
+        "full_name": "Xã An Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03557"
+    },
+    {
+        "code": "10660",
+        "name": "Ái Quốc",
+        "full_name": "Phường Ái Quốc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03122"
+    },
+    {
+        "code": "10675",
+        "name": "Kinh Môn",
+        "full_name": "Phường Kinh Môn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03431"
+    },
+    {
+        "code": "10678",
+        "name": "Bắc An Phụ",
+        "full_name": "Phường Bắc An Phụ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03434"
+    },
+    {
+        "code": "10705",
+        "name": "Nam An Phụ",
+        "full_name": "Xã Nam An Phụ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03437"
+    },
+    {
+        "code": "10714",
+        "name": "Nhị Chiểu",
+        "full_name": "Phường Nhị Chiểu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03436"
+    },
+    {
+        "code": "10726",
+        "name": "Phạm Sư Mạnh",
+        "full_name": "Phường Phạm Sư Mạnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03435"
+    },
+    {
+        "code": "10729",
+        "name": "Trần Liễu",
+        "full_name": "Phường Trần Liễu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03433"
+    },
+    {
+        "code": "10744",
+        "name": "Nguyễn Đại Năng",
+        "full_name": "Phường Nguyễn Đại Năng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03432"
+    },
+    {
+        "code": "10750",
+        "name": "Phú Thái",
+        "full_name": "Xã Phú Thái",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03306"
+    },
+    {
+        "code": "10756",
+        "name": "Lai Khê",
+        "full_name": "Xã Lai Khê",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03312"
+    },
+    {
+        "code": "10792",
+        "name": "An Thành",
+        "full_name": "Xã An Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03327"
+    },
+    {
+        "code": "10804",
+        "name": "Kim Thành",
+        "full_name": "Xã Kim Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03328"
+    },
+    {
+        "code": "10813",
+        "name": "Thanh Hà",
+        "full_name": "Xã Thanh Hà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03206"
+    },
+    {
+        "code": "10816",
+        "name": "Hà Bắc",
+        "full_name": "Xã Hà Bắc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03232"
+    },
+    {
+        "code": "10837",
+        "name": "Nam Đồng",
+        "full_name": "Phường Nam Đồng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03121"
+    },
+    {
+        "code": "10843",
+        "name": "Hà Nam",
+        "full_name": "Xã Hà Nam",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03233"
+    },
+    {
+        "code": "10846",
+        "name": "Hà Tây",
+        "full_name": "Xã Hà Tây",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03231"
+    },
+    {
+        "code": "10882",
+        "name": "Hà Đông",
+        "full_name": "Xã Hà Đông",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03234"
+    },
+    {
+        "code": "10888",
+        "name": "Cẩm Giang",
+        "full_name": "Xã Cẩm Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03606"
+    },
+    {
+        "code": "10891",
+        "name": "Tứ Minh",
+        "full_name": "Phường Tứ Minh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03126"
+    },
+    {
+        "code": "10903",
+        "name": "Cẩm Giàng",
+        "full_name": "Xã Cẩm Giàng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03626"
+    },
+    {
+        "code": "10909",
+        "name": "Tuệ Tĩnh",
+        "full_name": "Xã Tuệ Tĩnh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03627"
+    },
+    {
+        "code": "10930",
+        "name": "Mao Điền",
+        "full_name": "Xã Mao Điền",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03625"
+    },
+    {
+        "code": "10945",
+        "name": "Kẻ Sặt",
+        "full_name": "Xã Kẻ Sặt",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03706"
+    },
+    {
+        "code": "10966",
+        "name": "Bình Giang",
+        "full_name": "Xã Bình Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03724"
+    },
+    {
+        "code": "10972",
+        "name": "Đường An",
+        "full_name": "Xã Đường An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03725"
+    },
+    {
+        "code": "10993",
+        "name": "Thượng Hồng",
+        "full_name": "Xã Thượng Hồng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03726"
+    },
+    {
+        "code": "10999",
+        "name": "Gia Lộc",
+        "full_name": "Xã Gia Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03656"
+    },
+    {
+        "code": "11002",
+        "name": "Thạch Khôi",
+        "full_name": "Phường Thạch Khôi",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "03119"
+    },
+    {
+        "code": "11020",
+        "name": "Yết Kiêu",
+        "full_name": "Xã Yết Kiêu",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03665"
+    },
+    {
+        "code": "11050",
+        "name": "Gia Phúc",
+        "full_name": "Xã Gia Phúc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03657"
+    },
+    {
+        "code": "11065",
+        "name": "Trường Tân",
+        "full_name": "Xã Trường Tân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03679"
+    },
+    {
+        "code": "11074",
+        "name": "Tứ Kỳ",
+        "full_name": "Xã Tứ Kỳ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03906"
+    },
+    {
+        "code": "11086",
+        "name": "Đại Sơn",
+        "full_name": "Xã Đại Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03912"
+    },
+    {
+        "code": "11113",
+        "name": "Tân Kỳ",
+        "full_name": "Xã Tân Kỳ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03916"
+    },
+    {
+        "code": "11131",
+        "name": "Chí Minh",
+        "full_name": "Xã Chí Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03907"
+    },
+    {
+        "code": "11140",
+        "name": "Lạc Phượng",
+        "full_name": "Xã Lạc Phượng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03924"
+    },
+    {
+        "code": "11146",
+        "name": "Nguyên Giáp",
+        "full_name": "Xã Nguyên Giáp",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03928"
+    },
+    {
+        "code": "11164",
+        "name": "Vĩnh Lại",
+        "full_name": "Xã Vĩnh Lại",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03834"
+    },
+    {
+        "code": "11167",
+        "name": "Tân An",
+        "full_name": "Xã Tân An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03836"
+    },
+    {
+        "code": "11203",
+        "name": "Ninh Giang",
+        "full_name": "Xã Ninh Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03806"
+    },
+    {
+        "code": "11218",
+        "name": "Hồng Châu",
+        "full_name": "Xã Hồng Châu",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03837"
+    },
+    {
+        "code": "11224",
+        "name": "Khúc Thừa Dụ",
+        "full_name": "Xã Khúc Thừa Dụ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03835"
+    },
+    {
+        "code": "11239",
+        "name": "Thanh Miện",
+        "full_name": "Xã Thanh Miện",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03756"
+    },
+    {
+        "code": "11242",
+        "name": "Nguyễn Lương Bằng",
+        "full_name": "Xã Nguyễn Lương Bằng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03777"
+    },
+    {
+        "code": "11254",
+        "name": "Bắc Thanh Miện",
+        "full_name": "Xã Bắc Thanh Miện",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03775"
+    },
+    {
+        "code": "11257",
+        "name": "Hải Hưng",
+        "full_name": "Xã Hải Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03776"
+    },
+    {
+        "code": "11284",
+        "name": "Nam Thanh Miện",
+        "full_name": "Xã Nam Thanh Miện",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "03778"
+    },
+    {
+        "code": "11311",
+        "name": "Hồng Bàng",
+        "full_name": "Phường Hồng Bàng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04117"
+    },
+    {
+        "code": "11329",
+        "name": "Ngô Quyền",
+        "full_name": "Phường Ngô Quyền",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04219"
+    },
+    {
+        "code": "11359",
+        "name": "Gia Viên",
+        "full_name": "Phường Gia Viên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04213"
+    },
+    {
+        "code": "11383",
+        "name": "Lê Chân",
+        "full_name": "Phường Lê Chân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04721"
+    },
+    {
+        "code": "11407",
+        "name": "An Biên",
+        "full_name": "Phường An Biên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04707"
+    },
+    {
+        "code": "11411",
+        "name": "Đông Hải",
+        "full_name": "Phường Đông Hải",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04815"
+    },
+    {
+        "code": "11413",
+        "name": "Hải An",
+        "full_name": "Phường Hải An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04814"
+    },
+    {
+        "code": "11443",
+        "name": "Kiến An",
+        "full_name": "Phường Kiến An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04616"
+    },
+    {
+        "code": "11446",
+        "name": "Phù Liễn",
+        "full_name": "Phường Phù Liễn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04617"
+    },
+    {
+        "code": "11455",
+        "name": "Đồ Sơn",
+        "full_name": "Phường Đồ Sơn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "05014"
+    },
+    {
+        "code": "11473",
+        "name": "Bạch Đằng",
+        "full_name": "Phường Bạch Đằng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04318"
+    },
+    {
+        "code": "11488",
+        "name": "Lưu Kiếm",
+        "full_name": "Phường Lưu Kiếm",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04330"
+    },
+    {
+        "code": "11503",
+        "name": "Việt Khê",
+        "full_name": "Xã Việt Khê",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04343"
+    },
+    {
+        "code": "11506",
+        "name": "Lê Ích Mộc",
+        "full_name": "Phường Lê Ích Mộc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04346"
+    },
+    {
+        "code": "11533",
+        "name": "Hoà Bình",
+        "full_name": "Phường Hoà Bình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04308"
+    },
+    {
+        "code": "11542",
+        "name": "Nam Triệu",
+        "full_name": "Phường Nam Triệu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04345"
+    },
+    {
+        "code": "11557",
+        "name": "Thiên Hương",
+        "full_name": "Phường Thiên Hương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04338"
+    },
+    {
+        "code": "11560",
+        "name": "Thuỷ Nguyên",
+        "full_name": "Phường Thuỷ Nguyên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04344"
+    },
+    {
+        "code": "11581",
+        "name": "An Dương",
+        "full_name": "Phường An Dương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04422"
+    },
+    {
+        "code": "11593",
+        "name": "An Phong",
+        "full_name": "Phường An Phong",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04424"
+    },
+    {
+        "code": "11602",
+        "name": "Hồng An",
+        "full_name": "Phường Hồng An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04118"
+    },
+    {
+        "code": "11617",
+        "name": "An Hải",
+        "full_name": "Phường An Hải",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04423"
+    },
+    {
+        "code": "11629",
+        "name": "An Lão",
+        "full_name": "Xã An Lão",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04506"
+    },
+    {
+        "code": "11635",
+        "name": "An Trường",
+        "full_name": "Xã An Trường",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04526"
+    },
+    {
+        "code": "11647",
+        "name": "An Quang",
+        "full_name": "Xã An Quang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04525"
+    },
+    {
+        "code": "11668",
+        "name": "An Khánh",
+        "full_name": "Xã An Khánh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04524"
+    },
+    {
+        "code": "11674",
+        "name": "An Hưng",
+        "full_name": "Xã An Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "04523"
+    },
+    {
+        "code": "11680",
+        "name": "Kiến Thuỵ",
+        "full_name": "Xã Kiến Thuỵ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05124"
+    },
+    {
+        "code": "11689",
+        "name": "Hưng Đạo",
+        "full_name": "Phường Hưng Đạo",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04907"
+    },
+    {
+        "code": "11692",
+        "name": "Dương Kinh",
+        "full_name": "Phường Dương Kinh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "04912"
+    },
+    {
+        "code": "11713",
+        "name": "Nghi Dương",
+        "full_name": "Xã Nghi Dương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05127"
+    },
+    {
+        "code": "11725",
+        "name": "Kiến Minh",
+        "full_name": "Xã Kiến Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05125"
+    },
+    {
+        "code": "11728",
+        "name": "Kiến Hưng",
+        "full_name": "Xã Kiến Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05115"
+    },
+    {
+        "code": "11737",
+        "name": "Nam Đồ Sơn",
+        "full_name": "Phường Nam Đồ Sơn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "31",
+        "postal_code": "05013"
+    },
+    {
+        "code": "11749",
+        "name": "Kiến Hải",
+        "full_name": "Xã Kiến Hải",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05126"
+    },
+    {
+        "code": "11755",
+        "name": "Tiên Lãng",
+        "full_name": "Xã Tiên Lãng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05206"
+    },
+    {
+        "code": "11761",
+        "name": "Quyết Thắng",
+        "full_name": "Xã Quyết Thắng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05229"
+    },
+    {
+        "code": "11779",
+        "name": "Tân Minh",
+        "full_name": "Xã Tân Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05217"
+    },
+    {
+        "code": "11791",
+        "name": "Tiên Minh",
+        "full_name": "Xã Tiên Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05218"
+    },
+    {
+        "code": "11806",
+        "name": "Chấn Hưng",
+        "full_name": "Xã Chấn Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05230"
+    },
+    {
+        "code": "11809",
+        "name": "Hùng Thắng",
+        "full_name": "Xã Hùng Thắng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05224"
+    },
+    {
+        "code": "11824",
+        "name": "Vĩnh Bảo",
+        "full_name": "Xã Vĩnh Bảo",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05306"
+    },
+    {
+        "code": "11836",
+        "name": "Vĩnh Thịnh",
+        "full_name": "Xã Vĩnh Thịnh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05338"
+    },
+    {
+        "code": "11842",
+        "name": "Vĩnh Thuận",
+        "full_name": "Xã Vĩnh Thuận",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05339"
+    },
+    {
+        "code": "11848",
+        "name": "Vĩnh Hoà",
+        "full_name": "Xã Vĩnh Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05314"
+    },
+    {
+        "code": "11875",
+        "name": "Vĩnh Hải",
+        "full_name": "Xã Vĩnh Hải",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05319"
+    },
+    {
+        "code": "11887",
+        "name": "Vĩnh Am",
+        "full_name": "Xã Vĩnh Am",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05337"
+    },
+    {
+        "code": "11911",
+        "name": "Nguyễn Bỉnh Khiêm",
+        "full_name": "Xã Nguyễn Bỉnh Khiêm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "31",
+        "postal_code": "05336"
+    },
+    {
+        "code": "11914",
+        "name": "Cát Hải",
+        "full_name": "Đặc khu Cát Hải",
+        "type": "special_zone",
+        "type_name": "Đặc khu",
+        "province_code": "31",
+        "postal_code": "05418"
+    },
+    {
+        "code": "11948",
+        "name": "Bạch Long Vĩ",
+        "full_name": "Đặc khu Bạch Long Vĩ",
+        "type": "special_zone",
+        "type_name": "Đặc khu",
+        "province_code": "31",
+        "postal_code": "05506"
+    }
+]

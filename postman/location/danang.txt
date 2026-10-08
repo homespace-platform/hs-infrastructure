@@ -1,0 +1,860 @@
+{
+        "code": "48",
+        "name": "Đà Nẵng",
+        "full_name": "Thành phố Đà Nẵng",
+        "type": "city",
+        "type_name": "Thành phố",
+        "postal_code_prefixes": [
+            "50",
+            "51",
+            "52"
+        ]
+},
+[
+    {
+        "code": "20194",
+        "name": "Hải Vân",
+        "full_name": "Phường Hải Vân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50611"
+    },
+    {
+        "code": "20197",
+        "name": "Liên Chiểu",
+        "full_name": "Phường Liên Chiểu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50612"
+    },
+    {
+        "code": "20200",
+        "name": "Hoà Khánh",
+        "full_name": "Phường Hoà Khánh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50613"
+    },
+    {
+        "code": "20209",
+        "name": "Thanh Khê",
+        "full_name": "Phường Thanh Khê",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50316"
+    },
+    {
+        "code": "20242",
+        "name": "Hải Châu",
+        "full_name": "Phường Hải Châu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50206"
+    },
+    {
+        "code": "20257",
+        "name": "Hoà Cường",
+        "full_name": "Phường Hoà Cường",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50219"
+    },
+    {
+        "code": "20260",
+        "name": "Cẩm Lệ",
+        "full_name": "Phường Cẩm Lệ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50712"
+    },
+    {
+        "code": "20263",
+        "name": "Sơn Trà",
+        "full_name": "Phường Sơn Trà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50414"
+    },
+    {
+        "code": "20275",
+        "name": "An Hải",
+        "full_name": "Phường An Hải",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50413"
+    },
+    {
+        "code": "20285",
+        "name": "Ngũ Hành Sơn",
+        "full_name": "Phường Ngũ Hành Sơn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50510"
+    },
+    {
+        "code": "20305",
+        "name": "An Khê",
+        "full_name": "Phường An Khê",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50309"
+    },
+    {
+        "code": "20308",
+        "name": "Bà Nà",
+        "full_name": "Xã Bà Nà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "50818"
+    },
+    {
+        "code": "20314",
+        "name": "Hoà Xuân",
+        "full_name": "Phường Hoà Xuân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "50707"
+    },
+    {
+        "code": "20320",
+        "name": "Hoà Vang",
+        "full_name": "Xã Hoà Vang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "50817"
+    },
+    {
+        "code": "20332",
+        "name": "Hoà Tiến",
+        "full_name": "Xã Hoà Tiến",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "50814"
+    },
+    {
+        "code": "20333",
+        "name": "Hoàng Sa",
+        "full_name": "Đặc khu Hoàng Sa",
+        "type": "special_zone",
+        "type_name": "Đặc khu",
+        "province_code": "48",
+        "postal_code": "50906"
+    },
+    {
+        "code": "20335",
+        "name": "Bàn Thạch",
+        "full_name": "Phường Bàn Thạch",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51121"
+    },
+    {
+        "code": "20341",
+        "name": "Tam Kỳ",
+        "full_name": "Phường Tam Kỳ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51119"
+    },
+    {
+        "code": "20350",
+        "name": "Hương Trà",
+        "full_name": "Phường Hương Trà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51122"
+    },
+    {
+        "code": "20356",
+        "name": "Quảng Phú",
+        "full_name": "Phường Quảng Phú",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51120"
+    },
+    {
+        "code": "20364",
+        "name": "Chiên Đàn",
+        "full_name": "Xã Chiên Đàn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52718"
+    },
+    {
+        "code": "20380",
+        "name": "Tây Hồ",
+        "full_name": "Xã Tây Hồ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52717"
+    },
+    {
+        "code": "20392",
+        "name": "Phú Ninh",
+        "full_name": "Xã Phú Ninh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52719"
+    },
+    {
+        "code": "20401",
+        "name": "Hội An Tây",
+        "full_name": "Phường Hội An Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51321"
+    },
+    {
+        "code": "20410",
+        "name": "Hội An",
+        "full_name": "Phường Hội An",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51319"
+    },
+    {
+        "code": "20413",
+        "name": "Hội An Đông",
+        "full_name": "Phường Hội An Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51320"
+    },
+    {
+        "code": "20434",
+        "name": "Tân Hiệp",
+        "full_name": "Xã Tân Hiệp",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51318"
+    },
+    {
+        "code": "20443",
+        "name": "Hùng Sơn",
+        "full_name": "Xã Hùng Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51817"
+    },
+    {
+        "code": "20455",
+        "name": "Tây Giang",
+        "full_name": "Xã Tây Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51816"
+    },
+    {
+        "code": "20458",
+        "name": "Avương",
+        "full_name": "Xã Avương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51807"
+    },
+    {
+        "code": "20467",
+        "name": "Đông Giang",
+        "full_name": "Xã Đông Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51717"
+    },
+    {
+        "code": "20476",
+        "name": "Sông Kôn",
+        "full_name": "Xã Sông Kôn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51708"
+    },
+    {
+        "code": "20485",
+        "name": "Sông Vàng",
+        "full_name": "Xã Sông Vàng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51718"
+    },
+    {
+        "code": "20494",
+        "name": "Bến Hiên",
+        "full_name": "Xã Bến Hiên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51719"
+    },
+    {
+        "code": "20500",
+        "name": "Đại Lộc",
+        "full_name": "Xã Đại Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51624"
+    },
+    {
+        "code": "20506",
+        "name": "Thượng Đức",
+        "full_name": "Xã Thượng Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51626"
+    },
+    {
+        "code": "20515",
+        "name": "Hà Nha",
+        "full_name": "Xã Hà Nha",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51625"
+    },
+    {
+        "code": "20539",
+        "name": "Vu Gia",
+        "full_name": "Xã Vu Gia",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51627"
+    },
+    {
+        "code": "20542",
+        "name": "Phú Thuận",
+        "full_name": "Xã Phú Thuận",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51628"
+    },
+    {
+        "code": "20551",
+        "name": "Điện Bàn",
+        "full_name": "Phường Điện Bàn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51426"
+    },
+    {
+        "code": "20557",
+        "name": "Điện Bàn Bắc",
+        "full_name": "Phường Điện Bàn Bắc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51429"
+    },
+    {
+        "code": "20569",
+        "name": "Điện Bàn Tây",
+        "full_name": "Xã Điện Bàn Tây",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51430"
+    },
+    {
+        "code": "20575",
+        "name": "An Thắng",
+        "full_name": "Phường An Thắng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51428"
+    },
+    {
+        "code": "20579",
+        "name": "Điện Bàn Đông",
+        "full_name": "Phường Điện Bàn Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "48",
+        "postal_code": "51427"
+    },
+    {
+        "code": "20587",
+        "name": "Gò Nổi",
+        "full_name": "Xã Gò Nổi",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51431"
+    },
+    {
+        "code": "20599",
+        "name": "Nam Phước",
+        "full_name": "Xã Nam Phước",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51506"
+    },
+    {
+        "code": "20611",
+        "name": "Thu Bồn",
+        "full_name": "Xã Thu Bồn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51521"
+    },
+    {
+        "code": "20623",
+        "name": "Duy Xuyên",
+        "full_name": "Xã Duy Xuyên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51520"
+    },
+    {
+        "code": "20635",
+        "name": "Duy Nghĩa",
+        "full_name": "Xã Duy Nghĩa",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51510"
+    },
+    {
+        "code": "20641",
+        "name": "Quế Sơn",
+        "full_name": "Xã Quế Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52121"
+    },
+    {
+        "code": "20650",
+        "name": "Xuân Phú",
+        "full_name": "Xã Xuân Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52120"
+    },
+    {
+        "code": "20656",
+        "name": "Nông Sơn",
+        "full_name": "Xã Nông Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52123"
+    },
+    {
+        "code": "20662",
+        "name": "Quế Sơn Trung",
+        "full_name": "Xã Quế Sơn Trung",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52122"
+    },
+    {
+        "code": "20669",
+        "name": "Quế Phước",
+        "full_name": "Xã Quế Phước",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52124"
+    },
+    {
+        "code": "20695",
+        "name": "Thạnh Mỹ",
+        "full_name": "Xã Thạnh Mỹ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51906"
+    },
+    {
+        "code": "20698",
+        "name": "La Êê",
+        "full_name": "Xã La Êê",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51909"
+    },
+    {
+        "code": "20704",
+        "name": "La Dêê",
+        "full_name": "Xã La Dêê",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51911"
+    },
+    {
+        "code": "20707",
+        "name": "Nam Giang",
+        "full_name": "Xã Nam Giang",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51919"
+    },
+    {
+        "code": "20710",
+        "name": "Bến Giằng",
+        "full_name": "Xã Bến Giằng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51918"
+    },
+    {
+        "code": "20716",
+        "name": "Đắc Pring",
+        "full_name": "Xã Đắc Pring",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51915"
+    },
+    {
+        "code": "20722",
+        "name": "Khâm Đức",
+        "full_name": "Xã Khâm Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52306"
+    },
+    {
+        "code": "20728",
+        "name": "Phước Hiệp",
+        "full_name": "Xã Phước Hiệp",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52317"
+    },
+    {
+        "code": "20734",
+        "name": "Phước Năng",
+        "full_name": "Xã Phước Năng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52309"
+    },
+    {
+        "code": "20740",
+        "name": "Phước Chánh",
+        "full_name": "Xã Phước Chánh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52311"
+    },
+    {
+        "code": "20752",
+        "name": "Phước Thành",
+        "full_name": "Xã Phước Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52314"
+    },
+    {
+        "code": "20767",
+        "name": "Việt An",
+        "full_name": "Xã Việt An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52219"
+    },
+    {
+        "code": "20770",
+        "name": "Phước Trà",
+        "full_name": "Xã Phước Trà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52214"
+    },
+    {
+        "code": "20779",
+        "name": "Hiệp Đức",
+        "full_name": "Xã Hiệp Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52218"
+    },
+    {
+        "code": "20791",
+        "name": "Thăng Bình",
+        "full_name": "Xã Thăng Bình",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51228"
+    },
+    {
+        "code": "20794",
+        "name": "Thăng An",
+        "full_name": "Xã Thăng An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51229"
+    },
+    {
+        "code": "20818",
+        "name": "Đồng Dương",
+        "full_name": "Xã Đồng Dương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51233"
+    },
+    {
+        "code": "20827",
+        "name": "Thăng Phú",
+        "full_name": "Xã Thăng Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51232"
+    },
+    {
+        "code": "20836",
+        "name": "Thăng Trường",
+        "full_name": "Xã Thăng Trường",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51230"
+    },
+    {
+        "code": "20848",
+        "name": "Thăng Điền",
+        "full_name": "Xã Thăng Điền",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "51231"
+    },
+    {
+        "code": "20854",
+        "name": "Tiên Phước",
+        "full_name": "Xã Tiên Phước",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52622"
+    },
+    {
+        "code": "20857",
+        "name": "Sơn Cẩm Hà",
+        "full_name": "Xã Sơn Cẩm Hà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52624"
+    },
+    {
+        "code": "20875",
+        "name": "Lãnh Ngọc",
+        "full_name": "Xã Lãnh Ngọc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52621"
+    },
+    {
+        "code": "20878",
+        "name": "Thạnh Bình",
+        "full_name": "Xã Thạnh Bình",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52623"
+    },
+    {
+        "code": "20900",
+        "name": "Trà My",
+        "full_name": "Xã Trà My",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52506"
+    },
+    {
+        "code": "20908",
+        "name": "Trà Liên",
+        "full_name": "Xã Trà Liên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52519"
+    },
+    {
+        "code": "20920",
+        "name": "Trà Đốc",
+        "full_name": "Xã Trà Đốc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52509"
+    },
+    {
+        "code": "20923",
+        "name": "Trà Tân",
+        "full_name": "Xã Trà Tân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52511"
+    },
+    {
+        "code": "20929",
+        "name": "Trà Giáp",
+        "full_name": "Xã Trà Giáp",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52517"
+    },
+    {
+        "code": "20938",
+        "name": "Trà Leng",
+        "full_name": "Xã Trà Leng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52409"
+    },
+    {
+        "code": "20941",
+        "name": "Trà Tập",
+        "full_name": "Xã Trà Tập",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52407"
+    },
+    {
+        "code": "20944",
+        "name": "Nam Trà My",
+        "full_name": "Xã Nam Trà My",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52416"
+    },
+    {
+        "code": "20950",
+        "name": "Trà Linh",
+        "full_name": "Xã Trà Linh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52410"
+    },
+    {
+        "code": "20959",
+        "name": "Trà Vân",
+        "full_name": "Xã Trà Vân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52414"
+    },
+    {
+        "code": "20965",
+        "name": "Núi Thành",
+        "full_name": "Xã Núi Thành",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52806"
+    },
+    {
+        "code": "20971",
+        "name": "Tam Xuân",
+        "full_name": "Xã Tam Xuân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52826"
+    },
+    {
+        "code": "20977",
+        "name": "Đức Phú",
+        "full_name": "Xã Đức Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52825"
+    },
+    {
+        "code": "20984",
+        "name": "Tam Anh",
+        "full_name": "Xã Tam Anh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52824"
+    },
+    {
+        "code": "20992",
+        "name": "Tam Hải",
+        "full_name": "Xã Tam Hải",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52809"
+    },
+    {
+        "code": "21004",
+        "name": "Tam Mỹ",
+        "full_name": "Xã Tam Mỹ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "48",
+        "postal_code": "52823"
+    }
+]

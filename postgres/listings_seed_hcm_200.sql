@@ -1,12 +1,14 @@
--- HomeSpace: 1.000 tin đăng mẫu cho thử nghiệm tìm kiếm AI
+-- HomeSpace: 200 tin đăng mẫu tại Thành phố Hồ Chí Minh cho thử nghiệm tìm kiếm AI.
 -- Chạy trên homespace_core bằng pgAdmin (Query Tool).
--- Chỉ dành cho local/dev. Phân bổ theo 225 địa điểm / 34 tỉnh-thành từ featured-locations.json.
--- Mỗi địa điểm có 4-5 tin, đủ cả HOUSE, APARTMENT và ROOM; không xóa tin ngoài bộ seed.
+-- Chỉ dành cho local/dev. 168 phường/xã/đặc khu trong postman/location/hochiminh.txt
+-- đều có ít nhất một tin; 32 địa bàn đầu có thêm tin. Nguồn không chứa quận/huyện.
+-- Chỉ tạo 200 tin mới trên database sạch; không xóa bộ seed cũ nếu đã chạy trước đó.
 -- Chỉ cần chạy file này sau khi migration, bootstrap ADMIN và catalog của listing service đã sẵn sàng.
 -- Không cần chạy file sửa bổ sung. ID được tạo xác định, các bản ghi được upsert.
 -- Tin thuộc tài khoản bootstrap username=homespace (role ADMIN trong DB local hiện tại).
 -- Ảnh: dùng đúng 3 object S3 do người dùng cung cấp; cả 3 ảnh được gắn vào mỗi tin.
--- Địa chỉ/đường và liên hệ với địa điểm nổi bật là dữ liệu giả lập, không xác nhận tọa độ/khoảng cách thật.
+-- Mã/tên tỉnh và phường/xã/đặc khu lấy nguyên nguồn; số nhà/tên đường là dữ liệu giả lập,
+-- KHÔNG phải địa chỉ đã xác minh hoặc tọa độ thật.
 
 BEGIN;
 
@@ -29,469 +31,184 @@ BEGIN
     END IF;
 END $$;
 
--- Featured locations are embedded so this is a single pgAdmin-ready file.
+-- BEGIN HCM LOCATION DATA: generated from postman/location/hochiminh.txt
+-- The source has wards/communes/special zones, not district-level objects.
 CREATE TEMP TABLE hs_seed_places ON COMMIT DROP AS
-WITH place_source AS (
-    SELECT p.key AS province_code, p.value->>'name' AS province_short_name,
-           loc.location_label, loc.location_order
-    FROM jsonb_each($hs_featured_locations$
-{
-  "01": {
-    "code": "01",
-    "name": "Hà Nội",
-    "locations": [
-      "ĐH Quốc gia Hà Nội · Cầu Giấy",
-      "ĐH Bách khoa Hà Nội",
-      "Mỹ Đình",
-      "Cầu Giấy",
-      "Hà Đông",
-      "Thanh Xuân",
-      "Hồ Hoàn Kiếm"
-    ]
-  },
-  "04": {
-    "code": "04",
-    "name": "Cao Bằng",
-    "locations": [
-      "Trung tâm Cao Bằng",
-      "Bệnh viện Đa khoa tỉnh Cao Bằng",
-      "Khu vực Sông Bằng",
-      "Thác Bản Giốc",
-      "Trùng Khánh"
-    ]
-  },
-  "08": {
-    "code": "08",
-    "name": "Tuyên Quang",
-    "locations": [
-      "Trung tâm Tuyên Quang",
-      "ĐH Tân Trào",
-      "Khu công nghiệp Long Bình An",
-      "Trung tâm Hà Giang",
-      "Đồng Văn",
-      "Mèo Vạc"
-    ]
-  },
-  "11": {
-    "code": "11",
-    "name": "Điện Biên",
-    "locations": [
-      "Trung tâm Điện Biên Phủ",
-      "ĐH Điện Biên",
-      "Bến xe Điện Biên",
-      "Mường Thanh",
-      "Sân bay Điện Biên"
-    ]
-  },
-  "12": {
-    "code": "12",
-    "name": "Lai Châu",
-    "locations": [
-      "Trung tâm Lai Châu",
-      "Bệnh viện Đa khoa Lai Châu",
-      "Quảng trường Nhân dân",
-      "Tam Đường",
-      "Khu vực Tân Phong"
-    ]
-  },
-  "14": {
-    "code": "14",
-    "name": "Sơn La",
-    "locations": [
-      "Trung tâm Sơn La",
-      "ĐH Tây Bắc",
-      "Bệnh viện Đa khoa Sơn La",
-      "Mộc Châu",
-      "Mai Sơn"
-    ]
-  },
-  "15": {
-    "code": "15",
-    "name": "Lào Cai",
-    "locations": [
-      "Trung tâm Lào Cai",
-      "Ga Lào Cai",
-      "ĐH Thái Nguyên – Phân hiệu Lào Cai",
-      "Sa Pa",
-      "Trung tâm Yên Bái",
-      "Nghĩa Lộ"
-    ]
-  },
-  "19": {
-    "code": "19",
-    "name": "Thái Nguyên",
-    "locations": [
-      "ĐH Thái Nguyên",
-      "ĐH Công nghiệp Thái Nguyên",
-      "KCN Yên Bình",
-      "Samsung Thái Nguyên",
-      "Trung tâm Thái Nguyên",
-      "Trung tâm Bắc Kạn"
-    ]
-  },
-  "20": {
-    "code": "20",
-    "name": "Lạng Sơn",
-    "locations": [
-      "Trung tâm Lạng Sơn",
-      "Chợ Đông Kinh",
-      "Ga Đồng Đăng",
-      "Cửa khẩu Hữu Nghị",
-      "KCN Hữu Lũng"
-    ]
-  },
-  "22": {
-    "code": "22",
-    "name": "Quảng Ninh",
-    "locations": [
-      "Hạ Long",
-      "Bãi Cháy",
-      "Hòn Gai",
-      "ĐH Hạ Long",
-      "Cẩm Phả",
-      "Uông Bí",
-      "KCN Quảng Yên"
-    ]
-  },
-  "24": {
-    "code": "24",
-    "name": "Bắc Ninh",
-    "locations": [
-      "Trung tâm Bắc Ninh",
-      "ĐH Kinh Bắc",
-      "KCN VSIP Bắc Ninh",
-      "KCN Yên Phong",
-      "KCN Quế Võ",
-      "Trung tâm Bắc Giang",
-      "KCN Quang Châu"
-    ]
-  },
-  "25": {
-    "code": "25",
-    "name": "Phú Thọ",
-    "locations": [
-      "Việt Trì",
-      "ĐH Hùng Vương",
-      "KCN Thụy Vân",
-      "Trung tâm Vĩnh Yên",
-      "KCN Khai Quang",
-      "Trung tâm Hòa Bình",
-      "KCN Lương Sơn"
-    ]
-  },
-  "31": {
-    "code": "31",
-    "name": "Hải Phòng",
-    "locations": [
-      "Trung tâm Hải Phòng",
-      "ĐH Hàng Hải Việt Nam",
-      "ĐH Hải Phòng",
-      "Lê Chân",
-      "KCN Tràng Duệ",
-      "VSIP Hải Phòng",
-      "Trung tâm Hải Dương"
-    ]
-  },
-  "33": {
-    "code": "33",
-    "name": "Hưng Yên",
-    "locations": [
-      "Trung tâm Hưng Yên",
-      "Văn Giang",
-      "Ecopark",
-      "KCN Thăng Long II",
-      "KCN Phố Nối",
-      "Trung tâm Thái Bình",
-      "ĐH Y Dược Thái Bình"
-    ]
-  },
-  "37": {
-    "code": "37",
-    "name": "Ninh Bình",
-    "locations": [
-      "Trung tâm Ninh Bình",
-      "ĐH Hoa Lư",
-      "Tam Điệp",
-      "Trung tâm Nam Định",
-      "ĐH Điều dưỡng Nam Định",
-      "Phủ Lý",
-      "KCN Đồng Văn"
-    ]
-  },
-  "38": {
-    "code": "38",
-    "name": "Thanh Hóa",
-    "locations": [
-      "Trung tâm Thanh Hóa",
-      "ĐH Hồng Đức",
-      "ĐH Văn hóa Thể thao và Du lịch Thanh Hóa",
-      "KCN Lễ Môn",
-      "Nghi Sơn",
-      "Sầm Sơn"
-    ]
-  },
-  "40": {
-    "code": "40",
-    "name": "Nghệ An",
-    "locations": [
-      "Trung tâm Vinh",
-      "ĐH Vinh",
-      "ĐH Y khoa Vinh",
-      "Bến xe Vinh",
-      "KCN VSIP Nghệ An",
-      "Cửa Lò"
-    ]
-  },
-  "42": {
-    "code": "42",
-    "name": "Hà Tĩnh",
-    "locations": [
-      "Trung tâm Hà Tĩnh",
-      "ĐH Hà Tĩnh",
-      "KCN Vũng Áng",
-      "Kỳ Anh",
-      "Hồng Lĩnh",
-      "Bệnh viện Đa khoa Hà Tĩnh"
-    ]
-  },
-  "44": {
-    "code": "44",
-    "name": "Quảng Trị",
-    "locations": [
-      "Đông Hà",
-      "KCN Nam Đông Hà",
-      "Lao Bảo",
-      "Trung tâm Đồng Hới",
-      "ĐH Quảng Bình",
-      "Phong Nha"
-    ]
-  },
-  "46": {
-    "code": "46",
-    "name": "Huế",
-    "locations": [
-      "ĐH Huế",
-      "Bệnh viện Trung ương Huế",
-      "Trung tâm Huế",
-      "An Cựu",
-      "Phú Bài",
-      "KCN Phú Bài",
-      "Đại Nội Huế"
-    ]
-  },
-  "48": {
-    "code": "48",
-    "name": "Đà Nẵng",
-    "locations": [
-      "ĐH Bách khoa Đà Nẵng",
-      "ĐH Kinh tế Đà Nẵng",
-      "Hải Châu",
-      "Ngũ Hành Sơn",
-      "Liên Chiểu",
-      "Hòa Khánh",
-      "Hội An",
-      "Tam Kỳ"
-    ]
-  },
-  "51": {
-    "code": "51",
-    "name": "Quảng Ngãi",
-    "locations": [
-      "Trung tâm Quảng Ngãi",
-      "ĐH Phạm Văn Đồng",
-      "KCN VSIP Quảng Ngãi",
-      "Dung Quất",
-      "Trung tâm Kon Tum",
-      "ĐH Đà Nẵng – Phân hiệu Kon Tum"
-    ]
-  },
-  "52": {
-    "code": "52",
-    "name": "Gia Lai",
-    "locations": [
-      "Pleiku",
-      "ĐH Nông Lâm TP.HCM – Phân hiệu Gia Lai",
-      "KCN Trà Đa",
-      "Quy Nhơn",
-      "ĐH Quy Nhơn",
-      "KCN Phú Tài",
-      "Nhơn Hội"
-    ]
-  },
-  "56": {
-    "code": "56",
-    "name": "Khánh Hòa",
-    "locations": [
-      "Nha Trang",
-      "ĐH Nha Trang",
-      "ĐH Khánh Hòa",
-      "Cam Ranh",
-      "KCN Suối Dầu",
-      "Phan Rang",
-      "KCN Du Long"
-    ]
-  },
-  "66": {
-    "code": "66",
-    "name": "Đắk Lắk",
-    "locations": [
-      "Buôn Ma Thuột",
-      "ĐH Tây Nguyên",
-      "Bệnh viện Vùng Tây Nguyên",
-      "KCN Hòa Phú",
-      "Tuy Hòa",
-      "ĐH Phú Yên",
-      "KCN Hòa Hiệp"
-    ]
-  },
-  "68": {
-    "code": "68",
-    "name": "Lâm Đồng",
-    "locations": [
-      "Đà Lạt",
-      "ĐH Đà Lạt",
-      "Bảo Lộc",
-      "KCN Lộc Sơn",
-      "Phan Thiết",
-      "ĐH Phan Thiết",
-      "Gia Nghĩa",
-      "KCN Tâm Thắng"
-    ]
-  },
-  "75": {
-    "code": "75",
-    "name": "Đồng Nai",
-    "locations": [
-      "Biên Hòa",
-      "ĐH Lạc Hồng",
-      "KCN Amata",
-      "KCN Long Thành",
-      "Sân bay Long Thành",
-      "Đồng Xoài",
-      "KCN Becamex Bình Phước",
-      "Chơn Thành"
-    ]
-  },
-  "79": {
-    "code": "79",
-    "name": "Hồ Chí Minh",
-    "locations": [
-      "ĐH Quốc gia TP.HCM · Thủ Đức",
-      "ĐH Công nghiệp TP.HCM (IUH) · Gò Vấp",
-      "ĐH Bách khoa TP.HCM",
-      "Chợ Bến Thành",
-      "Landmark 81",
-      "Thủ Đức",
-      "Thủ Dầu Một",
-      "VSIP Bình Dương",
-      "Vũng Tàu",
-      "Phú Mỹ"
-    ]
-  },
-  "80": {
-    "code": "80",
-    "name": "Tây Ninh",
-    "locations": [
-      "Trung tâm Tây Ninh",
-      "KCN Phước Đông",
-      "KCN Trảng Bàng",
-      "Long An/Tân An",
-      "ĐH Kinh tế Công nghiệp Long An",
-      "KCN Long Hậu",
-      "KCN Đức Hòa"
-    ]
-  },
-  "82": {
-    "code": "82",
-    "name": "Đồng Tháp",
-    "locations": [
-      "Cao Lãnh",
-      "ĐH Đồng Tháp",
-      "Sa Đéc",
-      "KCN Sa Đéc",
-      "Mỹ Tho",
-      "ĐH Tiền Giang",
-      "KCN Tân Hương"
-    ]
-  },
-  "86": {
-    "code": "86",
-    "name": "Vĩnh Long",
-    "locations": [
-      "Trung tâm Vĩnh Long",
-      "ĐH Cửu Long",
-      "ĐH Sư phạm Kỹ thuật Vĩnh Long",
-      "Bến Tre",
-      "Trà Vinh",
-      "ĐH Trà Vinh",
-      "KCN Long Đức"
-    ]
-  },
-  "91": {
-    "code": "91",
-    "name": "An Giang",
-    "locations": [
-      "Long Xuyên",
-      "ĐH An Giang",
-      "Châu Đốc",
-      "Rạch Giá",
-      "ĐH Kiên Giang",
-      "Phú Quốc",
-      "Hà Tiên"
-    ]
-  },
-  "92": {
-    "code": "92",
-    "name": "Cần Thơ",
-    "locations": [
-      "ĐH Cần Thơ",
-      "ĐH Y Dược Cần Thơ",
-      "Ninh Kiều",
-      "Cái Răng",
-      "KCN Trà Nóc",
-      "Vị Thanh",
-      "Sóc Trăng"
-    ]
-  },
-  "96": {
-    "code": "96",
-    "name": "Cà Mau",
-    "locations": [
-      "Trung tâm Cà Mau",
-      "ĐH Bình Dương – Phân hiệu Cà Mau",
-      "KCN Khánh An",
-      "Bạc Liêu",
-      "ĐH Bạc Liêu",
-      "Nhà máy Điện khí Cà Mau"
-    ]
-  }
-}
-$hs_featured_locations$::jsonb) AS p
-    CROSS JOIN LATERAL jsonb_array_elements_text(p.value->'locations')
-        WITH ORDINALITY AS loc(location_label, location_order)
-)
-SELECT row_number() OVER (ORDER BY province_code, location_order)::int AS place_id,
-       province_code,
-       CASE WHEN province_code IN ('01','31','46','48','79','92')
-            THEN 'Thành phố ' ELSE 'Tỉnh ' END || province_short_name AS province_name,
-       location_label,
-       CASE
-         WHEN province_code='79' AND location_label ILIKE '%Gò Vấp%' THEN 'Phường Gò Vấp'
-         WHEN province_code='79' AND location_label ILIKE '%Bến Thành%' THEN 'Phường Bến Thành'
-         WHEN province_code='79' AND location_label ILIKE '%Landmark 81%' THEN 'Phường Bình Thạnh'
-         WHEN province_code='79' AND location_label ILIKE '%Thủ Đức%' THEN 'Phường Thủ Đức'
-         WHEN province_code='79' AND location_label ILIKE '%Bách khoa%' THEN 'Phường Diên Hồng'
-         WHEN province_code='01' AND location_label ILIKE '%Cầu Giấy%' THEN 'Phường Cầu Giấy'
-         WHEN province_code='01' AND location_label ILIKE '%Bách khoa%' THEN 'Phường Bạch Mai'
-         WHEN province_code='01' AND location_label ILIKE '%Mỹ Đình%' THEN 'Phường Mỹ Đình'
-         WHEN province_code='01' AND location_label ILIKE '%Hà Đông%' THEN 'Phường Hà Đông'
-         WHEN province_code='01' AND location_label ILIKE '%Thanh Xuân%' THEN 'Phường Thanh Xuân'
-         WHEN province_code='01' AND location_label ILIKE '%Hoàn Kiếm%' THEN 'Phường Hoàn Kiếm'
-         WHEN location_label LIKE '% · %' THEN 'Khu vực ' || split_part(location_label, ' · ', 2)
-         WHEN location_label LIKE 'Trung tâm %' THEN 'Khu vực ' || substring(location_label from 12)
-         ELSE 'Khu vực ' || location_label
-       END AS ward_name
-FROM place_source;
+SELECT p.place_id, '79'::text AS province_code,
+       'Thành phố Hồ Chí Minh'::text AS province_name,
+       p.ward_code, p.ward_name, p.place_type,
+       p.ward_name AS location_label
+FROM (VALUES
+    (1, '25747', 'Phường Thủ Dầu Một', 'ward'),
+    (2, '25750', 'Phường Phú Lợi', 'ward'),
+    (3, '25760', 'Phường Bình Dương', 'ward'),
+    (4, '25768', 'Phường Phú An', 'ward'),
+    (5, '25771', 'Phường Chánh Hiệp', 'ward'),
+    (6, '25777', 'Xã Dầu Tiếng', 'commune'),
+    (7, '25780', 'Xã Minh Thạnh', 'commune'),
+    (8, '25792', 'Xã Long Hoà', 'commune'),
+    (9, '25807', 'Xã Thanh An', 'commune'),
+    (10, '25813', 'Phường Bến Cát', 'ward'),
+    (11, '25819', 'Xã Trừ Văn Thố', 'commune'),
+    (12, '25822', 'Xã Bàu Bàng', 'commune'),
+    (13, '25837', 'Phường Chánh Phú Hoà', 'ward'),
+    (14, '25840', 'Phường Long Nguyên', 'ward'),
+    (15, '25843', 'Phường Tây Nam', 'ward'),
+    (16, '25846', 'Phường Thới Hoà', 'ward'),
+    (17, '25849', 'Phường Hoà Lợi', 'ward'),
+    (18, '25858', 'Xã Phú Giáo', 'commune'),
+    (19, '25864', 'Xã Phước Thành', 'commune'),
+    (20, '25867', 'Xã An Long', 'commune'),
+    (21, '25882', 'Xã Phước Hoà', 'commune'),
+    (22, '25888', 'Phường Tân Uyên', 'ward'),
+    (23, '25891', 'Phường Tân Khánh', 'ward'),
+    (24, '25906', 'Xã Bắc Tân Uyên', 'commune'),
+    (25, '25909', 'Xã Thường Tân', 'commune'),
+    (26, '25912', 'Phường Vĩnh Tân', 'ward'),
+    (27, '25915', 'Phường Bình Cơ', 'ward'),
+    (28, '25920', 'Phường Tân Hiệp', 'ward'),
+    (29, '25942', 'Phường Dĩ An', 'ward'),
+    (30, '25945', 'Phường Tân Đông Hiệp', 'ward'),
+    (31, '25951', 'Phường Đông Hoà', 'ward'),
+    (32, '25966', 'Phường Lái Thiêu', 'ward'),
+    (33, '25969', 'Phường Thuận Giao', 'ward'),
+    (34, '25975', 'Phường An Phú', 'ward'),
+    (35, '25978', 'Phường Thuận An', 'ward'),
+    (36, '25987', 'Phường Bình Hoà', 'ward'),
+    (37, '26506', 'Phường Vũng Tàu', 'ward'),
+    (38, '26526', 'Phường Tam Thắng', 'ward'),
+    (39, '26536', 'Phường Rạch Dừa', 'ward'),
+    (40, '26542', 'Phường Phước Thắng', 'ward'),
+    (41, '26545', 'Xã Long Sơn', 'commune'),
+    (42, '26560', 'Phường Bà Rịa', 'ward'),
+    (43, '26566', 'Phường Long Hương', 'ward'),
+    (44, '26572', 'Phường Tam Long', 'ward'),
+    (45, '26575', 'Xã Ngãi Giao', 'commune'),
+    (46, '26584', 'Xã Xuân Sơn', 'commune'),
+    (47, '26590', 'Xã Bình Giã', 'commune'),
+    (48, '26596', 'Xã Châu Đức', 'commune'),
+    (49, '26608', 'Xã Kim Long', 'commune'),
+    (50, '26617', 'Xã Nghĩa Thành', 'commune'),
+    (51, '26620', 'Xã Hồ Tràm', 'commune'),
+    (52, '26632', 'Xã Xuyên Mộc', 'commune'),
+    (53, '26638', 'Xã Bàu Lâm', 'commune'),
+    (54, '26641', 'Xã Hoà Hội', 'commune'),
+    (55, '26647', 'Xã Hoà Hiệp', 'commune'),
+    (56, '26656', 'Xã Bình Châu', 'commune'),
+    (57, '26659', 'Xã Long Điền', 'commune'),
+    (58, '26662', 'Xã Long Hải', 'commune'),
+    (59, '26680', 'Xã Đất Đỏ', 'commune'),
+    (60, '26686', 'Xã Phước Hải', 'commune'),
+    (61, '26704', 'Phường Phú Mỹ', 'ward'),
+    (62, '26710', 'Phường Tân Hải', 'ward'),
+    (63, '26713', 'Phường Tân Phước', 'ward'),
+    (64, '26725', 'Phường Tân Thành', 'ward'),
+    (65, '26728', 'Xã Châu Pha', 'commune'),
+    (66, '26732', 'Đặc khu Côn Đảo', 'special_zone'),
+    (67, '26737', 'Phường Tân Định', 'ward'),
+    (68, '26740', 'Phường Sài Gòn', 'ward'),
+    (69, '26743', 'Phường Bến Thành', 'ward'),
+    (70, '26758', 'Phường Cầu Ông Lãnh', 'ward'),
+    (71, '26767', 'Phường An Phú Đông', 'ward'),
+    (72, '26773', 'Phường Thới An', 'ward'),
+    (73, '26782', 'Phường Tân Thới Hiệp', 'ward'),
+    (74, '26785', 'Phường Trung Mỹ Tây', 'ward'),
+    (75, '26791', 'Phường Đông Hưng Thuận', 'ward'),
+    (76, '26800', 'Phường Linh Xuân', 'ward'),
+    (77, '26803', 'Phường Tam Bình', 'ward'),
+    (78, '26809', 'Phường Hiệp Bình', 'ward'),
+    (79, '26824', 'Phường Thủ Đức', 'ward'),
+    (80, '26833', 'Phường Long Bình', 'ward'),
+    (81, '26842', 'Phường Tăng Nhơn Phú', 'ward'),
+    (82, '26848', 'Phường Phước Long', 'ward'),
+    (83, '26857', 'Phường Long Phước', 'ward'),
+    (84, '26860', 'Phường Long Trường', 'ward'),
+    (85, '26876', 'Phường An Nhơn', 'ward'),
+    (86, '26878', 'Phường An Hội Đông', 'ward'),
+    (87, '26882', 'Phường An Hội Tây', 'ward'),
+    (88, '26884', 'Phường Gò Vấp', 'ward'),
+    (89, '26890', 'Phường Hạnh Thông', 'ward'),
+    (90, '26898', 'Phường Thông Tây Hội', 'ward'),
+    (91, '26905', 'Phường Bình Lợi Trung', 'ward'),
+    (92, '26911', 'Phường Bình Quới', 'ward'),
+    (93, '26929', 'Phường Bình Thạnh', 'ward'),
+    (94, '26944', 'Phường Gia Định', 'ward'),
+    (95, '26956', 'Phường Thạnh Mỹ Tây', 'ward'),
+    (96, '26968', 'Phường Tân Sơn Nhất', 'ward'),
+    (97, '26977', 'Phường Tân Sơn Hoà', 'ward'),
+    (98, '26983', 'Phường Bảy Hiền', 'ward'),
+    (99, '26995', 'Phường Tân Hoà', 'ward'),
+    (100, '27004', 'Phường Tân Bình', 'ward'),
+    (101, '27007', 'Phường Tân Sơn', 'ward'),
+    (102, '27013', 'Phường Tây Thạnh', 'ward'),
+    (103, '27019', 'Phường Tân Sơn Nhì', 'ward'),
+    (104, '27022', 'Phường Phú Thọ Hoà', 'ward'),
+    (105, '27028', 'Phường Phú Thạnh', 'ward'),
+    (106, '27031', 'Phường Tân Phú', 'ward'),
+    (107, '27043', 'Phường Đức Nhuận', 'ward'),
+    (108, '27058', 'Phường Cầu Kiệu', 'ward'),
+    (109, '27073', 'Phường Phú Nhuận', 'ward'),
+    (110, '27094', 'Phường An Khánh', 'ward'),
+    (111, '27097', 'Phường Bình Trưng', 'ward'),
+    (112, '27112', 'Phường Cát Lái', 'ward'),
+    (113, '27139', 'Phường Xuân Hoà', 'ward'),
+    (114, '27142', 'Phường Nhiêu Lộc', 'ward'),
+    (115, '27154', 'Phường Bàn Cờ', 'ward'),
+    (116, '27163', 'Phường Hoà Hưng', 'ward'),
+    (117, '27169', 'Phường Diên Hồng', 'ward'),
+    (118, '27190', 'Phường Vườn Lài', 'ward'),
+    (119, '27211', 'Phường Hoà Bình', 'ward'),
+    (120, '27226', 'Phường Phú Thọ', 'ward'),
+    (121, '27232', 'Phường Bình Thới', 'ward'),
+    (122, '27238', 'Phường Minh Phụng', 'ward'),
+    (123, '27259', 'Phường Xóm Chiếu', 'ward'),
+    (124, '27265', 'Phường Khánh Hội', 'ward'),
+    (125, '27286', 'Phường Vĩnh Hội', 'ward'),
+    (126, '27301', 'Phường Chợ Quán', 'ward'),
+    (127, '27316', 'Phường An Đông', 'ward'),
+    (128, '27343', 'Phường Chợ Lớn', 'ward'),
+    (129, '27349', 'Phường Phú Lâm', 'ward'),
+    (130, '27364', 'Phường Bình Phú', 'ward'),
+    (131, '27367', 'Phường Bình Tây', 'ward'),
+    (132, '27373', 'Phường Bình Tiên', 'ward'),
+    (133, '27418', 'Phường Chánh Hưng', 'ward'),
+    (134, '27424', 'Phường Bình Đông', 'ward'),
+    (135, '27427', 'Phường Phú Định', 'ward'),
+    (136, '27439', 'Phường Bình Hưng Hoà', 'ward'),
+    (137, '27442', 'Phường Bình Tân', 'ward'),
+    (138, '27448', 'Phường Bình Trị Đông', 'ward'),
+    (139, '27457', 'Phường Tân Tạo', 'ward'),
+    (140, '27460', 'Phường An Lạc', 'ward'),
+    (141, '27475', 'Phường Tân Hưng', 'ward'),
+    (142, '27478', 'Phường Tân Thuận', 'ward'),
+    (143, '27484', 'Phường Phú Thuận', 'ward'),
+    (144, '27487', 'Phường Tân Mỹ', 'ward'),
+    (145, '27496', 'Xã Tân An Hội', 'commune'),
+    (146, '27508', 'Xã An Nhơn Tây', 'commune'),
+    (147, '27511', 'Xã Nhuận Đức', 'commune'),
+    (148, '27526', 'Xã Thái Mỹ', 'commune'),
+    (149, '27541', 'Xã Phú Hoà Đông', 'commune'),
+    (150, '27544', 'Xã Bình Mỹ', 'commune'),
+    (151, '27553', 'Xã Củ Chi', 'commune'),
+    (152, '27559', 'Xã Hóc Môn', 'commune'),
+    (153, '27568', 'Xã Đông Thạnh', 'commune'),
+    (154, '27577', 'Xã Xuân Thới Sơn', 'commune'),
+    (155, '27592', 'Xã Bà Điểm', 'commune'),
+    (156, '27595', 'Xã Tân Nhựt', 'commune'),
+    (157, '27601', 'Xã Vĩnh Lộc', 'commune'),
+    (158, '27604', 'Xã Tân Vĩnh Lộc', 'commune'),
+    (159, '27610', 'Xã Bình Lợi', 'commune'),
+    (160, '27619', 'Xã Bình Hưng', 'commune'),
+    (161, '27628', 'Xã Hưng Long', 'commune'),
+    (162, '27637', 'Xã Bình Chánh', 'commune'),
+    (163, '27655', 'Xã Nhà Bè', 'commune'),
+    (164, '27658', 'Xã Hiệp Phước', 'commune'),
+    (165, '27664', 'Xã Cần Giờ', 'commune'),
+    (166, '27667', 'Xã Bình Khánh', 'commune'),
+    (167, '27673', 'Xã An Thới Đông', 'commune'),
+    (168, '27676', 'Xã Thạnh An', 'commune')
+) AS p(place_id, ward_code, ward_name, place_type);
+-- END HCM LOCATION DATA
 
 CREATE TEMP TABLE hs_seed_rows ON COMMIT DROP AS
 WITH place_count AS (
@@ -504,49 +221,46 @@ WITH place_count AS (
            get_byte(decode(md5('hs-seed-price-' || n::text), 'hex'), 0) AS price_var,
            get_byte(decode(md5('hs-seed-area-' || n::text), 'hex'), 0) AS area_var,
            get_byte(decode(md5('hs-seed-extra-' || n::text), 'hex'), 0) AS extra_var,
-           (ARRAY['Gần tuyến giao thông chính','Khu vực thuận tiện đi học và đi làm',
-                  'Không gian sống yên tĩnh','Dễ tiếp cận chợ và dịch vụ thiết yếu',
-                  'Có thể hẹn xem nhà vào nhiều khung giờ',
-                  'Phù hợp người thuê ưu tiên tiện ích xung quanh'])[(n % 6)+1] AS selling_point
-    FROM generate_series(1,1000) AS n
+           (ARRAY['Không gian được bố trí gọn gàng','Thông tin giá và phí được tách riêng',
+                  'Có thể trao đổi ngày nhận nhà','Có nhiều khung giờ hẹn xem',
+                  'Điều kiện thuê được ghi rõ trong tin',
+                  'Có thể xem chi tiết trang thiết bị bàn giao'])[(n % 6)+1] AS selling_point
+    FROM generate_series(1,200) AS n
     CROSS JOIN place_count pc
     JOIN hs_seed_places p ON p.place_id = ((n-1) % pc.total) + 1
 ), props AS (
     SELECT *,
            CASE category
-             WHEN 'HOUSE' THEN format('Nhà nguyên căn %s khu vực %s · HS%s',
-                   (ARRAY['có sân để xe','hẻm rộng','nhiều phòng ngủ','có sân thượng',
-                          'nội thất cơ bản','phù hợp gia đình'])[(extra_var % 6)+1], location_label, lpad(n::text,4,'0'))
-             WHEN 'APARTMENT' THEN format('Căn hộ %s khu vực %s · HS%s',
-                   (ARRAY['ban công thoáng','view nội khu','gần tiện ích','cao tầng',
-                          'nội thất mới','phù hợp gia đình nhỏ'])[(extra_var % 6)+1], location_label, lpad(n::text,4,'0'))
-             ELSE format('Phòng trọ %s khu vực %s · HS%s',
-                   (ARRAY['có gác','cửa sổ thoáng','có ban công','giá hợp lý',
-                          'bếp riêng','giờ giấc linh hoạt'])[(extra_var % 6)+1], location_label, lpad(n::text,4,'0'))
+             WHEN 'HOUSE' THEN format('Cho thuê nhà nguyên căn %s phòng ngủ%s tại %s',
+                   2 + n % 4, CASE WHEN n % 4 = 0 THEN ', có gara' ELSE '' END, ward_name)
+             WHEN 'APARTMENT' THEN format('Cho thuê căn hộ %s phòng ngủ, ban công %s tại %s',
+                   1 + n % 3, (ARRAY['hướng Đông Nam','hướng Đông Bắc','hướng Tây Nam','hướng Tây Bắc'])[(n % 4)+1], ward_name)
+             ELSE format('Cho thuê phòng trọ %s tại %s',
+                   CASE WHEN n % 3 = 0 THEN 'có gác lửng'
+                        WHEN n % 4 <> 1 THEN 'có ban công'
+                        WHEN n % 5 <> 0 THEN 'có cửa sổ'
+                        ELSE 'thông tin chi phí rõ ràng' END, ward_name)
            END AS title,
            (CASE category
              WHEN 'HOUSE' THEN 'Nhà nguyên căn phù hợp gia đình hoặc nhóm đi làm. '
              WHEN 'APARTMENT' THEN 'Căn hộ riêng tư với không gian sinh hoạt độc lập. '
              ELSE 'Phòng trọ phù hợp sinh viên hoặc người đi làm. '
-           END) || selling_point || '. Địa điểm tham chiếu: ' || location_label ||
+           END) || selling_point || '. Khu vực hành chính: ' || ward_name ||
            ', ' || province_name || '. ' ||
-           CASE WHEN location_label LIKE 'ĐH %' OR location_label LIKE '% · %'
-                THEN 'Tên tìm kiếm mở rộng: ' || replace(location_label, 'ĐH ', 'Đại học ') || '. '
-                WHEN location_label LIKE 'KCN %'
-                THEN 'Tên tìm kiếm mở rộng: ' || replace(location_label, 'KCN ', 'Khu công nghiệp ') || '. '
-                ELSE '' END ||
            (ARRAY['Có thể trao đổi thêm về thời điểm bàn giao.',
                   'Các khoản phí và điều kiện thuê được ghi theo từng mục.',
                   'Nên đặt lịch xem để kiểm tra không gian thực tế.',
-                  'Vui lòng xác nhận địa chỉ và khoảng cách thực tế với chủ nhà.'])[(extra_var % 4)+1]
+                  'Số nhà và đường là dữ liệu mẫu, không dùng để định vị thực tế.'])[(extra_var % 4)+1]
            AS description,
            CASE category WHEN 'HOUSE' THEN 65 + area_var % 150 + (n % 4) * 0.5
                          WHEN 'APARTMENT' THEN 30 + area_var % 95 + (n % 4) * 0.5
                          ELSE 15 + area_var % 30 + (n % 4) * 0.5 END::numeric(12,2) AS area_m2,
            CASE category
-             WHEN 'HOUSE' THEN 7000000 + (price_var % 130) * 200000
-             WHEN 'APARTMENT' THEN 4300000 + (price_var % 115) * 150000
-             ELSE 1400000 + (price_var % 95) * 40000
+             WHEN 'HOUSE' THEN 7000000 + (n % 4) * 2000000 + (price_var % 100) * 180000
+             WHEN 'APARTMENT' THEN 4500000 + (n % 3) * 1800000 + (price_var % 100) * 110000
+             WHEN 'ROOM' THEN CASE WHEN n % 11 = 0
+                   THEN 900000 + (price_var % 45) * 30000
+                   ELSE 1400000 + (price_var % 95) * 40000 END
            END::numeric(18,2) AS price_amount,
            current_date + (extra_var % 75) AS available_from,
            CASE WHEN n % 5 = 0 THEN 'FIXED_AMOUNT' ELSE 'MONTH_COUNT' END AS deposit_type,
@@ -566,14 +280,13 @@ WITH place_count AS (
     FROM numbered
 )
 SELECT p.*, c.owner_id,
-       md5('homespace-ai-listing-seed-v1-' || p.n::text)::uuid AS listing_id,
+       md5('homespace-hcm-200-listing-v2-' || p.n::text)::uuid AS listing_id,
        ('P' || lpad(n::text, 4, '0')) AS room_code,
        (ARRAY['Góc đọc sách','Sân phơi chung','Không gian làm việc',
               'Khu để xe có mái che','Ban công đón gió','Sảnh sinh hoạt chung',
               'Khu vực cây xanh','Tủ nhận hàng'])[(extra_var % 8)+1] AS extra_amenity
 FROM props p CROSS JOIN hs_seed_config c;
 
--- Khi nâng từ bản seed 100 tin, ID cũ có thể đổi loại hình/chính sách gửi xe.
 -- Chỉ dọn chi tiết lỗi thời gắn với chính những ID seed này; không đụng tin thật.
 DELETE FROM listing_house_details d USING hs_seed_rows s
 WHERE d.listing_id=s.listing_id::text AND s.category<>'HOUSE';
@@ -620,17 +333,24 @@ ON CONFLICT (id) DO UPDATE SET
     max_motorbike_count=excluded.max_motorbike_count, max_car_count=excluded.max_car_count,
     active=true, updated_at=now(), updated_by=excluded.updated_by;
 
--- Address/location fields. Codes are stable seed identifiers; names/full_address are for search text.
+-- Mã và tên địa bàn khớp chính xác nguồn location. Số nhà/đường chỉ là dữ liệu mẫu.
 INSERT INTO addresses (
     id, user_id, listing_id, branch_id, province_code, province_name, ward_code, ward_name,
     street_line, full_address, active, created_at, updated_at, created_by, updated_by
 )
-SELECT md5('homespace-ai-listing-seed-v1-address-' || n::text)::uuid::text,
+SELECT md5('homespace-hcm-200-address-v2-' || n::text)::uuid::text,
        NULL, listing_id::text, NULL, province_code, province_name,
-       province_code || '-SEED-' || lpad(n::text,4,'0'), ward_name,
-       ((n % 99) + 1)::text || ' Đường nội khu ' || (1 + extra_var % 20)::text,
-       ((n % 99) + 1)::text || ' Đường nội khu ' || (1 + extra_var % 20)::text ||
-       ', ' || ward_name || ', khu vực ' || location_label || ', ' || province_name,
+       ward_code, ward_name,
+       format('%s/%s đường %s', 10 + n % 180, 1 + extra_var % 45,
+              (ARRAY['Nguyễn Trãi','Lê Lợi','Hùng Vương','Trần Hưng Đạo',
+                     'Phan Đình Phùng','Nguyễn Văn Trỗi','Hai Bà Trưng','Lê Văn Việt',
+                     'Cách Mạng Tháng Tám','Điện Biên Phủ','Nguyễn Thị Minh Khai',
+                     'Phạm Văn Đồng'])[(n % 12)+1]),
+       format('%s/%s đường %s, %s, %s', 10 + n % 180, 1 + extra_var % 45,
+              (ARRAY['Nguyễn Trãi','Lê Lợi','Hùng Vương','Trần Hưng Đạo',
+                     'Phan Đình Phùng','Nguyễn Văn Trỗi','Hai Bà Trưng','Lê Văn Việt',
+                     'Cách Mạng Tháng Tám','Điện Biên Phủ','Nguyễn Thị Minh Khai',
+                     'Phạm Văn Đồng'])[(n % 12)+1], ward_name, province_name),
        true, now(), now(), owner_id, owner_id
 FROM hs_seed_rows
 ON CONFLICT (listing_id) DO UPDATE SET
@@ -650,12 +370,10 @@ SELECT listing_id::text, area_m2 + 8 + (n % 4) * 3, 4 + (n % 4) * 0.5, 14 + (n %
        3 + (n % 5) * 0.5, 1 + (n % 2), 2 + (n % 4), 2 + (n % 4), 1 + (n % 3),
        1 + (n % 2), 1, n % 3 = 0, house_has_garage,
        CASE WHEN n % 3 = 0 THEN 'HẺM XE HƠI' ELSE 'ĐƯỜNG NỘI BỘ' END,
-       3 + (n % 5), 1 + (n % 4),
+       2 * (2 + (n % 4)), 1 + (n % 4),
        CASE n % 4 WHEN 0 THEN 'FULLY_FURNISHED' WHEN 1 THEN 'BASIC' WHEN 2 THEN 'PARTIALLY_FURNISHED' ELSE 'UNFURNISHED' END,
        CASE n % 3 WHEN 0 THEN 'Sổ hồng riêng' WHEN 1 THEN 'Giấy tờ hợp lệ, trao đổi khi xem nhà' ELSE 'Hợp đồng sở hữu được cung cấp khi xem nhà' END,
-       CASE WHEN n % 4 = 0 THEN 'Cho thuê toàn bộ nhà'
-            ELSE format('Cho thuê từ tầng 2 đến tầng %s', 2 + (n % 4)) END,
-       CASE WHEN n % 4 = 0 THEN 1 ELSE 2 END, 2 + (n % 4)
+       'Cho thuê toàn bộ nhà', 1, 2 + (n % 4)
 FROM hs_seed_rows WHERE category='HOUSE'
 ON CONFLICT (listing_id) DO UPDATE SET land_area_m2=excluded.land_area_m2,
     frontage_width_m=excluded.frontage_width_m, length_m=excluded.length_m,
@@ -676,10 +394,10 @@ INSERT INTO listing_apartment_details (
     main_door_direction, balcony_direction, view_description, max_occupants, legal_status
 )
 SELECT listing_id::text,
-       'Tòa căn hộ khu vực ' || location_label,
+       'Tòa căn hộ tại ' || ward_name,
        (ARRAY['Block A','Block B','Tháp 1','Tháp 2','Block C','Tòa Đông','Tòa Tây'])[(n % 7)+1],
        'A' || (100 + n)::text, 2 + (n % 20), 25 + (n % 20),
-       1 + (n % 3), 1 + (n % 2), CASE WHEN n % 7 = 0 THEN 0 ELSE 1 END, 1,
+       1 + (n % 3), 1 + (n % 2), 1, 1,
        CASE n % 5 WHEN 0 THEN 'FULLY_FURNISHED' WHEN 1 THEN 'BASIC' WHEN 2 THEN 'PARTIALLY_FURNISHED' WHEN 3 THEN 'LUXURY' ELSE 'UNFURNISHED' END,
        (ARRAY['Đông','Tây','Nam','Bắc'])[(n % 4)+1],
        (ARRAY['Đông Nam','Đông Bắc','Tây Nam','Tây Bắc'])[(n % 4)+1],
@@ -759,7 +477,7 @@ INSERT INTO listing_charges (
     id, listing_id, charge_type, billing_method, amount, currency, unit, included_in_rent,
     custom_name, description, sort_order, active, created_at, updated_at, created_by, updated_by
 )
-SELECT md5('homespace-ai-listing-seed-v1-charge-' || n::text || '-' || sort_order::text)::uuid::text,
+SELECT md5('homespace-hcm-200-v2-charge-' || n::text || '-' || sort_order::text)::uuid::text,
        listing_id::text, charge_type, billing_method, amount, 'VND', unit, included,
        custom_name, CASE charge_type
          WHEN 'ELECTRICITY' THEN 'Tính theo đồng hồ điện và đơn giá ghi trong hợp đồng.'
@@ -791,7 +509,7 @@ WITH amenity_seed AS (
       WHEN 'REFRIGERATOR' THEN s.n % 5 <> 0
       WHEN 'WASHING_MACHINE' THEN s.n % 6 = 0
       WHEN 'ELEVATOR' THEN s.category='APARTMENT' OR s.n % 5 = 0
-      WHEN 'PARKING' THEN s.n % 4 <> 0
+      WHEN 'PARKING' THEN s.category <> 'ROOM' OR s.room_parking_policy <> 'NONE'
       WHEN 'SECURITY_24_7' THEN s.n % 3 = 0
       WHEN 'CAMERA' THEN s.n % 4 = 0
       WHEN 'PETS_ALLOWED' THEN s.n % 4 = 1
@@ -830,7 +548,7 @@ INSERT INTO listing_furnishing_assets (
     id, listing_id, furnishing_item_id, item_code, asset_name, quantity,
     handover_condition, condition_note, sort_order
 )
-SELECT md5('homespace-ai-listing-seed-v1-furnishing-' || fs.n::text || '-' || fs.code)::uuid::text,
+SELECT md5('homespace-hcm-200-v2-furnishing-' || fs.n::text || '-' || fs.code)::uuid::text,
        listing_id::text, furnishing_item_id, fs.code, fi.name,
        CASE WHEN fs.code IN ('CURTAIN','LIGHTING') THEN 1 + fs.n % 3 ELSE 1 END,
        handover_condition, 'Dữ liệu kiểm thử; tình trạng thực tế cần xác nhận khi bàn giao.', fs.sort_order
@@ -842,7 +560,7 @@ ON CONFLICT (id) DO UPDATE SET furnishing_item_id=excluded.furnishing_item_id,
 
 -- Custom amenity / free-text utility field from the form.
 INSERT INTO listing_custom_amenities (id, listing_id, name)
-SELECT md5('homespace-ai-listing-seed-v1-custom-' || n::text)::uuid::text,
+SELECT md5('homespace-hcm-200-v2-custom-' || n::text)::uuid::text,
        listing_id::text, extra_amenity
 FROM hs_seed_rows
 ON CONFLICT (id) DO UPDATE SET name=excluded.name;
@@ -866,7 +584,7 @@ ON CONFLICT DO NOTHING;
 WITH media_seed AS (
     SELECT s.*, m.media_order, m.file_name, m.sample_url,
            md5('homespace-seed-s3-object-' || m.media_order::text)::uuid::text AS storage_id,
-           md5('homespace-ai-listing-seed-v1-media-' || s.n::text || '-' || m.media_order::text)::uuid::text AS media_id
+           md5('homespace-hcm-200-v2-media-' || s.n::text || '-' || m.media_order::text)::uuid::text AS media_id
     FROM hs_seed_rows s
     CROSS JOIN (VALUES
       (1, '1ffbe426-4e8b-419e-95b1-a2f6b2308387.jpg', 'https://homespace-dev-files-v3.s3.ap-southeast-1.amazonaws.com/listing_image/8aeaf925-16d8-47d3-b377-c4fc83dafd56/1ffbe426-4e8b-419e-95b1-a2f6b2308387.jpg'),
@@ -894,7 +612,7 @@ ON CONFLICT (id) DO UPDATE SET original_name=excluded.original_name,
 WITH media_seed AS (
     SELECT s.*, m.media_order, m.file_name, m.sample_url,
            md5('homespace-seed-s3-object-' || m.media_order::text)::uuid::text AS storage_id,
-           md5('homespace-ai-listing-seed-v1-media-' || s.n::text || '-' || m.media_order::text)::uuid::text AS media_id
+           md5('homespace-hcm-200-v2-media-' || s.n::text || '-' || m.media_order::text)::uuid::text AS media_id
     FROM hs_seed_rows s
     CROSS JOIN (VALUES
       (1, '1ffbe426-4e8b-419e-95b1-a2f6b2308387.jpg', 'https://homespace-dev-files-v3.s3.ap-southeast-1.amazonaws.com/listing_image/8aeaf925-16d8-47d3-b377-c4fc83dafd56/1ffbe426-4e8b-419e-95b1-a2f6b2308387.jpg'),
@@ -917,38 +635,68 @@ ON CONFLICT (id) DO UPDATE SET listing_id=excluded.listing_id,
 -- Quick summary before commit; the temp seed table is dropped by COMMIT.
 DO $$
 BEGIN
-    IF (SELECT count(*) FROM hs_seed_places) <> 225
-       OR (SELECT count(DISTINCT province_code) FROM hs_seed_places) <> 34 THEN
-        RAISE EXCEPTION 'Danh sách địa điểm nổi bật phải có 225 địa điểm / 34 tỉnh-thành';
+    IF (SELECT count(*) FROM hs_seed_places) <> 168
+       OR (SELECT count(DISTINCT ward_code) FROM hs_seed_places) <> 168
+       OR EXISTS (SELECT 1 FROM hs_seed_places WHERE province_code <> '79') THEN
+        RAISE EXCEPTION 'Nguồn TP.HCM phải có 168 mã phường/xã/đặc khu duy nhất';
     END IF;
-    IF (SELECT count(*) FROM hs_seed_rows) <> 1000 THEN
-        RAISE EXCEPTION 'Seed phải tạo đúng 1.000 tin đăng';
+    IF (SELECT count(*) FROM hs_seed_rows) <> 200 THEN
+        RAISE EXCEPTION 'Seed phải tạo đúng 200 tin đăng';
     END IF;
     IF EXISTS (
-        SELECT 1 FROM hs_seed_rows GROUP BY place_id
-        HAVING count(*) NOT BETWEEN 4 AND 5 OR count(DISTINCT category) <> 3
+        SELECT 1 FROM hs_seed_places p
+        LEFT JOIN hs_seed_rows s ON s.place_id=p.place_id
+        GROUP BY p.place_id HAVING count(s.n) NOT BETWEEN 1 AND 2
     ) THEN
-        RAISE EXCEPTION 'Mỗi địa điểm phải có 4-5 tin và đủ 3 loại hình';
+        RAISE EXCEPTION 'Mỗi phường/xã/đặc khu phải có 1-2 tin';
+    END IF;
+    IF (SELECT count(DISTINCT category) FROM hs_seed_rows) <> 3 THEN
+        RAISE EXCEPTION 'Seed phải bao gồm đủ HOUSE, APARTMENT, ROOM';
     END IF;
     IF (
         SELECT count(*) FROM listings l
         JOIN hs_seed_rows s ON s.listing_id::text=l.id
         WHERE l.active IS TRUE AND l.status='PUBLISHED'
-    ) <> 1000 OR (
+    ) <> 200 OR (
         SELECT count(*) FROM addresses a
         JOIN hs_seed_rows s ON s.listing_id::text=a.listing_id
         WHERE a.active IS TRUE
-    ) <> 1000 THEN
-        RAISE EXCEPTION 'Seed chưa tạo đủ 1.000 tin và địa chỉ đang hoạt động';
+    ) <> 200 THEN
+        RAISE EXCEPTION 'Seed chưa tạo đủ 200 tin và địa chỉ đang hoạt động';
     END IF;
     IF EXISTS (
         SELECT 1 FROM hs_seed_rows s
         JOIN addresses a ON a.listing_id=s.listing_id::text
-        WHERE a.province_code<>s.province_code OR a.ward_name<>s.ward_name
-           OR a.full_address NOT LIKE '%' || s.location_label || ', ' || s.province_name
-           OR ltrim(s.title) NOT LIKE '%' || s.location_label || '%'
+        WHERE a.province_code<>s.province_code OR a.province_name<>s.province_name
+           OR a.ward_code<>s.ward_code OR a.ward_name<>s.ward_name
+           OR a.full_address NOT LIKE '%' || s.ward_name || ', ' || s.province_name
+           OR s.title NOT LIKE '%' || s.ward_name || '%'
     ) THEN
-        RAISE EXCEPTION 'Tiêu đề/địa chỉ seed không khớp địa điểm nổi bật';
+        RAISE EXCEPTION 'Tiêu đề/địa chỉ seed không khớp mã và tên địa bàn TP.HCM';
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM hs_seed_rows s
+        JOIN listings l ON l.id=s.listing_id::text
+        WHERE l.price_amount<=0 OR l.area_m2<=0
+           OR (l.category='ROOM' AND l.price_unit NOT IN ('ROOM_MONTH','PERSON_MONTH'))
+           OR (l.category<>'ROOM' AND l.price_unit<>'MONTH')
+           OR (l.max_motorbike_count=0 AND l.category<>'ROOM')
+    ) THEN
+        RAISE EXCEPTION 'Giá, diện tích, đơn vị giá hoặc sức chứa xe không hợp lý';
+    END IF;
+    IF EXISTS (
+        SELECT 1 FROM hs_seed_rows s
+        LEFT JOIN listing_room_details r ON r.listing_id=s.listing_id::text AND s.category='ROOM'
+        LEFT JOIN listing_house_details h ON h.listing_id=s.listing_id::text AND s.category='HOUSE'
+        LEFT JOIN listing_apartment_details ap ON ap.listing_id=s.listing_id::text AND s.category='APARTMENT'
+        WHERE (s.category='ROOM' AND (r.listing_id IS NULL OR r.max_occupants < 1
+                       OR r.has_balcony <> (r.balcony_type <> 'NONE')))
+           OR (s.category='HOUSE' AND (h.listing_id IS NULL OR h.max_occupants < 1
+                       OR h.rented_floor_from <> 1 OR h.rented_floor_to <> h.total_floors))
+           OR (s.category='APARTMENT' AND (ap.listing_id IS NULL OR ap.max_occupants < 1
+                       OR ap.floor_number > ap.building_total_floors))
+    ) THEN
+        RAISE EXCEPTION 'Chi tiết loại hình hoặc sức chứa không hợp lệ';
     END IF;
     IF EXISTS (
         SELECT 1 FROM hs_seed_rows s
@@ -982,7 +730,7 @@ FROM listings WHERE id IN (SELECT listing_id::text FROM hs_seed_rows)
 GROUP BY category, status ORDER BY category;
 
 SELECT count(DISTINCT province_code) AS province_count,
-       count(DISTINCT place_id) AS featured_place_count,
+       count(DISTINCT ward_code) AS ward_count,
        count(*) AS seeded_listing_count
 FROM hs_seed_rows;
 

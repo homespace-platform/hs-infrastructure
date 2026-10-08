@@ -1,0 +1,1150 @@
+{
+        "code": "01",
+        "name": "Hà Nội",
+        "full_name": "Thành phố Hà Nội",
+        "type": "city",
+        "type_name": "Thành phố",
+        "postal_code_prefixes": [
+            "10",
+            "11",
+            "12",
+            "13",
+            "14"
+        ]
+},
+[
+    {
+        "code": "00004",
+        "name": "Ba Đình",
+        "full_name": "Phường Ba Đình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11120"
+    },
+    {
+        "code": "00008",
+        "name": "Ngọc Hà",
+        "full_name": "Phường Ngọc Hà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11119"
+    },
+    {
+        "code": "00025",
+        "name": "Giảng Võ",
+        "full_name": "Phường Giảng Võ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11110"
+    },
+    {
+        "code": "00070",
+        "name": "Hoàn Kiếm",
+        "full_name": "Phường Hoàn Kiếm",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11024"
+    },
+    {
+        "code": "00082",
+        "name": "Cửa Nam",
+        "full_name": "Phường Cửa Nam",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11018"
+    },
+    {
+        "code": "00091",
+        "name": "Phú Thượng",
+        "full_name": "Phường Phú Thượng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11210"
+    },
+    {
+        "code": "00097",
+        "name": "Hồng Hà",
+        "full_name": "Phường Hồng Hà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11025"
+    },
+    {
+        "code": "00103",
+        "name": "Tây Hồ",
+        "full_name": "Phường Tây Hồ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11214"
+    },
+    {
+        "code": "00118",
+        "name": "Bồ Đề",
+        "full_name": "Phường Bồ Đề",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11813"
+    },
+    {
+        "code": "00127",
+        "name": "Việt Hưng",
+        "full_name": "Phường Việt Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11806"
+    },
+    {
+        "code": "00136",
+        "name": "Phúc Lợi",
+        "full_name": "Phường Phúc Lợi",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11817"
+    },
+    {
+        "code": "00145",
+        "name": "Long Biên",
+        "full_name": "Phường Long Biên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11814"
+    },
+    {
+        "code": "00160",
+        "name": "Nghĩa Đô",
+        "full_name": "Phường Nghĩa Đô",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11307"
+    },
+    {
+        "code": "00166",
+        "name": "Cầu Giấy",
+        "full_name": "Phường Cầu Giấy",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11314"
+    },
+    {
+        "code": "00175",
+        "name": "Yên Hoà",
+        "full_name": "Phường Yên Hoà",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11312"
+    },
+    {
+        "code": "00190",
+        "name": "Ô Chợ Dừa",
+        "full_name": "Phường Ô Chợ Dừa",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11511"
+    },
+    {
+        "code": "00199",
+        "name": "Láng",
+        "full_name": "Phường Láng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11528"
+    },
+    {
+        "code": "00226",
+        "name": "Văn Miếu - Quốc Tử Giám",
+        "full_name": "Phường Văn Miếu - Quốc Tử Giám",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11508"
+    },
+    {
+        "code": "00229",
+        "name": "Kim Liên",
+        "full_name": "Phường Kim Liên",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11520"
+    },
+    {
+        "code": "00235",
+        "name": "Đống Đa",
+        "full_name": "Phường Đống Đa",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11527"
+    },
+    {
+        "code": "00256",
+        "name": "Hai Bà Trưng",
+        "full_name": "Phường Hai Bà Trưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11626"
+    },
+    {
+        "code": "00283",
+        "name": "Vĩnh Tuy",
+        "full_name": "Phường Vĩnh Tuy",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11622"
+    },
+    {
+        "code": "00292",
+        "name": "Bạch Mai",
+        "full_name": "Phường Bạch Mai",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11618"
+    },
+    {
+        "code": "00301",
+        "name": "Vĩnh Hưng",
+        "full_name": "Phường Vĩnh Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11712"
+    },
+    {
+        "code": "00316",
+        "name": "Định Công",
+        "full_name": "Phường Định Công",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11717"
+    },
+    {
+        "code": "00322",
+        "name": "Tương Mai",
+        "full_name": "Phường Tương Mai",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11715"
+    },
+    {
+        "code": "00328",
+        "name": "Lĩnh Nam",
+        "full_name": "Phường Lĩnh Nam",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11709"
+    },
+    {
+        "code": "00331",
+        "name": "Hoàng Mai",
+        "full_name": "Phường Hoàng Mai",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11720"
+    },
+    {
+        "code": "00337",
+        "name": "Hoàng Liệt",
+        "full_name": "Phường Hoàng Liệt",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11719"
+    },
+    {
+        "code": "00340",
+        "name": "Yên Sở",
+        "full_name": "Phường Yên Sở",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11707"
+    },
+    {
+        "code": "00352",
+        "name": "Phương Liệt",
+        "full_name": "Phường Phương Liệt",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11412"
+    },
+    {
+        "code": "00364",
+        "name": "Khương Đình",
+        "full_name": "Phường Khương Đình",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11410"
+    },
+    {
+        "code": "00367",
+        "name": "Thanh Xuân",
+        "full_name": "Phường Thanh Xuân",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11417"
+    },
+    {
+        "code": "00376",
+        "name": "Sóc Sơn",
+        "full_name": "Xã Sóc Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12206"
+    },
+    {
+        "code": "00382",
+        "name": "Kim Anh",
+        "full_name": "Xã Kim Anh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12234"
+    },
+    {
+        "code": "00385",
+        "name": "Trung Giã",
+        "full_name": "Xã Trung Giã",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12210"
+    },
+    {
+        "code": "00430",
+        "name": "Đa Phúc",
+        "full_name": "Xã Đa Phúc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12232"
+    },
+    {
+        "code": "00433",
+        "name": "Nội Bài",
+        "full_name": "Xã Nội Bài",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12233"
+    },
+    {
+        "code": "00454",
+        "name": "Đông Anh",
+        "full_name": "Xã Đông Anh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12306"
+    },
+    {
+        "code": "00466",
+        "name": "Phúc Thịnh",
+        "full_name": "Xã Phúc Thịnh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12331"
+    },
+    {
+        "code": "00475",
+        "name": "Thư Lâm",
+        "full_name": "Xã Thư Lâm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12330"
+    },
+    {
+        "code": "00493",
+        "name": "Thiên Lộc",
+        "full_name": "Xã Thiên Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12332"
+    },
+    {
+        "code": "00508",
+        "name": "Vĩnh Thanh",
+        "full_name": "Xã Vĩnh Thanh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12333"
+    },
+    {
+        "code": "00541",
+        "name": "Phù Đổng",
+        "full_name": "Xã Phù Đổng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12413"
+    },
+    {
+        "code": "00562",
+        "name": "Thuận An",
+        "full_name": "Xã Thuận An",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12429"
+    },
+    {
+        "code": "00565",
+        "name": "Gia Lâm",
+        "full_name": "Xã Gia Lâm",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12428"
+    },
+    {
+        "code": "00577",
+        "name": "Bát Tràng",
+        "full_name": "Xã Bát Tràng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12423"
+    },
+    {
+        "code": "00592",
+        "name": "Từ Liêm",
+        "full_name": "Phường Từ Liêm",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12016"
+    },
+    {
+        "code": "00598",
+        "name": "Thượng Cát",
+        "full_name": "Phường Thượng Cát",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11912"
+    },
+    {
+        "code": "00602",
+        "name": "Đông Ngạc",
+        "full_name": "Phường Đông Ngạc",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11909"
+    },
+    {
+        "code": "00611",
+        "name": "Xuân Đỉnh",
+        "full_name": "Phường Xuân Đỉnh",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11908"
+    },
+    {
+        "code": "00613",
+        "name": "Tây Tựu",
+        "full_name": "Phường Tây Tựu",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11914"
+    },
+    {
+        "code": "00619",
+        "name": "Phú Diễn",
+        "full_name": "Phường Phú Diễn",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "11916"
+    },
+    {
+        "code": "00622",
+        "name": "Xuân Phương",
+        "full_name": "Phường Xuân Phương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12008"
+    },
+    {
+        "code": "00634",
+        "name": "Tây Mỗ",
+        "full_name": "Phường Tây Mỗ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12009"
+    },
+    {
+        "code": "00637",
+        "name": "Đại Mỗ",
+        "full_name": "Phường Đại Mỗ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12010"
+    },
+    {
+        "code": "00640",
+        "name": "Thanh Trì",
+        "full_name": "Xã Thanh Trì",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12522"
+    },
+    {
+        "code": "00643",
+        "name": "Thanh Liệt",
+        "full_name": "Phường Thanh Liệt",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12510"
+    },
+    {
+        "code": "00664",
+        "name": "Đại Thanh",
+        "full_name": "Xã Đại Thanh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12523"
+    },
+    {
+        "code": "00679",
+        "name": "Ngọc Hồi",
+        "full_name": "Xã Ngọc Hồi",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12516"
+    },
+    {
+        "code": "00685",
+        "name": "Nam Phù",
+        "full_name": "Xã Nam Phù",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12524"
+    },
+    {
+        "code": "04930",
+        "name": "Yên Xuân",
+        "full_name": "Xã Yên Xuân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13132"
+    },
+    {
+        "code": "08974",
+        "name": "Quang Minh",
+        "full_name": "Xã Quang Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12907"
+    },
+    {
+        "code": "08980",
+        "name": "Yên Lãng",
+        "full_name": "Xã Yên Lãng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12924"
+    },
+    {
+        "code": "08995",
+        "name": "Tiến Thắng",
+        "full_name": "Xã Tiến Thắng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12912"
+    },
+    {
+        "code": "09022",
+        "name": "Mê Linh",
+        "full_name": "Xã Mê Linh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12923"
+    },
+    {
+        "code": "09552",
+        "name": "Kiến Hưng",
+        "full_name": "Phường Kiến Hưng",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12121"
+    },
+    {
+        "code": "09556",
+        "name": "Hà Đông",
+        "full_name": "Phường Hà Đông",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12123"
+    },
+    {
+        "code": "09562",
+        "name": "Yên Nghĩa",
+        "full_name": "Phường Yên Nghĩa",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12116"
+    },
+    {
+        "code": "09568",
+        "name": "Phú Lương",
+        "full_name": "Phường Phú Lương",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12120"
+    },
+    {
+        "code": "09574",
+        "name": "Sơn Tây",
+        "full_name": "Phường Sơn Tây",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12721"
+    },
+    {
+        "code": "09604",
+        "name": "Tùng Thiện",
+        "full_name": "Phường Tùng Thiện",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12722"
+    },
+    {
+        "code": "09616",
+        "name": "Đoài Phương",
+        "full_name": "Xã Đoài Phương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12723"
+    },
+    {
+        "code": "09619",
+        "name": "Quảng Oai",
+        "full_name": "Xã Quảng Oai",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12637"
+    },
+    {
+        "code": "09634",
+        "name": "Cổ Đô",
+        "full_name": "Xã Cổ Đô",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12614"
+    },
+    {
+        "code": "09661",
+        "name": "Minh Châu",
+        "full_name": "Xã Minh Châu",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12608"
+    },
+    {
+        "code": "09664",
+        "name": "Vật Lại",
+        "full_name": "Xã Vật Lại",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12620"
+    },
+    {
+        "code": "09676",
+        "name": "Bất Bạt",
+        "full_name": "Xã Bất Bạt",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12638"
+    },
+    {
+        "code": "09694",
+        "name": "Suối Hai",
+        "full_name": "Xã Suối Hai",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12639"
+    },
+    {
+        "code": "09700",
+        "name": "Ba Vì",
+        "full_name": "Xã Ba Vì",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12629"
+    },
+    {
+        "code": "09706",
+        "name": "Yên Bài",
+        "full_name": "Xã Yên Bài",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12630"
+    },
+    {
+        "code": "09715",
+        "name": "Phúc Thọ",
+        "full_name": "Xã Phúc Thọ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12806"
+    },
+    {
+        "code": "09739",
+        "name": "Phúc Lộc",
+        "full_name": "Xã Phúc Lộc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12829"
+    },
+    {
+        "code": "09772",
+        "name": "Hát Môn",
+        "full_name": "Xã Hát Môn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "12810"
+    },
+    {
+        "code": "09784",
+        "name": "Đan Phượng",
+        "full_name": "Xã Đan Phượng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13007"
+    },
+    {
+        "code": "09787",
+        "name": "Liên Minh",
+        "full_name": "Xã Liên Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13023"
+    },
+    {
+        "code": "09817",
+        "name": "Ô Diên",
+        "full_name": "Xã Ô Diên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13022"
+    },
+    {
+        "code": "09832",
+        "name": "Hoài Đức",
+        "full_name": "Xã Hoài Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13226"
+    },
+    {
+        "code": "09856",
+        "name": "Dương Hoà",
+        "full_name": "Xã Dương Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13227"
+    },
+    {
+        "code": "09871",
+        "name": "Sơn Đồng",
+        "full_name": "Xã Sơn Đồng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13224"
+    },
+    {
+        "code": "09877",
+        "name": "An Khánh",
+        "full_name": "Xã An Khánh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13219"
+    },
+    {
+        "code": "09886",
+        "name": "Dương Nội",
+        "full_name": "Phường Dương Nội",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "12114"
+    },
+    {
+        "code": "09895",
+        "name": "Quốc Oai",
+        "full_name": "Xã Quốc Oai",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13306"
+    },
+    {
+        "code": "09910",
+        "name": "Kiều Phú",
+        "full_name": "Xã Kiều Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13327"
+    },
+    {
+        "code": "09931",
+        "name": "Hưng Đạo",
+        "full_name": "Xã Hưng Đạo",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13325"
+    },
+    {
+        "code": "09952",
+        "name": "Phú Cát",
+        "full_name": "Xã Phú Cát",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13314"
+    },
+    {
+        "code": "09955",
+        "name": "Thạch Thất",
+        "full_name": "Xã Thạch Thất",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13129"
+    },
+    {
+        "code": "09982",
+        "name": "Hạ Bằng",
+        "full_name": "Xã Hạ Bằng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13117"
+    },
+    {
+        "code": "09988",
+        "name": "Hoà Lạc",
+        "full_name": "Xã Hoà Lạc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13131"
+    },
+    {
+        "code": "10003",
+        "name": "Tây Phương",
+        "full_name": "Xã Tây Phương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13130"
+    },
+    {
+        "code": "10015",
+        "name": "Chương Mỹ",
+        "full_name": "Phường Chương Mỹ",
+        "type": "ward",
+        "type_name": "Phường",
+        "province_code": "01",
+        "postal_code": "13438"
+    },
+    {
+        "code": "10030",
+        "name": "Phú Nghĩa",
+        "full_name": "Xã Phú Nghĩa",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13411"
+    },
+    {
+        "code": "10045",
+        "name": "Xuân Mai",
+        "full_name": "Xã Xuân Mai",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13417"
+    },
+    {
+        "code": "10072",
+        "name": "Quảng Bị",
+        "full_name": "Xã Quảng Bị",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13432"
+    },
+    {
+        "code": "10081",
+        "name": "Trần Phú",
+        "full_name": "Xã Trần Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13423"
+    },
+    {
+        "code": "10096",
+        "name": "Hoà Phú",
+        "full_name": "Xã Hoà Phú",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13427"
+    },
+    {
+        "code": "10114",
+        "name": "Thanh Oai",
+        "full_name": "Xã Thanh Oai",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13527"
+    },
+    {
+        "code": "10126",
+        "name": "Bình Minh",
+        "full_name": "Xã Bình Minh",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13512"
+    },
+    {
+        "code": "10144",
+        "name": "Tam Hưng",
+        "full_name": "Xã Tam Hưng",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13510"
+    },
+    {
+        "code": "10180",
+        "name": "Dân Hoà",
+        "full_name": "Xã Dân Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13521"
+    },
+    {
+        "code": "10183",
+        "name": "Thường Tín",
+        "full_name": "Xã Thường Tín",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13606"
+    },
+    {
+        "code": "10210",
+        "name": "Hồng Vân",
+        "full_name": "Xã Hồng Vân",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13611"
+    },
+    {
+        "code": "10231",
+        "name": "Thượng Phúc",
+        "full_name": "Xã Thượng Phúc",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13635"
+    },
+    {
+        "code": "10237",
+        "name": "Chương Dương",
+        "full_name": "Xã Chương Dương",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13632"
+    },
+    {
+        "code": "10273",
+        "name": "Phú Xuyên",
+        "full_name": "Xã Phú Xuyên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13906"
+    },
+    {
+        "code": "10279",
+        "name": "Phượng Dực",
+        "full_name": "Xã Phượng Dực",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13921"
+    },
+    {
+        "code": "10330",
+        "name": "Chuyên Mỹ",
+        "full_name": "Xã Chuyên Mỹ",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13926"
+    },
+    {
+        "code": "10342",
+        "name": "Đại Xuyên",
+        "full_name": "Xã Đại Xuyên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13930"
+    },
+    {
+        "code": "10354",
+        "name": "Vân Đình",
+        "full_name": "Xã Vân Đình",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13806"
+    },
+    {
+        "code": "10369",
+        "name": "Ứng Thiên",
+        "full_name": "Xã Ứng Thiên",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13835"
+    },
+    {
+        "code": "10402",
+        "name": "Ứng Hoà",
+        "full_name": "Xã Ứng Hoà",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13837"
+    },
+    {
+        "code": "10417",
+        "name": "Hoà Xá",
+        "full_name": "Xã Hoà Xá",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13836"
+    },
+    {
+        "code": "10441",
+        "name": "Mỹ Đức",
+        "full_name": "Xã Mỹ Đức",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13728"
+    },
+    {
+        "code": "10459",
+        "name": "Phúc Sơn",
+        "full_name": "Xã Phúc Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13729"
+    },
+    {
+        "code": "10465",
+        "name": "Hồng Sơn",
+        "full_name": "Xã Hồng Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13718"
+    },
+    {
+        "code": "10489",
+        "name": "Hương Sơn",
+        "full_name": "Xã Hương Sơn",
+        "type": "commune",
+        "type_name": "Xã",
+        "province_code": "01",
+        "postal_code": "13723"
+    }
+]
