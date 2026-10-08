@@ -1,0 +1,801 @@
+{
+  "info": {
+    "_postman_id": "9d537c3c-3af0-490d-b99d-ab7fdbd7652e",
+    "name": "HomeSpace - VIETMAP Maps API (v4 + Logistics)",
+    "description": "Collection tự tạo từ tài liệu chính thức VIETMAP ngày 08/10/2026. 11 endpoint đã đối chiếu. KHÔNG phải tất cả API được cấp quyền trong Trial. Chỉ chạy thủ công theo thứ tự, tránh Runner gây tốn quota. Các API cũ/deprecated, Tilemap SDK, batch và Isochrone (chưa công khai endpoint) không nằm trong collection; xem Postman collection chính thức https://www.postman.com/orange-escape-494916/workspace/vietmap-api-collection .",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Search & Geocoding v4 (HomeSpace)",
+      "item": [
+        {
+          "name": "01 Autocomplete v4 - gợi ý khi nhập",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/autocomplete/v4?apikey={{apikey}}&text={{search_text}}&display_type=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "autocomplete",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "text",
+                  "value": "{{search_text}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "display_type",
+                  "value": "5",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "focus",
+                  "value": "{{focus}}",
+                  "description": "Ưu tiên vị trí",
+                  "disabled": true
+                },
+                {
+                  "key": "cityId",
+                  "value": "12",
+                  "description": "Tùy chọn lọc thành phố",
+                  "disabled": true
+                },
+                {
+                  "key": "distId",
+                  "value": "",
+                  "description": "Tùy chọn",
+                  "disabled": true
+                },
+                {
+                  "key": "wardId",
+                  "value": "",
+                  "description": "Tùy chọn",
+                  "disabled": true
+                },
+                {
+                  "key": "circle_center",
+                  "value": "",
+                  "description": "Tùy chọn",
+                  "disabled": true
+                },
+                {
+                  "key": "circle_radius",
+                  "value": "200",
+                  "description": "Mét",
+                  "disabled": true
+                },
+                {
+                  "key": "cats",
+                  "value": "",
+                  "description": "Mã POI",
+                  "disabled": true
+                },
+                {
+                  "key": "layers",
+                  "value": "ADDRESS",
+                  "description": "Các giá trị POI/ADDRESS/VILLAGE/WARD/DIST/CITY/STREET",
+                  "disabled": true
+                },
+                {
+                  "key": "admin_new",
+                  "value": "true",
+                  "description": "Dùng với lọc đơn vị hành chính",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Dùng khi người dùng đang gõ. Kết quả tự lưu ref_id đầu tiên vào environment. https://maps.vietmap.vn/docs/map-api/autocomplete-version/autocomplete-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });",
+                  "if (pm.response.code === 200) {",
+                  "  let data; try { data=pm.response.json(); } catch(e) {}",
+                  "  if (Array.isArray(data) && data.length && data[0].ref_id) {",
+                  "    pm.environment.set(\"ref_id\", data[0].ref_id);",
+                  "    console.log(\"Saved ref_id for Place v4:\", data[0].ref_id);",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02 Geocode v4 - tìm địa chỉ đầy đủ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/search/v4?apikey={{apikey}}&text={{full_address}}&display_type=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "search",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "text",
+                  "value": "{{full_address}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "display_type",
+                  "value": "5",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "focus",
+                  "value": "{{focus}}",
+                  "description": "Tùy chọn",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Địa chỉ đầy đủ -> ref_id; ref_id được tự lưu. https://maps.vietmap.vn/docs/map-api/geocode-version/geocode-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });",
+                  "if (pm.response.code === 200) {",
+                  "  let data; try { data=pm.response.json(); } catch(e) {}",
+                  "  if (Array.isArray(data) && data.length && data[0].ref_id) {",
+                  "    pm.environment.set(\"ref_id\", data[0].ref_id);",
+                  "    console.log(\"Saved ref_id for Place v4:\", data[0].ref_id);",
+                  "  }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03 Place v4 - ref_id -> tọa độ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/place/v4?apikey={{apikey}}&refid={{ref_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "place",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "refid",
+                  "value": "{{ref_id}}",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Chạy Autocomplete/Geocode trước. https://maps.vietmap.vn/docs/map-api/place-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });",
+                  "if(pm.response.code === 200) {let d=pm.response.json(); if(typeof d.lat === \"number\") pm.environment.set(\"lat\",String(d.lat)); if(typeof d.lng === \"number\") pm.environment.set(\"lng\",String(d.lng));}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04 Reverse v4 - tọa độ -> địa chỉ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reverse/v4?apikey={{apikey}}&lat={{lat}}&lng={{lng}}&display_type=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reverse",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "lat",
+                  "value": "{{lat}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "lng",
+                  "value": "{{lng}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "display_type",
+                  "value": "5",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "https://maps.vietmap.vn/docs/map-api/reverse-version/reverse-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02. Routing & Matrix",
+      "item": [
+        {
+          "name": "05 Route v4 - chỉ đường",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/route/v4?apikey={{apikey}}&point={{origin}}&point={{destination}}&vehicle=motorcycle&points_encoded=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "route",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{origin}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{destination}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "vehicle",
+                  "value": "motorcycle",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "points_encoded",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "annotations",
+                  "value": "toll",
+                  "description": "Có thể tính phí",
+                  "disabled": true
+                },
+                {
+                  "key": "alternative",
+                  "value": "true",
+                  "description": "Tuyến thay thế",
+                  "disabled": true
+                },
+                {
+                  "key": "avoid",
+                  "value": "ferry",
+                  "description": "Tránh phà",
+                  "disabled": true
+                },
+                {
+                  "key": "capacity",
+                  "value": "2000",
+                  "description": "Chỉ khi vehicle=truck",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "point lặp lại; định dạng lat,lng. https://maps.vietmap.vn/docs/map-api/route-version/route-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "06 Matrix v4 - khoảng cách & thời gian",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/matrix/v4?apikey={{apikey}}&point={{origin}}&point={{destination}}&vehicle=motorcycle&sources=0&destinations=1&annotation=duration&points_encoded=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "matrix",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{origin}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{destination}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "vehicle",
+                  "value": "motorcycle",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "sources",
+                  "value": "0",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "destinations",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "annotation",
+                  "value": "duration",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "points_encoded",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Chi phí được tính theo cặp điểm nguồn x đích. https://maps.vietmap.vn/docs/map-api/matrix-version/matrix-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "07 TSP v4 - tối ưu 1 chuyến",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tsp/v4?apikey={{apikey}}&point={{origin}}&point=10.765496,106.67626&point={{destination}}&vehicle=motorcycle&roundtrip=true&points_encoded=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "tsp",
+                "v4"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{origin}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "10.765496,106.67626",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "point",
+                  "value": "{{destination}}",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "vehicle",
+                  "value": "motorcycle",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "roundtrip",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "points_encoded",
+                  "value": "true",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "sources",
+                  "value": "first",
+                  "description": "Dùng khi roundtrip=false",
+                  "disabled": true
+                },
+                {
+                  "key": "destinations",
+                  "value": "last",
+                  "description": "Dùng khi roundtrip=false",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Có thể tốn nhiều transactions theo số điểm. https://maps.vietmap.vn/docs/map-api/tsp-version/tsp-v4/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03. Advanced APIs (chỉ test khi cần)",
+      "item": [
+        {
+          "name": "08 Map Matching - khớp vệt GPS",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/match-tolls?apikey={{apikey}}&api-version=1.1&vehicle=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "match-tolls"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "api-version",
+                  "value": "1.1",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "vehicle",
+                  "value": "1",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "POST JSON mảng [longitude,latitude]. https://maps.vietmap.vn/docs/map-api/match-tolls/",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  [\n    106.757849,\n    10.817956\n  ],\n  [\n    106.759134,\n    10.821371\n  ],\n  [\n    106.760694,\n    10.825196\n  ]\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "09 VRP - tối ưu nhiều xe",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/vrp?apikey={{apikey}}&api-version=1.1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "vrp"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                },
+                {
+                  "key": "api-version",
+                  "value": "1.1",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Có thể tính transactions theo xe x điểm. https://maps.vietmap.vn/docs/map-api/vrp/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicles\": [\n    {\n      \"id\": 1,\n      \"start\": [\n        106.6759,\n        10.7592\n      ],\n      \"end\": [\n        106.6759,\n        10.7592\n      ]\n    }\n  ],\n  \"jobs\": [\n    {\n      \"id\": 1,\n      \"location\": [\n        106.67626,\n        10.765496\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10 Geofencing - kiểm tra trong bán kính",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/geofencing?apikey={{apikey}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "geofencing"
+              ],
+              "query": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "description": "API key - giữ trong environment",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "https://maps.vietmap.vn/docs/map-api/geofencing/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"geometryCenters\": [\n    {\n      \"id\": \"1\",\n      \"long\": 105.7487405,\n      \"lat\": 9.8644254\n    },\n    {\n      \"id\": \"2\",\n      \"long\": 105.7491342,\n      \"lat\": 9.8642686\n    }\n  ],\n  \"radius\": 15,\n  \"long\": 105.7488398,\n  \"lat\": 9.8643837\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11 Static Map - trả về PNG",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/maps/statics/tm",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "maps",
+                "statics",
+                "tm"
+              ],
+              "query": []
+            },
+            "description": "POST multipart/form-data, trả về PNG. Key trong form, không phải query. Có thể cần Tilemap consumer. https://maps.vietmap.vn/docs/map-api/static-map-version/static-map/",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "apikey",
+                  "value": "{{apikey}}",
+                  "type": "text"
+                },
+                {
+                  "key": "lat",
+                  "value": "{{lat}}",
+                  "type": "text"
+                },
+                {
+                  "key": "lng",
+                  "value": "{{lng}}",
+                  "type": "text"
+                },
+                {
+                  "key": "zoom",
+                  "value": "17",
+                  "type": "text"
+                },
+                {
+                  "key": "size",
+                  "value": "600x400",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "197 Trần Phú, TP Hồ Chí Minh",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status < 500\", function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.environment.get(\"apikey\")) { console.warn(\"Chưa đặt apikey trong Environment\"); }"
+        ]
+      }
+    }
+  ]
+}
