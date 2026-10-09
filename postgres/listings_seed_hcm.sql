@@ -1,8 +1,9 @@
--- HomeSpace: 200 tin đăng mẫu tại Thành phố Hồ Chí Minh cho thử nghiệm tìm kiếm AI.
+-- HomeSpace: 2.520 tin đăng mẫu tại Thành phố Hồ Chí Minh cho thử nghiệm tìm kiếm AI.
 -- Chạy trên homespace_core bằng pgAdmin (Query Tool).
 -- Chỉ dành cho local/dev. 168 phường/xã/đặc khu trong postman/location/hochiminh.txt
--- đều có ít nhất một tin; 32 địa bàn đầu có thêm tin. Nguồn không chứa quận/huyện.
--- Chỉ tạo 200 tin mới trên database sạch; không xóa bộ seed cũ nếu đã chạy trước đó.
+-- mỗi địa bàn có đúng 15 tin: 5 nhà nguyên căn, 5 căn hộ, 5 phòng trọ.
+-- Nguồn không chứa quận/huyện. Để có đúng 2.520 tin, hãy chạy trên database sạch;
+-- file này không xóa các tin seed cũ đã được tạo bằng ID khác.
 -- Chỉ cần chạy file này sau khi migration, bootstrap ADMIN và catalog của listing service đã sẵn sàng.
 -- Không cần chạy file sửa bổ sung. ID được tạo xác định, các bản ghi được upsert.
 -- Tin thuộc tài khoản bootstrap username=homespace (role ADMIN trong DB local hiện tại).
@@ -211,35 +212,65 @@ FROM (VALUES
 -- END HCM LOCATION DATA
 
 CREATE TEMP TABLE hs_seed_rows ON COMMIT DROP AS
-WITH place_count AS (
-    SELECT count(*)::int AS total FROM hs_seed_places
-), numbered AS (
-    SELECT n, p.*, ((n-1) / pc.total)::int AS place_round,
-           CASE ((p.place_id + ((n-1) / pc.total)::int) % 3)
-             WHEN 0 THEN 'HOUSE' WHEN 1 THEN 'APARTMENT' ELSE 'ROOM'
-           END AS category,
-           get_byte(decode(md5('hs-seed-price-' || n::text), 'hex'), 0) AS price_var,
-           get_byte(decode(md5('hs-seed-area-' || n::text), 'hex'), 0) AS area_var,
-           get_byte(decode(md5('hs-seed-extra-' || n::text), 'hex'), 0) AS extra_var,
+WITH numbered AS (
+    SELECT ((p.place_id - 1) * 15 + slot.slot_no)::int AS n,
+           slot.slot_no AS local_slot, p.*,
+           CASE WHEN slot.slot_no <= 5 THEN 'HOUSE'
+                WHEN slot.slot_no <= 10 THEN 'APARTMENT'
+                ELSE 'ROOM' END AS category,
+           get_byte(decode(md5('hs-seed-price-' || ((p.place_id - 1) * 15 + slot.slot_no)::text), 'hex'), 0) AS price_var,
+           get_byte(decode(md5('hs-seed-area-' || ((p.place_id - 1) * 15 + slot.slot_no)::text), 'hex'), 0) AS area_var,
+           get_byte(decode(md5('hs-seed-extra-' || ((p.place_id - 1) * 15 + slot.slot_no)::text), 'hex'), 0) AS extra_var,
            (ARRAY['Không gian được bố trí gọn gàng','Thông tin giá và phí được tách riêng',
                   'Có thể trao đổi ngày nhận nhà','Có nhiều khung giờ hẹn xem',
                   'Điều kiện thuê được ghi rõ trong tin',
-                  'Có thể xem chi tiết trang thiết bị bàn giao'])[(n % 6)+1] AS selling_point
-    FROM generate_series(1,200) AS n
-    CROSS JOIN place_count pc
-    JOIN hs_seed_places p ON p.place_id = ((n-1) % pc.total) + 1
+                  'Có thể xem chi tiết trang thiết bị bàn giao'])[((p.place_id - 1) * 15 + slot.slot_no) % 6 + 1] AS selling_point
+    FROM hs_seed_places p
+    CROSS JOIN generate_series(1,15) AS slot(slot_no)
 ), props AS (
     SELECT *,
            CASE category
-             WHEN 'HOUSE' THEN format('Cho thuê nhà nguyên căn %s phòng ngủ%s tại %s',
-                   2 + n % 4, CASE WHEN n % 4 = 0 THEN ', có gara' ELSE '' END, ward_name)
-             WHEN 'APARTMENT' THEN format('Cho thuê căn hộ %s phòng ngủ, ban công %s tại %s',
-                   1 + n % 3, (ARRAY['hướng Đông Nam','hướng Đông Bắc','hướng Tây Nam','hướng Tây Bắc'])[(n % 4)+1], ward_name)
-             ELSE format('Cho thuê phòng trọ %s tại %s',
-                   CASE WHEN n % 3 = 0 THEN 'có gác lửng'
-                        WHEN n % 4 <> 1 THEN 'có ban công'
+             WHEN 'HOUSE' THEN CASE local_slot
+               WHEN 1 THEN format('Cho thuê nhà nguyên căn %s phòng ngủ tại %s', 2 + n % 4, ward_name)
+               WHEN 2 THEN format('Nhà nguyên căn %s tầng, %s phòng ngủ ở %s', 2 + n % 4, 2 + n % 4, ward_name)
+               WHEN 3 THEN format('Cho thuê nhà %s phòng ngủ%s tại %s', 2 + n % 4,
+                   CASE WHEN n % 4 = 0 THEN ', có gara'
+                        ELSE format(', %s tầng', 2 + n % 4) END, ward_name)
+               WHEN 4 THEN format('Cho thuê nhà nguyên căn %s m², %s phòng ngủ tại %s',
+                   65 + area_var % 150 + (n % 4) * 0.5, 2 + n % 4, ward_name)
+               ELSE format('Cho thuê nhà nguyên căn %s phòng ngủ, %s tầng ở %s',
+                   2 + n % 4, 2 + n % 4, ward_name)
+             END
+             WHEN 'APARTMENT' THEN CASE local_slot
+               WHEN 6 THEN format('Cho thuê căn hộ %s phòng ngủ tại %s', 1 + n % 3, ward_name)
+               WHEN 7 THEN format('Căn hộ tầng %s, %s phòng ngủ ở %s', 2 + n % 20, 1 + n % 3, ward_name)
+               WHEN 8 THEN format('Cho thuê căn hộ %s phòng ngủ, ban công hướng %s tại %s',
+                   1 + n % 3, (ARRAY['Đông Nam','Đông Bắc','Tây Nam','Tây Bắc'])[(n % 4)+1], ward_name)
+               WHEN 9 THEN format('Căn hộ %s phòng ngủ, diện tích %s m² tại %s',
+                   1 + n % 3, 30 + area_var % 95 + (n % 4) * 0.5, ward_name)
+               ELSE format('Cho thuê căn hộ %s phòng ngủ, đầy đủ nội thất tại %s',
+                   1 + n % 3, ward_name)
+             END
+             ELSE CASE local_slot
+               WHEN 11 THEN format('Cho thuê phòng trọ %s m² tại %s',
+                   15 + area_var % 30 + (n % 4) * 0.5, ward_name)
+               WHEN 12 THEN format('Phòng trọ %s tại %s',
+                   CASE WHEN n % 4 <> 1 THEN 'có ban công'
                         WHEN n % 5 <> 0 THEN 'có cửa sổ'
-                        ELSE 'thông tin chi phí rõ ràng' END, ward_name)
+                        ELSE format('tầng %s', n % 5) END, ward_name)
+               WHEN 13 THEN format('Cho thuê phòng trọ %s tại %s',
+                   CASE WHEN n % 3 = 0 THEN 'có gác lửng'
+                        WHEN n % 4 <> 0 THEN 'WC riêng'
+                        ELSE format('tầng %s', n % 5) END, ward_name)
+               WHEN 14 THEN format('Phòng trọ %s, tối đa %s người tại %s',
+                   CASE WHEN n % 7 = 0 THEN format('tầng %s', n % 5)
+                        ELSE 'có chỗ gửi xe máy' END, 1 + n % 3, ward_name)
+               ELSE format('Cho thuê phòng trọ %s m², %s tại %s',
+                   15 + area_var % 30 + (n % 4) * 0.5,
+                   CASE WHEN n % 4 <> 1 THEN 'có ban công'
+                        WHEN n % 3 = 0 THEN 'có gác lửng'
+                        ELSE format('tầng %s', n % 5) END, ward_name)
+             END
            END AS title,
            (CASE category
              WHEN 'HOUSE' THEN 'Nhà nguyên căn phù hợp gia đình hoặc nhóm đi làm. '
@@ -640,29 +671,35 @@ BEGIN
        OR EXISTS (SELECT 1 FROM hs_seed_places WHERE province_code <> '79') THEN
         RAISE EXCEPTION 'Nguồn TP.HCM phải có 168 mã phường/xã/đặc khu duy nhất';
     END IF;
-    IF (SELECT count(*) FROM hs_seed_rows) <> 200 THEN
-        RAISE EXCEPTION 'Seed phải tạo đúng 200 tin đăng';
+    IF (SELECT count(*) FROM hs_seed_rows) <> 2520 THEN
+        RAISE EXCEPTION 'Seed phải tạo đúng 2.520 tin đăng';
     END IF;
     IF EXISTS (
         SELECT 1 FROM hs_seed_places p
         LEFT JOIN hs_seed_rows s ON s.place_id=p.place_id
-        GROUP BY p.place_id HAVING count(s.n) NOT BETWEEN 1 AND 2
+        GROUP BY p.place_id HAVING count(s.n) <> 15
     ) THEN
-        RAISE EXCEPTION 'Mỗi phường/xã/đặc khu phải có 1-2 tin';
+        RAISE EXCEPTION 'Mỗi phường/xã/đặc khu phải có đúng 15 tin';
     END IF;
-    IF (SELECT count(DISTINCT category) FROM hs_seed_rows) <> 3 THEN
-        RAISE EXCEPTION 'Seed phải bao gồm đủ HOUSE, APARTMENT, ROOM';
+    IF EXISTS (
+        SELECT 1 FROM hs_seed_places p
+        CROSS JOIN (VALUES ('HOUSE'), ('APARTMENT'), ('ROOM')) AS expected(category)
+        LEFT JOIN hs_seed_rows s ON s.place_id=p.place_id AND s.category=expected.category
+        GROUP BY p.place_id, expected.category
+        HAVING count(s.n) <> 5 OR count(DISTINCT s.title) <> 5
+    ) THEN
+        RAISE EXCEPTION 'Mỗi địa bàn phải có đúng 5 tiêu đề khác nhau cho từng loại hình';
     END IF;
     IF (
         SELECT count(*) FROM listings l
         JOIN hs_seed_rows s ON s.listing_id::text=l.id
         WHERE l.active IS TRUE AND l.status='PUBLISHED'
-    ) <> 200 OR (
+    ) <> 2520 OR (
         SELECT count(*) FROM addresses a
         JOIN hs_seed_rows s ON s.listing_id::text=a.listing_id
         WHERE a.active IS TRUE
-    ) <> 200 THEN
-        RAISE EXCEPTION 'Seed chưa tạo đủ 200 tin và địa chỉ đang hoạt động';
+    ) <> 2520 THEN
+        RAISE EXCEPTION 'Seed chưa tạo đủ 2.520 tin và địa chỉ đang hoạt động';
     END IF;
     IF EXISTS (
         SELECT 1 FROM hs_seed_rows s
